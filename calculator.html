@@ -233,7 +233,7 @@ app.controller('calculator', function($scope,$http,$resource) {
 var init = function () {
    
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -265,7 +265,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://localhost:3000/api/charge.php?ngn="+para).then(function(response) {
+$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -279,7 +279,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://localhost:3000/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -295,7 +295,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://localhost:3000/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -310,7 +310,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://localhost:3000/api/charge.php?amount="+para).then(function(response) {
+       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

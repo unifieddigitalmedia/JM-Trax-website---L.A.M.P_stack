@@ -66,9 +66,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -804,7 +804,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -840,7 +840,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -860,7 +860,7 @@ init();
 
 app.factory('Order_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/transactions',{
+var resource = $resource('http://81.137.131.58/api/transactions',{
 
 
 username:"@username",
@@ -921,7 +921,7 @@ $scope.sendersdetails = true;
 $scope.getrates = function () {
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -944,9 +944,9 @@ var init = function () {
 $http.get(
 
 
- // "http://localhost:3000/api/autofill.php?username="+getCookie('sender_username')+
+ // "http://81.137.131.58/api/autofill.php?username="+getCookie('sender_username')+
   
-  "http://localhost:3000/api/autofill.php?username="+getCookie('sendersid')+
+  "http://81.137.131.58/api/autofill.php?username="+getCookie('sendersid')+
   "&receipient_firstname="+getCookie('receipient_firstname')+
   "&receipient_lastname="+getCookie('receipient_lastname')+
   "&receipient_bank="+getCookie('receipient_bank')+
@@ -1002,6 +1002,11 @@ $scope.paypalemail = response.data[1].ReceipientPayPal;
 $scope.reasonfortransfer = response.data[1].ReceipientReasonForTransfer;
 
 $scope.shop = response.data[2].Shop;
+
+
+
+$scope.agentusername = getCookie('agentusername');
+
 
 
 });
@@ -1131,7 +1136,7 @@ document.cookie = "transaction_number=" + log.orderID;
 
 document.cookie = "gbp_total=" + $scope.total;
 
-window.location = "http://localhost:3000/checkout.html" ;
+window.location = "http://81.137.131.58/checkout.html" ;
 
 }
 else
@@ -1163,7 +1168,7 @@ alert(log.ERROR);
 
     $scope.calREMITTANCE = function(para) {
 
-      $http.get("http://localhost:3000/api/charge.php?remittance="+para).then(function(response) {
+      $http.get("http://81.137.131.58/api/charge.php?remittance="+para).then(function(response) {
 
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -1182,7 +1187,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://localhost:3000/api/charge.php?ngn="+para).then(function(response) {
+$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -1198,7 +1203,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://localhost:3000/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
 
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -1214,7 +1219,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://localhost:3000/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -1229,7 +1234,7 @@ $scope.rate = response.data.RATE;
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://localhost:3000/api/charge.php?amount="+para).then(function(response) {
+       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

@@ -64,9 +64,11 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+    <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -237,7 +239,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -273,7 +275,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -293,7 +295,7 @@ init();
 
 app.factory('Rates_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/rates',{
+var resource = $resource('http://81.137.131.58/api/rates',{
 
 
 
@@ -315,7 +317,7 @@ app.controller('rates', function($scope,Rates_Service,$http,$resource) {
 $scope.getrates = function () {
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 
  $scope.gbp = response.data[0].rate;

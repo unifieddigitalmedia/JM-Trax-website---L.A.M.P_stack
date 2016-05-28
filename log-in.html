@@ -66,9 +66,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -139,9 +139,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -314,7 +314,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Login_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/login',{});
+var resource = $resource('http://81.137.131.58/api/login',{});
 
 return resource;
 
@@ -347,7 +347,7 @@ if(log.ERROR === "")
 
 
 
-window.location = "http://localhost:3000/dashboard.php" ;
+window.location = "http://81.137.131.58/dashboard.php" ;
 
 
 

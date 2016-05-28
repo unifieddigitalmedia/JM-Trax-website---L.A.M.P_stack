@@ -64,9 +64,11 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+  <a href="deleted-transactions.html"> Deleted Transactions </a>   
 
   <a> Recipients </a> 
 
@@ -288,7 +290,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -324,7 +326,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -344,7 +346,7 @@ init();
 
 app.factory('Receipients_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 firstname:"@firstname",
 lastname:"@lastname",
@@ -362,7 +364,7 @@ app.controller('receipients', function($scope,Receipients_Service,$http,$resourc
 
 $scope.beneficiarysearch = function () {
 
-$http.get("http://localhost:3000/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("http://81.137.131.58/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.reclists = response.data;
 
@@ -373,7 +375,7 @@ $scope.reclists = response.data;
 $scope.receipient_summary = function () {
 
 
-window.location = "http://localhost:3000/receipient-statement.html" ;
+window.location = "http://81.137.131.58/receipient-statement.html" ;
 
 
 }
@@ -382,7 +384,7 @@ window.location = "http://localhost:3000/receipient-statement.html" ;
 
 $scope.beneficiary_transactions = function (para) {
 
-$http.get("http://localhost:3000/api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
 
 
 

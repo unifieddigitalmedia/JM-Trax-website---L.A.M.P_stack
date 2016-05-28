@@ -76,6 +76,8 @@
   <a > Daily Transactions </a>
 
   <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  
+  <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -245,7 +247,7 @@ $scope.usertype = true;
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -269,7 +271,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -277,7 +279,7 @@ window.location = "http://localhost:3000/index.html" ;
 
 
 
-$http.get("http://localhost:3000/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 
@@ -322,7 +324,7 @@ document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "http://localhost:3000/editorder.html" ;
+window.location = "http://81.137.131.58/editorder.html" ;
 
 }
 
@@ -458,6 +460,7 @@ DateString = ('0' + date.getDate()).slice(-2) + '-'
 
 
 angular.forEach(input, function(value, key) {
+
 
 
 

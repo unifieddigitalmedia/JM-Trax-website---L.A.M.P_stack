@@ -400,7 +400,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -450,7 +450,7 @@ $scope.paypaldiv = true;
 $scope.getrates = function () {
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -465,7 +465,7 @@ $http.get("http://localhost:3000/api/rates").then(function(response) {
 $scope.getreclist = function () {
 
 
-$http.get("http://localhost:3000/api/receipients.php?id="+$scope.sendersid).then(function(response) {
+$http.get("http://81.137.131.58/api/receipients.php?id="+$scope.sendersid).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -497,7 +497,7 @@ $scope.sendersid = getCookie('agentid');
 
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
  $scope.banklist = response.data;
 
@@ -507,7 +507,7 @@ $http.get("http://localhost:3000/api/banks").then(function(response) {
 
 
 
-$http.get("http://localhost:3000/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
+$http.get("http://81.137.131.58/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -521,7 +521,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -545,7 +545,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -644,7 +644,7 @@ $scope.updatedreceipientaccountnumber = $scope.receipentlist[para].ReceipientAcc
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -677,7 +677,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("http://localhost:3000/api/receipients.php?id="+$scope.recid).then(function(response) {
+$http.delete("http://81.137.131.58/api/receipients.php?id="+$scope.recid).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -721,7 +721,7 @@ else
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -752,7 +752,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("http://localhost:3000/api/receipients.php?id="+$scope.recid).then(function(response) {
+$http.delete("http://81.137.131.58/api/receipients.php?id="+$scope.recid).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -922,7 +922,7 @@ var shopacc = $scope.shopacc.bankholder
 
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -1005,7 +1005,7 @@ else
 {
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",

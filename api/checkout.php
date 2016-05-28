@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT")
 {
 
 
-
 $sql = "UPDATE transfers SET cash = '$_REQUEST[cash]' , `change` ='$_REQUEST[change]' WHERE id = '$_REQUEST[id]' ";
  
 if ($conn->query($sql) === TRUE) {
@@ -24,9 +23,14 @@ if ($conn->query($sql) === TRUE) {
      
 
 
+echo json_encode(array(
+    "ERROR" => "Record was updated successfully" ));
+    
 $sql1 = "SELECT * FROM transfers WHERE id = '$_REQUEST[id]' ";
 
 $result = $conn->query($sql1);
+
+$row = $result->fetch_assoc();
 
 if ($result->num_rows > 0) {
   
@@ -58,49 +62,41 @@ $a = $countrycode."".$row[sendermobile];
 }
 
 
+$email = "service@jmtrax.com,justmtransfers@gmail.com" ;
+$subject = "New Transaction";
+$message =" Transaction No:$row[id] for $row[senderfirstname] $row[senderlasttname] sending to $row[recipientfirstname] $row[recipientsurname] in $row[bankname] Account No. $row[bankac]. The amount being sent is NGN $row[ngn]." ;
+mail($email, "Subject: $subject",$message, "From:just-computers@hotmail.com");
 
 
-if(!empty($row[uksms]))
+if(!empty($row[uksms]) || $row[uksms] != 'false' )
 {
+
+
+
+
 
 $subject = "Welcome to JM Trax" ;
 $message =" Dear $row[senderfirstname] $row[senderlasttname], This confirm your transfer with us and your reference is JM$row[id] . The amount being sent is NGN $TotalDueNGN to $row[recipientfirstname] $row[recipientsurname]" ;
-mail("$recipient", "Subject: $subject",
+mail($recipient, "Subject: $subject",
 $message, "From:service@ifixedcomputers.com" );
 
-echo "<script> alert('Confirmation sent to +$a '); </script>";
 
 }
 
 
 
-$email = "service@jmtrax.com,justmtransfers@gmail.com" ;
-$subject = "New Transaction";
-$message =" Transaction No:$row[id] for $row[senderfirstname] $row[senderlasttname] sending to $row[recipientfirstname] $row[recipientsurname] in $row[bankname] Account No. $row[bankac]. The amount being sent is NGN $row[ngn]." ;
-mail("$email", "Subject: $subject",$message, "From:just-computers@hotmail.com");
 
-
-
-if(!empty($row[ngnsms]))
+if(!empty($row[ngnsms]) || $row[ngnsms] != 'false')
 {
 
-$to = "+234".''.$row[receipientphone];
 
-
-echo "<script> alert('Confirmation sent to $to '); </script>";
-
-
-$user = "jmtrax";
-$password = "n3L5Hpth";
-$api_id = "3511481";
-$baseurl ="http://api.clickatell.com";
+$to = "234". $row[recipientphone];
 
 
 $text = urlencode("Dear $row[recipientfirstname] $row[recipientsurname],
 $row[SendersFirstName] $row[SendersLastName] has processed the sum of $row[ngn] to credit your $row[bankname] using JM-Transfer. This will be processed shortly otherwise allow 24-48hrs before checking your account statement if the bank has not alerted you. Thanks for using JM-Transfer.");
 
-$url = "$baseurl/http/auth?user=$user&password=$password&api_id=$api_id";
-
+$url = "http://api.clickatell.com/http/auth?user=jmtrax&password=Olori123&api_id=3511481";
 
 $ret = file($url);
 
@@ -110,7 +106,8 @@ if ($sess[0] == "OK") {
 
 $sess_id = trim($sess[1]);
 
-$url = "$baseurl/http/sendmsg?session_id=$sess_id&to=$to&text=$text&from=447506775414";
+
+$url = "http://api.clickatell.com/http/sendmsg?session_id=$sess_id&to=$to&text=$text&from=447506775414";
 
 $ret = file($url);
 
@@ -118,12 +115,18 @@ $send = explode(":",$ret[0]);
 
 if ($send[0] == "ID") {
 
+
+
 } else {
 
-}
-} else {
 
 }
+
+} else {
+
+
+}
+
 
 
 
@@ -135,8 +138,6 @@ if ($send[0] == "ID") {
 
 } else {
 
-echo json_encode(array(
-    "ERROR" => "Record was updated successfully" ));
 }
 
 
@@ -162,9 +163,6 @@ echo json_encode(array(
 
 
 }
-
-
-
 
 
 

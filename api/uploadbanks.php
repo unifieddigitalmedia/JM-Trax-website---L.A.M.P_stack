@@ -1,46 +1,39 @@
-<?php 
+<?php
 
 
-$servername = "localhost";
-$username = "jmtrax";
-$password = "s0na@bebe123";
-$dbname = "jmtrax";
+$to = "2348093183139";
 
-$conn = new mysqli($servername, $username, $password,$dbname);
+$to = "447809183907";
+
+$text = urlencode("Dear $row[recipientfirstname] $row[recipientsurname],
+$row[SendersFirstName] $row[SendersLastName] has processed the sum of $row[ngn] to credit your $row[bankname] using JM-Transfer. This will be processed shortly otherwise allow 24-48hrs before checking your account statement if the bank has not alerted you. Thanks for using JM-Transfer.");
+
+$url = "http://api.clickatell.com/http/auth?user=jmtrax&password=Olori123&api_id=3511481";
+
+$ret = file($url);
+
+$sess = explode(":",$ret[0]);
+
+if ($sess[0] == "OK") {
+
+$sess_id = trim($sess[1]);
+
+$url = "$baseurl/http/sendmsg?session_id=$sess_id&to=$to&text=$text&from=447506775414";
+
+$url = "http://api.clickatell.com/http/sendmsg?session_id=$sess_id&to=$to&text=$text&from=447506775414";
+
+$ret = file($url);
+
+$send = explode(":",$ret[0]);
+
+if ($send[0] == "ID") {
 
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 
-
-
-
-$sql = "SELECT * FROM sendingbanklist";
-
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-
-
-
-$sql1 = "INSERT INTO banks (bankname,type)
-VALUES ('$row[banklist]', 'receipient')";
-
-if ($conn->query($sql1) === TRUE) {
-
-    echo "New record created successfully";
 } else {
-    echo "Error: " . $sql1 . "<br>" . $conn->error;
+
+
 }
-
-
-
-        
-    }
 
 } else {
 

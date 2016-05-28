@@ -62,9 +62,10 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+    <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -271,14 +272,14 @@
 
 <option value='' > Your secret question </option>
 
-<option value='What is the first name of your favourite uncle.php?' > What is the first name of your favourite uncle.php? </option>
-<option value='Where did you meet your spouse.php?' > Where did you meet your spouse.php? </option>
-<option value='What is your eldest cousins name.php?' > What is your eldest cousin's name.php? </option>
-<option value='What is your youngest childs nickname.php?' > What is your youngest child's nickname.php? </option>
-<option value='What is your eldest childs nickname.php?' > What is your eldest child's nickname.php?</option>
-<option value='What is the first name of your eldest niece.php?' >What is the first name of your eldest niece.php? </option>
-<option value='What is the first name of your eldest nephew.php?' > What is the first name of your eldest nephew.php?</option>
-<option value='What is the first name of your favourite aunt.php?' > What is the first name of your favourite aunt.php? </option>
+<option value='What is the first name of your favourite uncle?' > What is the first name of your favourite uncle ? </option>
+<option value='Where did you meet your spouse?' > Where did you meet your spouse ? </option>
+<option value='What is your eldest cousins name ?' > What is your eldest cousin's name ? </option>
+<option value='What is your youngest childs nickname?' > What is your youngest child's nickname ? </option>
+<option value='What is your eldest childs nickname ?' > What is your eldest child's nickname ?</option>
+<option value='What is the first name of your eldest niece ?' >What is the first name of your eldest niece ? </option>
+<option value='What is the first name of your eldest nephew ?' > What is the first name of your eldest nephew ?</option>
+<option value='What is the first name of your favourite aunt ?' > What is the first name of your favourite aunt ? </option>
 <option value='
 Where did you spend your honeymoon.php?' > 
  </option>
@@ -590,7 +591,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -626,7 +627,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -646,7 +647,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/user',{
+var resource = $resource('http://81.137.131.58/api/user',{
 
 id:"@id",
 firstname:"@firstname",
@@ -701,7 +702,7 @@ $scope.senderdetails = true;
 $scope.getshops = function () {
 
 
-$http.get("http://localhost:3000/api/shop").then(function(response) {
+$http.get("http://81.137.131.58/api/shop").then(function(response) {
 
 
  $scope.shops = response.data;
@@ -734,7 +735,7 @@ $scope.usershop = $scope.shopdropdown.name;
 $scope.getsenderslist = function () {
 
 
-$http.get("http://localhost:3000/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
+$http.get("http://81.137.131.58/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
 document.getElementById("customerlastname").value+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
@@ -757,13 +758,13 @@ $scope.userreport = function () {
 if($scope.sendersid == undefined)
 {
 	
-	alert('You  need to slect auser');
+	alert('You  need to slect a user');
 	
 }
 else
 {
 	
-	$http.get("http://localhost:3000/api/agent_report.php?agentusername"+$scope.USERNAME).then(function(response) {
+	$http.get("http://81.137.131.58/api/agent_report.php?agentusername"+$scope.USERNAME).then(function(response) {
 
 
 alert(response.data.ERROR);
@@ -802,6 +803,7 @@ $scope.PASSWORD = $scope.senderslist[para].password;
 $scope.SECRETQUESTION = $scope.senderslist[para].secretquestion;
 $scope.ANSWER = $scope.senderslist[para].secretanswer;
 $scope.user_ID = $scope.senderslist[para].id;
+
 $scope.usershop = $scope.senderslist[para].shop;
 
 $scope.limit = $scope.senderslist[para].limit;
@@ -830,14 +832,16 @@ $scope.savesender();
 $scope.savesender = function() {
 
 
+var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-var EmailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2}).php?)$/i;
+      
+var EmailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2}))$/i;
 
 var email = document.getElementById("customeremail").value;
 
 
 
-if(!EmailRegex.test(email))
+if(re.test(email))
 {
 
 
@@ -907,7 +911,9 @@ occupation:$scope.occupation,
 
 
   
-  $scope.getsenderslist() ; 
+
+$scope.getsenderslist() ; 
+
 if(log.ERROR){ alert(log.ERROR);}
 
 
@@ -973,7 +979,7 @@ occupation:$scope.occupation,
 }, function() {
 
 
-alert(log.ERROR);
+if(log.ERROR){ alert(log.ERROR);}
 
 $scope.sendersid = undefined;
 $scope.FirstName = "";
@@ -1046,7 +1052,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://localhost:3000/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("http://81.137.131.58/api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 alert(response.data.ERROR);
 

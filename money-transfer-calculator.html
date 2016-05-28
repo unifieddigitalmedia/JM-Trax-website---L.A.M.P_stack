@@ -81,7 +81,7 @@
 
 <div class="col-sm-6" >
 
-<h5> Here are your benficiaries . To get started select a beneficary or add a new by clicking <a href="beneficiary-details.html" > here </a> </h5>
+<h5> Here are your benficiaries . To get started select a beneficary or add a new by clicking <a href="beneficiary-details.html" style="color:red;" > here </a> </h5>
 
 <table class="table borderless ">
 
@@ -296,7 +296,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Money_Transfer_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -356,7 +356,7 @@ $scope.agenttype = getCookie('agenttype') ;
 $scope.creditlimit = getCookie('agentcredit') ;
 
 
-$http.get("http://localhost:3000/api/senders.php?username="+getCookie('agentusername')).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?username="+getCookie('agentusername')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -375,7 +375,7 @@ $scope.senderslist = response.data;
 
 	
 
-$http.get("http://localhost:3000/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
+$http.get("http://81.137.131.58/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -387,7 +387,7 @@ $scope.receipentlist = response.data;
 
 
 
-$http.get("http://localhost:3000/api/transactions.php?sendersMobile="+getCookie('agentemail')).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?sendersMobile="+getCookie('agentemail')).then(function(response) {
 
 
 $scope.transactionlist = response.data;
@@ -403,7 +403,7 @@ $scope.periodtotal = $scope.calculate30daytotals($scope.transactionlist);
 
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -418,7 +418,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -442,7 +442,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -720,7 +720,7 @@ document.cookie = "total=" + $scope.total  ;
 
 document.cookie = "rate=" + $scope.rate  ;
 
-window.location = "http://localhost:3000/confirm-benficiary.html" ;
+window.location = "http://81.137.131.58/confirm-benficiary.html" ;
 
 }
 
@@ -749,7 +749,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://localhost:3000/api/charge.php?ngn="+para).then(function(response) {
+$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -764,7 +764,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://localhost:3000/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -780,7 +780,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://localhost:3000/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -795,7 +795,7 @@ $scope.rate = response.data.RATE;
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://localhost:3000/api/charge.php?amount="+para).then(function(response) {
+       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

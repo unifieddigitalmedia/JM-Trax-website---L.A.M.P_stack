@@ -64,9 +64,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -431,7 +431,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -471,7 +471,7 @@ $scope.thirdpartydiv = true;
 $scope.getsenderslist = function () {
 
 
-$http.get("http://localhost:3000/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -729,7 +729,7 @@ else
 
 $scope.deleterec = function () {
 
-var resource = $resource('http://localhost:3000/api/receipients',{});
+var resource = $resource('http://81.137.131.58/api/receipients',{});
 
 var r = confirm("You are about to delete this receipient");
 

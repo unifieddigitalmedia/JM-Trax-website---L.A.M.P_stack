@@ -66,9 +66,11 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+  <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
   <a href="receipients.html"> Recipients </a> 
 
@@ -566,7 +568,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -602,7 +604,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -622,7 +624,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -675,7 +677,7 @@ $scope.senderdetails = true;
 
 var init = function () {
   
-$http.get("http://localhost:3000/api/getoccupations.php").then(function(response) {
+$http.get("http://81.137.131.58/api/getoccupations.php").then(function(response) {
 
  $scope.occupations = response.data;
 
@@ -694,7 +696,7 @@ $scope.getsenderslist = function () {
 
 
 
-$http.get("http://localhost:3000/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
 
@@ -758,7 +760,7 @@ $scope.receipentlist = $scope.senderslist[para].senderdetails.receipients;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://localhost:3000/senderstransactions.php" ;
+window.location = "http://81.137.131.58/senderstransactions.php" ;
 
 }
 
@@ -844,7 +846,7 @@ var county = document.getElementById("county").value;
 
 var postcode = document.getElementById("postcode").value;
 
-if(line1 == '' || line2 =='' || town=='' || postcode =='')
+if(line1 == '' || town=='' || postcode =='')
 
 {
 
@@ -1078,7 +1080,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://localhost:3000/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("http://81.137.131.58/api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 if(log.ERROR){ alert(log.ERROR);}
@@ -1150,7 +1152,7 @@ var scriptTag = document.getElementById("PCAe4b2e7e1d8a241dead6229b29fb22327");
 var headTag = document.getElementsByTagName("head").item(0);
 var strUrl = "";
 
-strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/Find/v1.10/json.ws.php?";
+strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/Find/v1.10/json.ws?";
 strUrl += "&Key=" + encodeURI(Key);
 strUrl += "&SearchTerm=" + encodeURI(Postcode);
 strUrl += "&CallbackFunction=PostcodeAnywhere_Interactive_Find_v1_10End";
@@ -1214,7 +1216,7 @@ var scriptTag = document.getElementById("PCAb9b445072c50417b82ad4204c2ec66c1");
 var headTag = document.getElementsByTagName("head").item(0);
 var strUrl = "";
 //Build the url
-strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/RetrieveById/v1.30/json.ws.php?";
+strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/RetrieveById/v1.30/json.ws?";
 strUrl += "&Key=" + encodeURI(Key);
 strUrl += "&Id=" + encodeURI(Id);
 strUrl += "&UserName=" + encodeURI(UserName);

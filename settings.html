@@ -417,7 +417,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Settings_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/user',{
+var resource = $resource('http://81.137.131.58/api/user',{
 
 id:"@id",
 firstname:"@firstname",
@@ -469,7 +469,7 @@ $scope.agenttype = getCookie('agenttype') ;
 
 $scope.creditlimit = getCookie('agentcredit') ;
 
-$http.get("http://localhost:3000/api/senders.php?customerusername="+getCookie('agentusername')).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?customerusername="+getCookie('agentusername')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -479,7 +479,7 @@ $scope.selectsender(0);
     });
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 
 
@@ -496,7 +496,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -520,7 +520,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -592,7 +592,7 @@ $scope.rights = $scope.senderslist[para].usertype;
 $scope.getshops = function () {
 
 
-$http.get("http://localhost:3000/api/shop").then(function(response) {
+$http.get("http://81.137.131.58/api/shop").then(function(response) {
 
 
  $scope.shops = response.data;
@@ -716,7 +716,7 @@ else
 
 
 
-  $http.put("http://localhost:3000/api/user.php?id="+$scope.sendersid+"&firstname="+$scope.FirstName+
+  $http.put("http://81.137.131.58/api/user.php?id="+$scope.sendersid+"&firstname="+$scope.FirstName+
   "&lastname="+$scope.LastName+
   "&mobile="+$scope.MobilePhone+
   "&email=&user_type=customer"+
@@ -818,11 +818,11 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://localhost:3000/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("http://81.137.131.58/api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 alert(response.data.ERROR);
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 });
 

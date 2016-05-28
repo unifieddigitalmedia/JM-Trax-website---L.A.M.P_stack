@@ -79,6 +79,7 @@ $date = $day."-".$month."-".$year;
 
 $t = array(
 
+"id" => $row2[id],
 "senderfirstname" => $row2[senderfirstname],
 "senderlasttname" => $row2[senderlasttname],
 "line1" => $row2[line1],
@@ -104,7 +105,7 @@ $t = array(
 "remittance" => $row2[remittance],
 "ngn" => $row2[ngn],
 "amount" => $row2[amount],
-"totalngn" => $row2[totalngn],
+"totalngn" => $row2[ngn],
 "totalgbp" => $row2[totalgbp],
 "fee" => $row2[fee],
 "date" => $date,
@@ -129,9 +130,94 @@ else
 
 
 
+$sql1 = "SELECT * FROM transfers WHERE id = '$_REQUEST[id]' ";
+
+$result1 = $conn->query($sql1);
+
+$row2 = $result1->fetch_assoc();
+
+$sql2 = "INSERT INTO deletedtransfers (
+
+                senderfirstname,
+                senderlasttname,
+                line1,
+                line2,
+                line3,
+                town,
+                sendercounty,
+                postcode,
+                senderphone,
+                sendermobile,
+                senderemail,
+                recipientsurname,
+                recipientfirstname,
+                recipientphone,
+                bankac,
+                bankname,
+                recmobilephoneprex,
+                paymentref,
+                shopacc,
+                paypalemail,
+                reasonfortransfer,
+                agentusername,
+                remittance,
+                ngn,
+                amount,
+                totalgbp,
+                fee,
+                `date`,
+                shop,
+                customeref,
+                rate,uksms,ngnsms,orderID)
+
+VALUES ('$row2[senderfirstname]',
+          '$row2[senderlasttname]',
+          '$row2[line1]',
+          '$row2[line2]',
+          '$row2[line3]',
+          '$row2[town]',
+          '$row2[sendercounty]',
+          '$row2[postcode]',
+          '$row2[senderphone]',
+          '$row2[sendermobile]',
+          '$row2[senderemail]',
+          '$row2[recipientsurname]',
+          '$row2[recipientfirstname]',
+          '$row2[recipientphone]',
+          '$row2[bankac]',
+          '$row2[bankname]',
+          '$row2[recmobilephoneprex]',
+          '$row2[paymentref]',
+          '$row2[shopacc]',
+          '$row2[paypalemail]',
+          '$row2[reasonfortransfer]',
+          '$row2[agentusername]',
+          '$row2[remittance]',
+          '$row2[date]',
+          '$row2[amount]',
+          '$row2[totalgbp]',
+          '$row2[fee]',
+          '$row2[date]',
+          '$row2[shop]',
+          '$row2[customerref]',
+          '$_REQUEST[rate]',
+          '$_REQUEST[uksms]',
+          '$row2[ngnsms]',
+          '$_REQUEST[id]')";
+
+if ($conn->query($sql2) === TRUE) {
+
+
 $sql3 = "DELETE FROM transfers WHERE id = '$_REQUEST[id]' ";
 
 if ($conn->query($sql3) === TRUE) {
+
+
+$email = "service@jmtrax.com,justmtransfers@gmail.com" ;
+$subject = "Transaction Deleted";
+$message =" $_REQUEST[agentusername] deleted transaction JM$_REQUEST[id]. That was sending to $row2[senderfirstname] $row2[senderlasttname] in the amount of £ $row2[amount] - $row2[ngn] NGN." ;
+mail($email, "Subject: $subject",$message, "From:just-computers@hotmail.com");
+
 
 
    echo json_encode(array(
@@ -158,6 +244,17 @@ if ($conn->query($sql3) === TRUE) {
 
 
 }
+
+
+
+} else {
+
+
+
+
+}
+
+
 
 
 

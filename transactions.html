@@ -73,9 +73,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -322,7 +322,7 @@ function getCookie(cname) {
 var init = function () {
    
 
-$http.get("http://localhost:3000/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 
@@ -408,7 +408,7 @@ document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "http://localhost:3000/editorder.html" ;
+window.location = "http://81.137.131.58/editorder.html" ;
 
 }
 
@@ -462,7 +462,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -498,7 +498,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 

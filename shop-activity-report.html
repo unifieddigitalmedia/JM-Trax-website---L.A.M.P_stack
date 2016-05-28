@@ -110,7 +110,7 @@ var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/shop-activity-report',{});
+var resource = $resource('http://81.137.131.58/api/shop-activity-report',{});
 
 return resource;
 
@@ -128,7 +128,7 @@ $scope.receipientname = getCookie('shop')  ;
 
 $scope.period = getCookie('fromdate') + "  " + getCookie('todate') ;
 
-$http.get("http://localhost:3000/api/shop-activity-report.php?shop="+getCookie('shop')).then(function(response) {
+$http.get("http://81.137.131.58/api/shop-activity-report.php?shop="+getCookie('shop')).then(function(response) {
 
 
 $scope.dailytransactionlist = response.data;

@@ -111,7 +111,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/transactions',{});
+var resource = $resource('http://81.137.131.58/api/transactions',{});
 
 return resource;
 
@@ -128,7 +128,7 @@ var init = function () {
 $scope.sendersname = getCookie('sender_firstname') + "  " + getCookie('sender_lastname') ;
 
 
-$http.get("http://localhost:3000/api/sender_transactions.php?username="+getCookie('sender_username')+"&usertype=customer" ).then(function(response) {
+$http.get("http://81.137.131.58/api/sender_transactions.php?username="+getCookie('sender_username')+"&usertype=customer" ).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 

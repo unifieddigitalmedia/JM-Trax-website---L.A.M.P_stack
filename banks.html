@@ -67,9 +67,11 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+    <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -411,7 +413,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -447,7 +449,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -467,7 +469,7 @@ init();
 
 app.factory('Bank_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/banks',{
+var resource = $resource('http://81.137.131.58/api/banks',{
 
 
  bank_name:"@bankname", 
@@ -494,7 +496,7 @@ $scope.getbanklist = function () {
 
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 
 $scope.banklist = response.data;
@@ -586,7 +588,7 @@ if($scope.payee_bank_pos !== undefined)
 
 
 
-$http.delete("http://localhost:3000/api/banks.php?id="+$scope.banklist[$scope.payee_bank_pos].id).then(function(response) {
+$http.delete("http://81.137.131.58/api/banks.php?id="+$scope.banklist[$scope.payee_bank_pos].id).then(function(response) {
 
 alert(response.data.ERROR);
 

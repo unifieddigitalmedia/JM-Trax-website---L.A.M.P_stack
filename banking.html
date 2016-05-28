@@ -66,9 +66,11 @@
 
   <a href=""> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+  <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -122,7 +124,7 @@
   <div class="col-sm-2"> <label for="usr">*AMOUNT</label><input type="text" class="form-control input-sm"  id='amount' name='amount' class=''   ng-model='amount'></div>
   <div class="col-sm-2"> <label for="usr">*PAYMENT REF</label><select name='payment' ng-model='payment' class="form-control input-sm"><option value='ONLINE' > ONLINE </option> <option value='CASH' > CASH </option> <option value='BANK' > BANK </option> <option value='CASH PICKUP' > CASH PICKUP </option><option value='CUSTOMER TRANSFER' > CUSTOMER TRANSFER </option></select> </div>
   <div class="col-sm-2"> <label for="usr">BANK</label>
-  <select class="form-control input-sm"  ng-options="bank as bank.bankname for bank in bankslist | filter:bank.type='receipient' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown" style="position:relative; " id="bank"></select>
+  <select class="form-control input-sm"  ng-options="bank as bank.bankname for bank in bankslist | filter:bank.type='payee' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown" style="position:relative; " id="bank"></select>
 </div>
   <div class="col-sm-2"> <label for="usr">*DAILY SALES</label><input type="text" class="form-control input-sm" id='sales' name='sales' class=''   ng-model='sales'></div>
   <div class="col-sm-2"> <label for="usr">*NUM TRANS.</label><input type="text" class="form-control input-sm"  id='transfers' name='transfers' class='' ng-model='transfers'></div>
@@ -285,7 +287,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -321,7 +323,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -341,7 +343,7 @@ init();
 
 app.factory('Banking_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/banking.php',{
+var resource = $resource('http://81.137.131.58/api/banking.php',{
 
 date:"@date",
 amount:"@amount",
@@ -384,7 +386,7 @@ $scope.agenttype = getCookie('agenttype') ;
 $scope.creditlimit = getCookie('agentcredit') ;
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 
 
@@ -394,7 +396,8 @@ $http.get("http://localhost:3000/api/banks").then(function(response) {
 
     });
     
-$http.get("http://localhost:3000/api/banking.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+   
+$http.get("http://81.137.131.58/api/banking.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 $scope.banklist = response.data;
 
@@ -459,7 +462,7 @@ var log = Banking_Service.save(
 date:document.getElementById("datepicker2").value,
 amount:$scope.amount,
 payment_ref:$scope.payment,
-bank:$scope.bankdropdown,
+bank:$scope.bankdropdown.bankname,
 sales:$scope.sales,
 num_transfers:$scope.transfers,
 agent:$scope.agentusername,
@@ -510,11 +513,10 @@ if (r == true) {
 
 
 
-alert( "http://localhost:3000/api/banking.php?id="+$scope.banklist[para].id);
 
 $http.delete(
 
-  "http://localhost:3000/api/banking.php?id="+$scope.banklist[para].id).then(function(response) {
+  "http://81.137.131.58/api/banking.php?id="+$scope.banklist[para].id).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -590,7 +592,7 @@ $(function() {
 
  
 
-    $( "#datepicker2" ).datepicker({ dateFormat: "d-m-yy" });
+    $( "#datepicker2" ).datepicker({ dateFormat: "dd-m-yy" });
   
   });
 

@@ -96,7 +96,7 @@ $user = array(
 'County' =>  $row2[County] , 
 'Country'  => $_REQUEST[Country] , 
 'Mobile'  =>  $row2[Mobile] , 
-'Email'  => $row2[Mobile] , 
+'Email'  => $row2[Email] , 
 'Sourceoffunds'  => $row2[Sourceoffunds] ,
 'IDtype'  => $row2[IDtype] , 
 'Dnumber'  => $row2[IDnumber] , 
@@ -106,8 +106,8 @@ $user = array(
 'AddressURL'  =>  $row2[AddressURL] ,
 'IncomeURL'  => $row2[IncomeURL] ,
 'Enabled'  => $row2[Enabled] ,
-'Occupation ' =>  $row2[Occupation] ,
-'shop ' =>  $row2[Shop] ,
+'Occupation' =>  $row2[Occupation] ,
+'shop' =>  $row2[Shop] ,
 
 
       );
@@ -216,7 +216,20 @@ $password = $_REQUEST[password_field] ;
 
 }
 
+if(!$_REQUEST[email])
 
+{
+
+$email = $_REQUEST[mobile];
+
+}
+else 
+
+{
+
+$email = $_REQUEST[email] ;
+
+}
 
 
 $sql2 = "INSERT INTO users (
@@ -267,7 +280,7 @@ VALUES ('$username',
           '$_REQUEST[county]',
           '$_REQUEST[country]',
           '$_REQUEST[mobile]',
-          '$_REQUEST[mobile]',
+          '$email',
           '',
           '$_REQUEST[IDtype]',
           '$_REQUEST[IDnumber]',
@@ -277,7 +290,7 @@ VALUES ('$username',
           '',
           '',
           'on',
-          '$_REQUEST[Occupation]','$_REQUEST[shop_name]')";
+          '$_REQUEST[occupation]','$_REQUEST[shop_name]')";
 
 if ($conn->query($sql2) === TRUE) {
 
@@ -377,6 +390,24 @@ echo json_encode(array(
 }else {
 	
 	
+	
+	if(!$_REQUEST[email])
+
+{
+
+$email = $_REQUEST[mobile];
+
+}
+else 
+
+{
+
+$email = $_REQUEST[email] ;
+
+}
+
+
+	
 	$sql2 = "UPDATE users SET 
 
                 username = '$_REQUEST[username_field]' , 
@@ -396,7 +427,7 @@ echo json_encode(array(
                 County = '$_REQUEST[county]' , 
                 Country = '$_REQUEST[country]' , 
                 Mobile = '$_REQUEST[mobile]' , 
-                Email = '$_REQUEST[mobile]' , 
+                Email = '$email' , 
                 Sourceoffunds = '' , 
                 IDtype = '$_REQUEST[IDtype]' , 
                 IDnumber = '$_REQUEST[IDnumber]' , 
@@ -405,8 +436,8 @@ echo json_encode(array(
                 IDURL = '' , 
                 AddressURL = '' , 
                 IncomeURL = '' , 
-                Enabled = '' , 
-                Occupation = '$_REQUEST[Occupation]' 
+                Enabled = '' , Shop = '$_REQUEST[shop_name]',
+                Occupation = '$_REQUEST[occupation]' 
                
                  WHERE id = '$_REQUEST[id]'
                  

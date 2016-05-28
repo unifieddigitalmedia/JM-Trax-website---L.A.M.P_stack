@@ -450,7 +450,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -517,7 +517,7 @@ $scope.creditlimit = getCookie('agentcredit') ;
 
 
 
-$http.get("http://localhost:3000/api/getoccupations").then(function(response) {
+$http.get("http://81.137.131.58/api/getoccupations").then(function(response) {
 
 
 
@@ -534,7 +534,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -558,7 +558,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -566,7 +566,7 @@ window.location = "http://localhost:3000/index.html" ;
 
 
 
-$http.get("http://localhost:3000/api/senders.php?id="+getCookie('agentid')).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?id="+getCookie('agentid')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -576,7 +576,7 @@ $scope.selectsender(0);
 
     });
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 
 
@@ -770,7 +770,7 @@ occupation:$scope.occupation.occupation,
 
 if(log.ERROR){ alert(log.ERROR);}
 
-window.location = "http://localhost:3000/transfer.html" ;
+window.location = "http://81.137.131.58/transfer.html" ;
 
   });
 
@@ -818,7 +818,7 @@ occupation:$scope.occupation.occupation,
 }, function() {
 
 
-if(log.ERROR){ alert(log.ERROR);} else {  window.location = "http://localhost:3000/transfer.html" ;  }
+if(log.ERROR){ alert(log.ERROR);} else {  window.location = "http://81.137.131.58/transfer.html" ;  }
 
 
 

@@ -66,9 +66,11 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  
+    <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -322,7 +324,7 @@
 <div clas='row'>
 
 <div class="col-sm-6"> </div>
-<div class="col-sm-6" style="text-align:center;"> Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account. 
+<div class="col-sm-6" style="text-align:center;"> Pay via PayPal; you can pay with your credit card if you do not have a PayPal account. 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input alt="PayPal - The safer, easier way to pay online." name="submit" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_checkout_pp_142x27.png" type="image" ng-click='completetransfer(<?php echo $_SESSION[neworder]; ?>)'/>
 <img src="https://www.paypal.com/en_AU/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
@@ -331,10 +333,10 @@
 <input name="item_name" type="hidden" class="tnum"  />
 
 <input name="amount" type="hidden" class="gbptotal" />
-<input name="return" type="hidden" value="http://www.localhost:3000/receipt.html" />
+<input name="return" type="hidden" value="http://www.81.137.131.58/receipt.html" />
 <input name="no_shipping" type="hidden" value="0" />
 <input name="currency_code" type="hidden" value="GBP" />
-<input name="callback_url" type="hidden" value="http:/localhost:3000/" />
+<input name="callback_url" type="hidden" value="http:/81.137.131.58/" />
 
 </form></div>
 
@@ -459,7 +461,7 @@ init();
 
 app.factory('Checkout_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/checkout',{
+var resource = $resource('http://81.137.131.58/api/checkout',{
 
 
 username:"@username",
@@ -537,7 +539,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -561,7 +563,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -608,7 +610,7 @@ change : $scope.change,
 
 if(log.ERROR){ alert(log.ERROR);}
 
-window.location = "http://localhost:3000/receipt.html" ;
+window.location = "http://81.137.131.58/receipt.html" ;
 
 
   });

@@ -15,160 +15,40 @@
       type="image/png" 
       href="/images/jmtrax_icon.png">
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
+<link rel="icon" 
+      type="image/png" 
+      href="/images/jmtrax_icon.png">
 
-<title> Just Money Transfers | Dashboard </title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<title> Just Money Transfers | Deleted Transactions </title>
 
 
 </head>
 
-<body ng-cloak>
+<body ng-cloak ng-app="justmoneytransfers" >
 
   
 
  
 
 
-<header>
+<header ng-controller="menucontroller">
 
 
 <ul class="topnav">
 
 <li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
 
-<li class="dropdown-link">
-
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
-
-<li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
+<li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
 </li>  
 
-<li class="dropdown-link"> <a class="dropbtn" >Administration</a> 
+<li class="dropdown-link" ng-hide="usertype"> <a class="dropbtn" >Administration</a> 
 
 <div class="dropdown-content">
-
-  <a href="banks.html"> Banks </a>  
-
-  <a href="commission-fees.php"> Commission Fees</a>  
-
-  <a href="customers.html"> Customers </a>
-
-  <a href="exchange-rates.html"> Exchange Rates</a>  
-
-  <a href="shops.html"> Shops </a> 
-
-  <a href=""> Users </a>   
-
-</div>
-
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Reports</a>  
-
-<nav class="dropdown-content">
-
-  <a href="banking.html"> Banking</a> 
-
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
-
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
-
-   <a href="receipients.html"> Recipients </a> 
-
-    <a href="sales-report.html"> Sales Report </a> 
-
-  <a href="senders.html"> Senders </a> 
-
-  <a href="transactions.php"> Transactions </a>  
-
-</nav>
-
-</li>  
-
-<li class="dropdown-link"> <a href="index.html" class="dropbtn" >Log Out</a> 
-
-
-</li>  
-
-<li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
-</li>
-
-
-
-</ul>
-<li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
-
-</li>  
-
-<li class="dropdown-link">
-
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
-
-<li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Administration</a> 
-
-<div class="dropdown-content">
-
-  <a href="banks.html"> Banks </a>  
-
-  <a href="commission-fees.php"> Commission Fees</a>  
-
-  <a href="customers.html"> Customers </a>
-
-  <a href="exchange-rates.html"> Exchange Rates</a>  
-
-  <a href="shops.html"> Shops </a> 
-
-  <a href=""> Users </a>   
-
-</div>
-
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Reports</a>  
-
-<nav class="dropdown-content">
-
-  <a href="banking.html"> Banking</a> 
-
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
-
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
-
-   <a href="receipients.html"> Recipients </a> 
-
-    <a href="sales-report.html"> Sales Report </a> 
-
-  <a href="senders.html"> Senders </a> 
-
-  <a href="transactions.php"> Transactions </a>  
-
-</nav>
-
-</li>  
-
-<li class="dropdown-link"> <a href="index.html" class="dropbtn" >Log Out</a> 
-
-
-</li>  
-
-<li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
-</li>
-
-
-
-</ul>
-<li class="dropdown-link"> <a class="dropbtn" >Administration</a> 
-
-<nav class="dropdown-content">
 
   <a href="banks.html"> Banks </a>  
 
@@ -182,35 +62,6 @@
 
   <a href="users.html"> Users </a>   
 
-</nav>
-
-
-</li>  
-
-<li class="dropdown-link">
-
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
-
-<li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Administration</a> 
-
-<div class="dropdown-content">
-
-  <a href="banks.html"> Banks </a>  
-
-  <a href="commission-fees.php"> Commission Fees</a>  
-
-  <a href="customers.html"> Customers </a>
-
-  <a href="exchange-rates.html"> Exchange Rates</a>  
-
-  <a href="shops.html"> Shops </a> 
-
-  <a href=""> Users </a>   
-
 </div>
 
 
@@ -224,7 +75,9 @@
 
   <a href="daily-transactions-receipients.html"> Daily Transactions </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+    <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  
+  <a> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -249,1279 +102,78 @@
 
 
 
-</ul>
-<li class="dropdown-link"> <a class="dropbtn" >Reports</a>  
-
-<nav class="dropdown-content">
-
-  <a href="banking.html"> Banking</a> 
-
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
-
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
-
-   <a href="receipients.html"> Recipients </a> 
-
-    <a href="sales-report.html"> Sales Report </a> 
-
-  <a href="senders.html"> Senders </a> 
-
-  <a href="transactions.php"> Transactions </a>  
-
-</nav>
-
-</li>  
-
-<li class="dropdown-link">
-
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
-
-<li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Administration</a> 
-
-<div class="dropdown-content">
-
-  <a href="banks.html"> Banks </a>  
-
-  <a href="commission-fees.php"> Commission Fees</a>  
-
-  <a href="customers.html"> Customers </a>
-
-  <a href="exchange-rates.html"> Exchange Rates</a>  
-
-  <a href="shops.html"> Shops </a> 
-
-  <a href=""> Users </a>   
-
-</div>
-
-
-</li>  
-
-<li class="dropdown-link"> <a class="dropbtn" >Reports</a>  
-
-<nav class="dropdown-content">
-
-  <a href="banking.html"> Banking</a> 
-
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
-
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
-
-   <a href="receipients.html"> Recipients </a> 
-
-    <a href="sales-report.html"> Sales Report </a> 
-
-  <a href="senders.html"> Senders </a> 
-
-  <a href="transactions.php"> Transactions </a>  
-
-</nav>
-
-</li>  
-
-<li class="dropdown-link"> <a href="index.html" class="dropbtn" >Log Out</a> 
-
-
-</li>  
-
-<li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
-</li>
-
-
-
-</ul>
-<li class="dropdown-link"> <a href="index.html" class="dropbtn" >Log Out</a> 
-
-
-</li>  
-
-<li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
-</li>
-
-
-
-</ul>
-
-
-
-
-
-
-</header>
+</ul></header>
 
   
-
-
-<input type='hidden' value=' <.php?php echo $_SESSION[loggedinuser]; .php?>' name='username' id='username' />
-
-<div class="container-fluid"  ng-controller='PostsCtrl' >
-
-
-
-
-<div class="row" >
-
-<div class="col-sm-4" >
-
-<table class="" style='background-color:black;color:white;padding:15px;height:150px;opacity:0.9;'>
-<thead>
-
-</thead>
-<tbody>
-<tr>
-<td>Id:</td>
-<td><.php?php echo $id ; .php?></td>
-</tr>
-
-<tr>
-<td>Username:</td>
-<td><.php?php echo $name ; .php?></td>
-</tr>
-
-<tr>
-<td>Email:</td>
-<td><.php?php echo $email ; .php?></td>
-</tr>
-
-<tr>
-<td>Access Level:</td>
-<td><.php?php echo $level ; .php?></td>
-</tr>
-
-
-
-<tr>
-<td>Credit Limit:</td>
-<td><.php?php echo $limit ; .php?></td>
-</tr>
-
-
-<tr>
-<td>Available Balance:</td>
-<td><.php?php echo $bal ; .php?></td>
-</tr>
-
-<tr>
-<td>Outstanding Balance:</td>
-<td><.php?php echo $out ; .php?></td>
-</tr>
-
-<tr>
-<td></td>
-
-<td>Click <a href='../banking-transaction/' style="colour:red,font-weight:bold;"> here </a> to bank</td>
-</tr>
-
-
-</tbody>
-</table>
-
-</div>
-
-
-
-<div class="col-sm-6" style="vertical-align:bottom;text-align:left;">
-
-
-<div class="row">
-
-   <div class="col-sm-4">
-
-
-      <div class="form-group">
-
-
-<h5>  1 GBP =  <span id='homepage'>  </span> NGN  </h5>
-
-</br>
-
-<h5> <span>  <.php?php echo $rateist[1]; .php?> </span> NGN = 1 GBP </h5>
-
-
-
-      </div>
-
-
-</div>
-
-
- <div class="col-sm-4">
-
-
-      <div class="form-group">
-
-      </div>
-
-
-</div>
-
- <div class="col-sm-4">
-
-
-      <div class="form-group">
-
-      </div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="row">
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-<label for="GBP">AMOUNT GBP £</label>
-
-      </div>
-
-
-   </div>
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-
-<label for="GBP">TRANSFER FEE £ </label>
-      </div>
-
-
-   </div>
-
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-<label for="GBP">TOTAL NGN </label>
-      </div>
-
-
-   </div>
-   
-<div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-<label for="GBP">TOTAL GBP £ </label>
-      </div>
-
-
-   </div>
-
-</div>
-
-
-<div class="row">
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-
-    <label for="GBP"></label>
-
-<input type="text" class="form-control input-sm" id="localamount1"   >
-
-
-      </div>
-
-
-   </div>
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    <label for="GBP"></label>
-
-<input type="text" class="form-control input-sm" id="fee1"  >
-
-
-      </div>
-
-
-   </div>
-
-
-   <div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-
- <label for="GBP"></label>
-<input type="text" class="form-control input-sm" id="NGN1" >
-
-
-      </div>
-
-
-   </div>
-
-
-<div class="col-sm-3">
-
-
-      <div class="form-group">
-    
-
- <label for="GBP"></label>
-
-<input type="text" class="form-control input-sm" id="total1"  style="color:red;">
-
-
-      </div>
-
-
-   </div>
-</div>
-
-
-<div class="row">
-
-   <div class="col-sm-4">
-
-
-      <div class="form-group">
-    
-
-      </div>
-
-
-   </div>
-
-   <div class="col-sm-4">
-
-
-      <div class="form-group">
-    
-
-
-      </div>
-
-
-   </div>
-
-
-   <div class="col-sm-4">
-
-
-      <div class="form-group">
-    
-      </div>
-
-
-   </div>
-   
-
-
-</div>
-
-</div>
-
-<div class="col-sm-2" style="vertical-align:bottom;text-align:left;">
-
-</div>
-
-</div>
-
-
-&nbsp;
-
-<div class="row" ng-init='bankingfull()'>
-  <div class="col-sm-12"><select name="website" ng-model="website" ng-options= "website.name as website.description for website in options" style='float:right;' ng-change='websiteID()'>
-                </select> </div>
-</div>
-&nbsp;
-<div class="row" style="text-align:centre;border:red dotted thin">
-
-<div class="col-sm-3" style="text-align:center;border:red dotted thin;padding:10px">Outstanding balance to JMTrax £&nbsp;<.php?php echo $out ; .php?></div>
-
-<div class="col-sm-3" style="text-align:center;border:red dotted thin;padding:10px">Agent available balance £&nbsp;<.php?php echo $bal ; .php?> </div>
-
-<div class="col-sm-3" style="text-align:center;border:red dotted thin;padding:10px">Agent credit limit £&nbsp;<.php?php echo $limit ; .php?></div>
-
-<div class="col-sm-3" style="text-align:center;border:red dotted thin;padding:10px">
-
-echo 'Announcing payment click <a id="annoucingpayment" class="annoucingpayment" style="colour:red,font-weight:bold;"> here </a>
-
-
-
-</div>
-</div>
-&nbsp;
-
-<h2> Total sent by sender since {{days}} </h2>
-<div class="row" style='text-align:center'>
-
-<div class="col-sm-3" style="">
-<label> <h3> AMOUNT GBP £ </h3></label>
-</div>
-
-<div class="col-sm-3" style="">
-<label> <h3>FEE £</h3></label>
-</div>
-
-<div class="col-sm-3" style="">
-<label> <h3>TOTAL DUE GBP £</h3></label>
-</div>
-
-<div class="col-sm-3" style="">
-<label> <h3>TOTAL NGN</h3></label>
-</div>
-
-
-
-</div>
+<div class="container-fluid"  ng-controller='menucontroller'   >
 
 
 &nbsp;
 
 
-<div class="row" style='text-align:center'>
 
-<div class="col-sm-3" style="">
-<h4> {{AMOUNT}} </h4>
-</div>
-
-<div class="col-sm-3" style="">
-<h4>{{FEE}}</h4>
-</div>
-
-<div class="col-sm-3" style="">
-<h4>{{GBP}}</h4>
-</div>
-
-<div class="col-sm-3" style="">
-<h4>{{NGN}}</h4>
-</div>
-
-
-
-</div>
-
-
-&nbsp;
-
-
-<div class="row" ng-init="checkuser();getreceipientsandtransactions()">
-
-
-
-<div class="col-sm-6" style="">
-
-<h6>SENDERS DETAILS</h6> 
-
-
-
-<form role="form" name="sendersmobileform" >
-
-<div class="form-group" style='height:100px;'>
-
-
-  <div class="row">
-
-    <div class="col-sm-6" >
-
-<input type="text"  class="form-control input-sm"   id="customerfirstname" ng-model='FirstName' placeholder="* First Name :" />
-
-
-</div>
-    <div class="col-sm-6" >
-
-
-<input type="text"  class="form-control input-sm"  id="customerlastname" ng-model='LastName' placeholder="* LAST NAME :" />
-
-
-</div>
-    
-
-
-  </div>
-
-&nbsp;
-
-  <div class="row">
-
-    <div class="col-sm-3" ><input type="text"  class="form-control input-sm"  value ='+44' disabled style='font-weight:bold;color:red;' ></div>
-    <div class="col-sm-2" ><input type="sendersmobile"  class="form-control input-sm"  value ='0'  disabled style='font-weight:bold;color:red;'></div>
-    <div class="col-sm-7" ><input type="text"  class="form-control input-sm"   name='sendersmobile' placeholder='Senders Mobile' required style='font-weight:bold;color:red;' id="customermobile" ng-model='MobilePhone' /></div>
-  </div>
-
-
-
-
-</div>
-
-<span id="sendererror" style='color:red;font-weight:bold;'> {{sendererror}}  </span>
-
-<div class="row">
-<div class="col-sm-6" style=""> <button type="submit" class="btn btn-primary btn-block" ng-click='searchmobilenumber()' ng-disabled="sendersmobileform.$invalid" >SEARCH</button>
-
-
-</div>
-<div class="col-sm-6" style="">  
-
-
-
-
-</div>
-
-
-
-</div>
-
-&nbsp;
-
-</form>
-
-
-</div>
-
-
-
-<div class="col-sm-6">
-
-
-<h6>RECEIPIENTS DETAILS</h6> </span>
-
-<form role="form" name="sendersmobileform" >
-
-<div class="form-group" style='height:100px;'>
-
-
-  <div class="row">
-
-    <div class="col-sm-6" >
-
-<input value="{{recfname}}"  class="form-control input-sm"   id='recfirstnamepop' name="recfirstname" onkeyup="showResult(this.value)" ng-model='recfirstname'  placeholder="* First Name:"/>
-
-
-</div>
-    <div class="col-sm-6" >
-
-
-<input type="text" value="{{reclname}}"  class="form-control input-sm"   id='reclastnamepop' name="recsurname" onkeyup="showresult(this.value)"  ng-model='reclastname'  placeholder="* Last Name:"/> 
-
-
-</div>
-    
-
-
-  </div>
-
-&nbsp;
-
-  <div class="row">
-
-    <div class="col-sm-4" ><input type="text"  class="form-control input-sm"  value ='+234' disabled style='font-weight:bold;color:red;' ></div>
-    <div class="col-sm-8" ><input value="{{recphone}}"  class="form-control input-sm"   id='recmobile'  name="recmobilephone" ng-model='recphone' ></div>
-  </div>
-<span id="recerror" style='color:red;font-weight:bold;'> {{recerror}}  </span>
-
-
-</div>
-<div class="row">
-<div class="col-sm-6" style=""><!-- <button type="submit" class="btn btn-primary btn-block" ng-click='beneficiarysearch()' ng-disabled="sendersmobileform.$invalid" >SEARCH</button> --></div>
-<div class="col-sm-6" style="">  
-
-
-</div>
-
-
-
-</div>
-
-&nbsp;
-
-</form>
-
-
-
-</div>
-
-
-
-<div class="col-sm-2" style="">
-
-</div>
-
-
-</div>
-
-<span style='color:red;' > search by sender name or mobile to get started. *search is case sensitive </span>
-
-&nbsp;
-
-<div class="row">
-
-   <div class="col-sm-6">
-
-<table>
-
-<tr>
-
-<td> FIRST NAME </td>
-<td> LAST NAME </td>
-<td> MOBILE </td>
-<td> 1st LINE </td>
-<td>  </td>
-
-</tr>
-
-</table>
-
-
-<div style="height: 200px;
-    overflow: scroll; max-height:200px;color:green;border:grey solid thin;"  ng-init="getsenderslists()"  >
-
-<table >
-    
-    <tbody>
-
-
-
-      <tr ng-repeat='sender in senderslist | sendernamesearch:FirstName:LastName' style='cursor:pointer;' ng-click="searchmobilenumber()">
-        
-<td style="text-align:left;">{{sender.SendersFirstName}}</td>
-
-<td> {{sender.SendersLastName}}</td>
-
-<td><span id="mobilecell">{{sender.SendersMobile}}</span></td>
-
-<td>{{sender.Line1}}</td>
-
-<td><button type='button' ng-click="selectsender()" style="color:red" class="btn btn-link">EDIT</button></td>
-      
-      
+<div class="table-responsive"  ng-init="getdaily()">
+
+
+ <table class="table table-bordered">
+    <thead>
+
+   <tr>
+        <th style='tablecells'>STAFF REF.</th>
+        <th style='tablecells'>SHOP</th>
+        <th  style='tablecells'>DATE</th>
+        <th style='tablecells' >TRANS. NO.</th>
+        <th style='tablecells'>SENDER FIRST NAME</th>
+        <th style='tablecells'>SENDER LAST NAME</th>
+        <th style='tablecells'>AMOUNT £</th>
+        <th style='tablecells'>FEES £</th>
+        <th style='tablecells'>TOTAL GBP DUE £</th>
+        <th style='tablecells'>TOTAL NGN DUE</th>
+        <th style='tablecells'>STATUS</th>
       </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='daily in dailytransactionlist ' ng-click="selecttransfer($index)" style="cursor:pointer">
+        <td style='tablecells'>{{daily.agentusername}}</td>
+        <td style='tablecells'>{{daily.shop}}</td>
+        <td style='tablecells'>{{daily.date}}</td>
+         <td style='tablecells'>JM{{daily.id}}</td>
+        <td style='tablecells'>{{daily.senderfirstname}}</td>
+        <td style='tablecells'>{{daily.senderlasttname}}</td>
+        <td style='tablecells'>{{tocurrency(daily.amount)}}</td>
+        <td style='tablecells' >{{daily.fee}}</td>
+        <td style='tablecells'>{{tocurrency(daily.totalgbp)}}</td>
+        <td style='tablecells'>{{tocurrency(daily.totalngn)}}</td>
+        <td style='tablecells'>{{daily.status}}</td>
+
+      </tr>
+
+ <tr>
+        <td colspan='6'></td>
+        <td>AMOUNT £</td>
+        <td>FEES £</td>
+        <td>TOTAL GBP DUE £</td>
+        <td>TOTAL NGN DUE</td>
+        
+      </tr>
+
+ <tr>
+        <td colspan='6'></td>
+        <td>{{ dailytransactionlist | sumByKey:'amount' }}</td>
+        <td>{{ dailytransactionlist | sumByKey:'fee' }}</td>
+        <td>{{ dailytransactionlist | sumByKey:'totalgbp' }}</td>
+        <td>{{ dailytransactionlist | sumByKey:'totalngn' }}</td>
+  
+        
+      </tr>
+
+
     </tbody>
   </table>
 
-
-
-</div>
-
-
-&nbsp;
-<p> {{senderrror}}  </p>
-&nbsp;
-
-<div class="row">
-
-   <div class="col-sm-4">
-
-
-      <div class="form-group">
-     <label for="usr"></label>
-      <input type="text"  class="form-control input-sm"   id="postcode" ng-model='SenderPostcode' placeholder="* POSTCODE :">
-      </div>
-
-
-   </div>
-
-    <div class="col-sm-4">
-
-      <div class="form-group">
-     <label for="usr"></label>
-      <button type='button'  id='find'  ng-click='searchpostcode()' class="btn btn-primary btn-block" > Find </button>
-      
-      </div>
-
-   </div>
-
-    <div class="col-sm-4">
-
-      <div class="form-group">
-    <label for="usr"></label>
-      <select name='building' id='building' ng-change='popform()' style='float:right; position:relative;width:100%;' ng-model='streetvalue'> </select>
-      </div>
-
-
-   </div>
-
-
-</div>
-
-
-<div class="row">
-
-   <div class="col-sm-4">
-
- <div class="form-group">
- <label for="usr"></label>
-      <input type="text"  class="form-control input-sm" id="line1" ng-model='line1' placeholder="* 1ST LINE :">
-      </div>
-
-   </div>
-
-    <div class="col-sm-4">
-
-
-<div class="form-group">
-  <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="2ND LINE :" />
-      </div>
-
-
-
-   </div>
-
-    <div class="col-sm-4">
-
-
-<div class="form-group">
-    <label for="usr"></label>
-     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="3RD LINE :">
-      </div>
-
-
-
-   </div>
-
-
-</div>
-
-
-
-<div class="row">
-
-   <div class="col-sm-4">
-
- <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="* TOWN :">
-      </div>
-
-
-   </div>
-
-    <div class="col-sm-4">
-
- <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="COUNTY :" >
-      </div>
-
-   </div>
-
-    <div class="col-sm-4">
-
- <div class="form-group">
-    <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="customeremail" ng-model='EMAIL' placeholder="* EMAIL :">
-      </div>
-
-   </div>
-
-
-</div>
-
-
-<div class="row">
-
-<div class="col-sm-3">
-
- <div class="form-group">
- <button type="button" class="btn btn-primary btn-block"  ng-click='savesender()' >ADD NEW </button>
-
-     
-      </div>
-
-
-   </div>
-
-   <div class="col-sm-3">
-
- <div class="form-group">
- <button type="button" class="btn btn-primary btn-block"  ng-click='savesender()' > UPDATE </button>
-
-     
-      </div>
-
-
-   </div>
-
-    <div class="col-sm-3">
-
- <div class="form-group">
-
-<!-- <button type="button" class="btn btn-primary btn-block" ng-hide="senderdetail.USERID" ng-click='convertcustomer()'> ENABLE CUSTOMER</button> --> 
-
-<button type="button" class="btn btn-primary btn-block" ng-click='deletesender()'>DELETE</button>
-
-      </div>
-
-   </div>
-
-    <div class="col-sm-3">
-
-<form action='http://www.justcomputersparts.co.uk/senderstransactions' method='POST'>  <button type='submit' name='printsenders' class="btn btn-primary btn-block"  >PRINT</button>  <input type='hidden' name='sendersID' value='{{sendersid}}' /> </form>
-
-
-
-
-   </div>
-
-
-</div>
-
-
-&nbsp;
-<h6> SENDERS ID DETAILS</h6>
-<div>
-
-
-<table class="table table-bordered " ng-hide='senderdetails'>
-<thead>
-
-
-<th> TYPE OF ID </th>
-<th> ID NUM </th>
-<th> COUNTRY OF ISSUE  </th>
-
-
-
-</thead>
-<tbody>
-
-
-<tr>
-
-<td>{{senderdetail.TYPEOFID}}</td>
-<td>{{senderdetail.IDNUM}}</td>
-<td>{{senderdetail.COUNTRYOFISSUE}}</td>
-
-</tr>
-
-<tr>
-<th> EXPIRY DATE </th>
-</tr>
-<tr>
-<td>{{ssenderdetail.EXPIRYDATE}}</td>
-</tr>
-<tr>
-
-<th> PROOF OF INCOME </th>
-<th> TYPE OF ID </th>
-<th> PROOF OF ADDRESS </th>
-
-</tr>
-
-
-<tr>
-
-<td><a href='{{senderdetail.INCOME}}' target='_blank'>  <img src='http://www.jmtrax.net/identifications/ic_launcher.png' style='position:relative; width:16px;height:16px' /> </a></td>
-<td><a href='{{senderdetail.ID}}' target='_blank'>  <img src='http://www.jmtrax.net/identifications/ic_launcher.png' style='position:relative; width:16px;height:16px' /> </a></td>
-<td><a href='{{senderdetail.ADDRESS}}' target='_blank'>  <img src='http://www.jmtrax.net/identifications/ic_launcher.png' style='position:relative; width:16px;height:16px' /> </a></td>
-
-</tr>
-
-
-
-
-</tbody>
-</table>
-
-
-
-<table class="table table-bordered " ng-hide='senderdetails'>
-<thead>
-
-
-<th> USERNAME </th>
-<th> PASSWORD </th>
-
-
-
-</thead>
-<tbody>
-
-
-<tr>
-
-<td>{{senderdetail.USERNAME}}</td>
-<td>{{senderdetail.PASSWORD}}</td></tr>
-
-<tr> <th> SECRET QUESTION </th>
-<th> SECRET ANSWER </th></tr>
-<tr><td>{{senderdetail.SECRETQUESTION}}</td>
-<td>{{senderdetail.ANSWER}}</td>
-</tr>
-
-
-</tbody>
-</table>
-
-<!-- <table style="font-size:11px;border:none;" >
-
-<tbody>
-
-
-<tr>
-<td>{{senderdetail.USERID}}&nbsp;{{senderdetail.USERNAME}}&nbsp;{{senderdetail.PASSWORD}}&nbsp;{{senderdetail.SECRETQUESTION}}&nbsp;{{senderdetail.ANSWER}}</td>
-</tr>
-
-
-</tbody>
-</table> -->
-
-
-</div>
-
-
-&nbsp;
-
-
-
-   </div>
-
-   <div class="col-sm-6">
-
-<table>
-
-<tr> 
-
-<td> FIRST NAME </td> 
-
-<td> LAST NAME </td> 
-
-<td> BANK </td> 
-
-<td> ACCOUNT NUMBER </td> 
-
-</tr>
-
-</table>
-<div style="height: 200px;overflow: scroll; max-height:200px;border:grey solid thin;" >
-
-<table  ng-init="getrecs();">
-
-<tbody>
-<tr ng-repeat="rec in receipentlist | recnamesearch:recfirstname:reclastname" style='cursor:pointer;text-align:left;' ng-click="selectreceipient()">
-
-<td style="text-align:left;">{{rec.FIRSTNAME}}</td>
-<td>{{rec.LASTNAME}}</td>
-<td>{{rec.BANK}}</td>
-<td>{{rec.ACCOUNTNUMBER}}</td>
-
-</tr>
-
-
-</tbody>
-</table>
-
-
-</div>
-
-&nbsp;
-
-<span id="recerror" style='color:red;font-weight:bold;'> {{recerror}}  </span>
-
-&nbsp;
-
-
-<div class="row">
-
-   <div class="col-sm-4">
-
-
-
-     <div class="form-group">
-      <label for="usr"></label>
-     <input type="text" name="recbank" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank' placeholder="*  Bank:" /> 
-      </div>
-
-
-
-   </div>
-
-   <div class="col-sm-4">
-
-
- <div class="form-group">
-      <label for="usr"></label>
-     <select name='bank' id='bankdropdown' class="form-control input-sm" style="position:relative; float:right; color:red; font-family:Arial, Helvetica, sans-serif; width:100%; " >
-
-
-<option value='' > </option>
-
-</select> 
-      </div>
-
-
-
-
-   </div>
-
-
-   <div class="col-sm-4">
-
-
-
-      <div class="form-group">
-      <label for="usr"></label>
-      <input name='recbankaccount' type='text' class="form-control input-sm" style="position:relative; "  value="{{recaccount}}"  id='recnumber' ng-model='recaccount'  placeholder="* Bank Account:" /> 
-      </div>
-
-
-
-   </div>
-
-
-  </div>
-
-
-  <div class="row">
-
-   <div class="col-sm-4">
-
-
- <div class="form-group">
-      <label for="usr"></label>
-     <input type="text" id='paymenttextfeild'  class="form-control input-sm" style="position:relative; " name="payment"  value="{{recpaymentref}}" id='payment ref' ng-model='recpaymentref' placeholder="*Payment Reference :"/> 
-      </div>
-
-
-
-   </div>
-
-   <div class="col-sm-4">
-
-
-<div class="form-group">
-      <label for="usr"></label>
-    <select name='' id='paymentdropdown' class="form-control input-sm" style="position:relative; color:red; float:right;width:100%; " >
-
-
-
-<option value='' > </option>
-
-<option value='Cash' >Cash </option>
-
-<option value='Bank' >Bank </option>
-
-<option value='PayPal' >PayPal </option>
-
-<option value='thirdparty' >Third Party </option>
-
-</select>
-      </div>
-
-
-
-   </div>
-
-
-   <div class="col-sm-4">
-
-
-<div class="form-group" ng-hide="thirdpartydiv">
- 
-<textarea rows="4" cols="50" ng-model="thirdpartycomment"></textarea>
-
-</div>
-
-
- <div class="form-group" ng-hide="shopaccdiv">
-      
-      <label for="usr"></label>
-
-<select name='shopacc'  ng-model='shopacc' class="form-control" >
-
-<option value='' > </option>
-
-</select>
-
-
-  </div>
-
-
-   </div>
-
-
-  </div>
-
-
-  <div class="row">
-
-   <div class="col-sm-4">
-
-<div class="form-group">
-      <label for="usr"></label>
-      <input type="text" id='reasonfortransfer' style="position:relative; " name="reasonfortransfer"  class="form-control input-sm" value="{{recreasonfortransfer}}"  class='recreason' ng-model='recreasonfortransfer' placeholder="*Reason:"/> 
-      </div>
-
-
-
-   </div>
-
-   <div class="col-sm-4">
-
-
- <div class="form-group">
-      <label for="usr"></label>
-    <select name='' id='transferreason' class="form-control input-sm" style ='position:relative;width:100%;' >
-
-
-<option value=""></option>
-<option value="Family Assistance">Family Assistance</option>
-<option value="Commercial">Commercial</option>
-
-
-<option value="Pret">Pret</option>
-<option value="Help">help</option>
-
-
-<option value="Others">Other</option>
-
-
-</select>
-      </div>
-
-
-
-   </div>
-
-
-   <div class="col-sm-4">
-
-<div class="form-group">
-
-<button type="button" class="btn btn-primary btn-block" ng-click='saverec()'>SEND MONEY</button> 
-      </div>
-
-
-   </div>
-
-
-  </div>
-
-
-  <div class="row">
-
-   <div class="col-sm-3">
-<button type="button" class="btn btn-primary btn-block"  ng-click='saverec()' >ADD NEW </button>
-
-
-
-   </div>
-
-   <div class="col-sm-3">
-
- <div class="form-group">
- <button type="button" class="btn btn-primary btn-block"  ng-click='saverec()' >UPDATE </button>
- 
-      </div>
-
-
-
-   </div>
-
-<div class="col-sm-3">
-
- <div class="form-group">
-  <button type="button" class="btn btn-primary btn-block" ng-click='deletereceipient()'>DELETE </button> 
-      </div>
-
-
-
-   </div>
-
-   <div class="col-sm-3">
-
-<div class="form-group">
-     <form action='http://www.justcomputersparts.co.uk/beneficiary-transactions' method='GET' id='printallben' name='printallben' class='printallben'>  
-<button  type="submit" class="btn btn-primary btn-block"  name='printsenders'  >PRINT </button> 
-<input type='hidden' name='sendersID' value='{{sendersid}}' /><input type='hidden' value='{{recipientsID}}' name='recipientsID' /> 
-</form>
-      </div>
-
-
-
-   </div>
-
-
-&nbsp;
-
-
-
-<h6 >PREVIOUS TRANSACTIONS <a ng-click="printall()" style="cursor:pointer;color:red;" ng-hide='senderdetails'> PRINT ALL  <form id="alltransactions" action='http://www.justcomputersparts.co.uk/senderstransactions' method='get' >  <input type='hidden' name='sendersID' value='{{sendersid}}' /> </form> </a> </h6> 
-
-
-<table>
-
-<tr>  
-<td> DATE </td>
-<td> T-NUM </td>
-<td> B. FIRST NAME </td>
-<td> B. LAST NAME </td>
-<td> AMOUNT GBP </td>
-<td> FEE </td>
-<td> TOTAL GBP DUE </td>
-
-</tr>
-
-</table>
-<div  style="height:200px;overflow: scroll; max-height:200px;border:grey solid thin;" >
-
-
-<table >
-
-<tbody>
-<tr  ng-repeat="trans in transactionlist" >
-<td style="text-align:left;">{{trans.DATE}} &nbsp;<span id="transnumberindi" class="transnumberindi">{{trans.TRANSACTIONNUM}}</span>&nbsp;{{trans.RECFIRSTNAME}}&nbsp;{{trans.RECLASTNAME}}&nbsp;{{trans.AMOUNT}}&nbsp; {{trans.FEE}}&nbsp;{{trans.GBPDUE}}&nbsp; <form action='http://www.justcomputersparts.co.uk/senderstransactions' method='get' id="individualtransaction"> <input type='hidden' name='sendersID' value='{{sendersid}}' /> <input type='hidden' name='orderID' value='{{TRANSACTIONNUM}}' /> </form></td>
-
-
-
-</tr>
-
-</tbody>
-</table>
-
-
-</div>
-
-
-  </div>
-
-
-
-&nbsp;
 </div>
 
 </div>
-
-
-<form action='http://www.justcomputersparts.co.uk/order/' method='GET' id='moneyorder' name='moneyorder' class='moneyorder'>  
-<input type='hidden' name='sendersID' value='{{sendersid}}' />
-<input type='hidden' value='{{recipientsID}}' name='recipientsID' id="orderrecipientsID" /> 
-<input type='hidden' value='SUBMIT' name='rectobeamended' /> 
-
-</form>
-
-
-</div>
-
-
 
 
 <footer>
@@ -1535,9 +187,9 @@ echo 'Announcing payment click <a id="annoucingpayment" class="annoucingpayment"
 
  </div>
 
-  <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
+  <div class="col-sm-6" id="footer_column_2" style="text-align:center">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='/images/Photo2_small.png' class="footerimage"alt="Collection of logo representing Nigeria Banks that Jm Trax are associated with" />
 
    </div>
 
@@ -1552,13 +204,9 @@ echo 'Announcing payment click <a id="annoucingpayment" class="annoucingpayment"
 
 <p style='color:white;'>&copy; UNIFIED DIGITAL MEDIA  - http://www.unifieddigitalmedia.co.uk</p>
 
-  </section>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
-
-<script src="/scripts/app.js" ></script>
-
-<script src="/scripts/normal.js" ></script>
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
@@ -1568,9 +216,323 @@ echo 'Announcing payment click <a id="annoucingpayment" class="annoucingpayment"
 
 <script src="scripts/main.js"> </script>
 
+<script type="text/javascript">
+
+
+var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter','calfilter']);
+
+
+app.controller('menucontroller', function($scope,$http,$resource) {
+
+
+var init = function () {
+   
+
+
+$scope.usertype = false;
+
+if( getCookie('agenttype') === 'user'  )
+
+{ 
+
+$scope.usertype = true;
+
+
+}
+
+  
+ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
+
+{
+
+
+window.location = "http://81.137.131.58/index.html" ;
+
+
+}
+
+var counter = 0;
+
+setInterval(function(){ counter = counter + 1 ;
+
+
+window.addEventListener("mousemove",function getcoords() {
+
+
+counter = 0;
+
+});
+
+if (counter == '1800')
+
+{
 
 
 
+
+window.location = "http://81.137.131.58/index.html" ;
+
+
+
+} },1000);
+
+
+
+$http.get("http://81.137.131.58/api/deletedtransactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+
+$scope.dailytransactionlist = response.data;
+
+
+
+
+    });
+
+
+
+
+$scope.tocurrency = function (para) {
+
+
+var number = para.toString();
+
+var dollars = number.split('.')[0];
+
+var  cents = (number.split('.')[1] || '') +'00';
+
+var dollars = dollars.split('').reverse().join('').replace(/(\d{3}(?!$))/g, '$1,').split('').reverse().join('');
+
+var cent = cents.slice(0, 2);
+
+var decimal = ".";
+
+var cent2 = decimal.concat(cent);
+
+var dollars = dollars.concat(cent2);
+
+return dollars;
+
+
+
+
+}
+
+$scope.selecttransfer = function (para) {
+
+
+document.cookie = "transaction_number=" + $scope.filteredTransactions[para].id;
+document.cookie = "fromdate=" + $scope.startdate;
+document.cookie = "enddate=" + $scope.enddate;
+document.cookie = "status=" + $scope.status;
+document.cookie = "trans_pos=" + para;
+window.location = "http://81.137.131.58/editorder.html" ;
+
+}
+
+
+};
+
+init();
+
+
+
+
+function getCookie(cname) {
+
+    var name = cname + "=";
+  
+    var ca = document.cookie.split(';');
+  
+    for(var i=0; i<ca.length; i++) {
+  
+        var c = ca[i];
+  
+        while (c.charAt(0)==' ') c = c.substring(1);
+  
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  
+    }
+  
+    return "";
+
+}
+
+
+
+
+
+
+
+});
+
+
+
+
+angular.module('dailyFilter', []).filter('todaystransfers', function() {
+
+return function(input) {
+
+var log = [];
+
+   var date = new Date();
+    
+    
+ var DateString;
+
+ var monthIndex = date.getMonth();
+    
+    if(monthIndex === 12)
+{
+
+monthIndex = 1; 
+
+}else {
+
+monthIndex = monthIndex + 1 ; 
+
+}
+
+
+DateString = ('0' + date.getDate()).slice(-2) + '-'
+             + ('0' + monthIndex).slice(-2) + '-'
+             + date.getFullYear();
+             
+
+
+    var log = [];
+
+
+
+angular.forEach(input, function(value, key) {
+
+if (value.date === Datestring )  { this.push(value); }
+
+
+
+}, log);
+
+return log;
+
+
+
+}
+
+
+
+});
+
+
+
+
+angular.module('dailyFilter', []).filter('todaystransfers', function() {
+
+return function(input) {
+
+var log = [];
+
+   var date = new Date();
+    
+    
+ var DateString;
+
+ var monthIndex = date.getMonth();
+    
+    if(monthIndex === 12)
+{
+
+monthIndex = 1; 
+
+}else {
+
+monthIndex = monthIndex + 1 ; 
+
+}
+
+
+DateString = ('0' + date.getDate()).slice(-2) + '-'
+             + ('0' + monthIndex).slice(-2) + '-'
+             + date.getFullYear();
+             
+             
+   
+
+
+    var log = [];
+
+
+angular.forEach(input, function(value, key) {
+
+
+
+if (value.date === DateString )  { this.push(value); }
+
+
+
+}, log);
+
+return log;
+
+
+
+}
+
+
+
+});
+
+
+angular.module('calfilter', [])
+    .filter('sumByKey', function() {
+        return function(data, key) {
+        
+            var sum = 0;
+
+            for (var i = data.length - 1; i >= 0; i--) {
+            
+                sum += parseInt(data[i][key].replace(",", ""));
+            
+            }
+            
+      
+            var number = sum.toString();
+
+            var dollars = number.split('.')[0];
+
+            var  cents = (number.split('.')[1] || '') +'00';
+
+            var dollars = dollars.split('').reverse().join('').replace(/(\d{3}(?!$))/g, '$1,').split('').reverse().join('');
+
+            var cent = cents.slice(0, 2);
+
+            var decimal = ".";
+
+            var cent2 = decimal.concat(cent);
+
+            var dollars = dollars.concat(cent2);
+            
+            return dollars;
+        };
+    });
+
+
+
+</script>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+$(function() {
+
+    $( "#datepicker" ).datepicker({ dateFormat: "d-m-yy" });
+
+    $( "#datepicker1" ).datepicker({ dateFormat: "d-m-yy" });
+  
+  });
+
+
+</script>
 
 </body>
 

@@ -133,7 +133,7 @@
 
 </table>
 
-<span class='innercallink' > <a href='calculator.html' style='color:red;" > <h6 style='color:red;padding:10px;'>Click here for todays rates and charges</a></h6> </span>
+<span class='innercallink' > <a href='calculator.html' style='color:red;' > <h6 style='color:red;padding:10px;'>Click here for todays rates and charges</a></h6> </span>
 
 <span > <h6 style='color:red;padding:10px;' class='innercal'> Enter an amount to send and click anywhere</h6> </span>
 
@@ -461,7 +461,7 @@
 
 <span id='agreementerror' class='agreementerror' > </span> <span style='color:red;'> {{agreement}}</span> <p class="spanerror"> 
 
-<label style="position:relative; font-family:Arial, Helvetica, sans-serif; font-size:11px;" > <input type='checkbox' name='agreement' id='agreement' class='agreement'/>&nbsp;You must agree to the JUST MONEY TRANSFER terms & conditions (the â€œT&Câ€ (which are available at <a href='../termsandconditions/' > www.justcomputersparts.co.uk </a> Our Customer Services number is 020 8771 5353 and or our email address is <a href='mailto:service@justcomputersparts.co.uk' > service@justcomputersparts.co.uk </a> Please feel free to contact us during normal business hours 09:00 to 19:00 </label>
+<label style="position:relative; font-family:Arial, Helvetica, sans-serif; font-size:11px;" > <input type='checkbox' name='agreement' id='agreement' class='agreement'/>&nbsp;You must agree to the JUST MONEY TRANSFER terms & conditions (the T&C (which are available at <a href='../termsandconditions/' > www.justcomputersparts.co.uk </a> Our Customer Services number is 020 8771 5353 and or our email address is <a href='mailto:service@justcomputersparts.co.uk' > service@justcomputersparts.co.uk </a> Please feel free to contact us during normal business hours 09:00 to 19:00 </label>
   </span>
 </p>  
 
@@ -586,7 +586,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Login_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/login',{});
+var resource = $resource('http://81.137.131.58/api/login',{});
 
 return resource;
 
@@ -598,8 +598,14 @@ app.controller('calculator', function($scope,$http,$resource) {
 
 var init = function () {
    
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$scope.gbp = response.data[0].rate;
+$scope.ngn = response.data[1].rate;
+
+});
+
+$http.get("http://Homemedia/api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -631,7 +637,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://localhost:3000/api/charge.php?ngn="+para).then(function(response) {
+$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -645,7 +651,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://localhost:3000/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -661,7 +667,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://localhost:3000/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -676,7 +682,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://localhost:3000/api/charge.php?amount="+para).then(function(response) {
+       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -762,7 +768,7 @@ if(log.USERTYPE === "customer")
 
 {
 
-window.location = "http://localhost:3000/money-transfer-calculator.html" ;
+window.location = "http://81.137.131.58/money-transfer-calculator.html" ;
 
 }
 else
@@ -772,7 +778,7 @@ else
         
 
 
-window.location = "http://localhost:3000/dashboard.php" ;
+window.location = "http://81.137.131.58/dashboard.php" ;
 
 }
 
@@ -805,7 +811,7 @@ alert(log.ERROR);
 $scope.forgottenpassword = function () {
 
 
-var resource = $resource('http://localhost:3000/api/forgottenpassword',{
+var resource = $resource('http://81.137.131.58/api/forgottenpassword',{
 
 email : "@email",
 
@@ -869,7 +875,7 @@ alert(log.ERROR);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 
 
@@ -904,7 +910,7 @@ return resource;
 app.controller('signup', function($scope,Senders_Service,$http,$resource) {
 
 
-$http.get("http://localhost:3000/api/getoccupations").then(function(response) {
+$http.get("http://81.137.131.58/api/getoccupations").then(function(response) {
 
 
 
@@ -946,11 +952,11 @@ var lastname = document.getElementById("lastname").value;
 
 
 
-if(password.length < 8 )
+if(password.length < 6 )
 
 {
 
-$scope.passworderror = 'Password must be 8 characters in length.';}
+$scope.passworderror = 'Password must be 6 characters in length.';}
 
 else
 
@@ -1036,7 +1042,7 @@ $scope.mobileerror= '';
 $scope.passworderror='';
 
 
-$http.post("http://localhost:3000/api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer").then(function(response) {
+$http.post("http://81.137.131.58/api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer").then(function(response) {
 
 
 
@@ -1067,7 +1073,7 @@ document.cookie = "sender_firstname=" + firstname ;
 
 document.cookie = "sender_lastname=" + lastname ;
 
-window.location = "http://localhost:3000/money-transfer-calculator.html" ;
+window.location = "http://81.137.131.58/money-transfer-calculator.html" ;
 
 
 

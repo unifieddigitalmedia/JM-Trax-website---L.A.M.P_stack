@@ -451,7 +451,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -517,7 +517,7 @@ $scope.agenttype = getCookie('agenttype') ;
 $scope.creditlimit = getCookie('agentcredit') ;
 
 
-$http.get("http://localhost:3000/api/senders.php?id="+getCookie('agentid')).then(function(response) {
+$http.get("http://81.137.131.58/api/senders.php?id="+getCookie('agentid')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -528,7 +528,7 @@ $scope.selectsender(0);
     });
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 
 
@@ -539,7 +539,7 @@ $http.get("http://localhost:3000/api/banks").then(function(response) {
     });
 
 
-$http.get("http://localhost:3000/api/getoccupations").then(function(response) {
+$http.get("http://81.137.131.58/api/getoccupations").then(function(response) {
 
 
 
@@ -554,7 +554,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -578,7 +578,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -666,7 +666,7 @@ $scope.savesender();
 $scope.savesender = function() {
 
 
-if(angular.isUndefined($scope.occupation.occupation))
+if(angular.isUndefined($scope.occupation))
 
 {
 
@@ -708,7 +708,7 @@ var county = document.getElementById("county").value;
 
 var postcode = document.getElementById("postcode").value;
 
-if(line1 == '' || line2 =='' || town=='' || postcode =='')
+if(line1 == '' ||  town=='' || postcode =='')
 
 {
 
@@ -877,9 +877,6 @@ if (r == true) {
 if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 {
-
-alert($scope.sendersid);
-
 
 
 var log = Senders_Service.save(

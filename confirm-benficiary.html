@@ -363,7 +363,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/senders',{
+var resource = $resource('http://81.137.131.58/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -413,7 +413,7 @@ $scope.paypaldiv = true;
 $scope.getrates = function () {
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -442,7 +442,7 @@ $scope.recipientsID = undefined;
 
 
 
-$http.get("http://localhost:3000/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
+$http.get("http://81.137.131.58/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -456,7 +456,7 @@ $scope.sendersid = getCookie('agentid') ;
 
 
 
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
  $scope.banklist = response.data;
 
@@ -469,7 +469,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -493,7 +493,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -585,7 +585,7 @@ $scope.updatedreceipientaccountnumber = $scope.receipentlist[para].ReceipientAcc
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -799,7 +799,7 @@ var shopacc = $scope.shopacc.bankholder
 
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -879,7 +879,7 @@ else
 {
 
 
-var resource = $resource('http://localhost:3000/api/receipients',{
+var resource = $resource('http://81.137.131.58/api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -936,7 +936,7 @@ document.cookie = "receipient_bank=" + document.getElementById("recbank").value 
 document.cookie = "receipient_banknumber=" + document.getElementById("recnumber").value ;
 
 
-window.location = "http://localhost:3000/confirm-sender.html" ;
+window.location = "http://81.137.131.58/confirm-sender.html" ;
 
 
 

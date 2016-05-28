@@ -29,15 +29,15 @@
 <div class="container-fluid"  ng-controller='transactions'   >
 
 
-<div class="table-responsive"  ng-init="getdaily()">
+<div class="table"  ng-init="getdaily()">
 
- <table class="table table-bordered">
+ <table class="table table-bordered" style='position:relative;color:black; margin:0 auto;font-size:70%;' >
     <thead>
       <tr>
          <th style='tablecells'>STAFF REF.</th>
         <th style='tablecells'>SHOP</th>
-        <th  style='tablecells'>DATE</th>
-        <th style='tablecells' >TRANS. NO.</th>
+        <th  style='tablecells' colspan='2'>DATE</th>
+        <th style='tablecells' >T NO.</th>
         <th style='tablecells'>SENDER FIRST NAME</th>
         <th style='tablecells'>SENDER LAST NAME</th>
         <th style='tablecells'>AMOUNT £</th>
@@ -51,7 +51,7 @@
       <tr ng-repeat='daily in ( filteredTransactions = ( dailytransactionlist |  todaystransfers : startdate : enddate : status ) )' ng-click="selecttransfer($index)" style="cursor:pointer">
         <td style='tablecells'>{{daily.agentusername}}</td>
         <td style='tablecells'>{{daily.shop}}</td>
-        <td style='tablecells'>{{daily.date}}</td>
+        <td style='tablecells' colspan='2'>{{daily.date}}</td>
         <td style='tablecells'>JM{{daily.id}}</td>
         <td style='tablecells'>{{daily.senderfirstname}}</td>
         <td style='tablecells'>{{daily.senderlasttname}}</td>
@@ -64,7 +64,7 @@
       </tr>
  
  <tr>
-        <td colspan='6'></td>
+        <td colspan='7'></td>
         <td>AMOUNT £</td>
         <td>FEES £</td>
         <td>TOTAL GBP DUE £</td>
@@ -115,7 +115,7 @@ var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/transactions',{});
+var resource = $resource('http://81.137.131.58/api/transactions',{});
 
 return resource;
 
@@ -130,7 +130,7 @@ app.controller('transactions', function($scope,Transactions_Service,$http,$resou
 $scope.getdaily = function () {
 
 
-$http.get("http://localhost:3000/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 
 $scope.dailytransactionlist = response.data;

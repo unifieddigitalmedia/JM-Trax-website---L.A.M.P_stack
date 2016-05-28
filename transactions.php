@@ -244,9 +244,10 @@ $objWriter->save('php://output');
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
+  <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -505,7 +506,7 @@ var init = function () {
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -541,13 +542,13 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
 } },1000);
 
-$http.get("http://localhost:3000/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("http://81.137.131.58/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 
@@ -628,12 +629,12 @@ return dollars;
 
 $scope.selecttransfer = function (para) {
 
-document.cookie = "transaction_number=" + $scope.dailytransactionlist[para].id;
+document.cookie = "transaction_number=" + $scope.filteredTransactions[para].id;
 document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "http://localhost:3000/editorder.html" ;
+window.location = "http://81.137.131.58/editorder.html" ;
 
 }
 
@@ -731,7 +732,6 @@ if(para2 == undefined )
 if(para != undefined && para1 != undefined)
 
 {
-
 
 
 angular.forEach(input, function(value, key) {
@@ -847,9 +847,9 @@ return log;
 
 $(function() {
 
-    $( "#datepicker" ).datepicker({ dateFormat: "d-mm-yy" });
+    $( "#datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
 
-    $( "#datepicker1" ).datepicker({ dateFormat: "d-mm-yy" });
+    $( "#datepicker1" ).datepicker({ dateFormat: "dd-mm-yy" });
   
   });
 

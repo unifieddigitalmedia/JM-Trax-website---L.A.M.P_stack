@@ -62,9 +62,9 @@
 
   <a href="banking.html"> Banking</a> 
 
-  <a href="daily-transactions-receipients.html"> Daily Transactions </a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions </a>   
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -101,7 +101,7 @@
     <div class="col-sm-8" >
 
 
-<table class="table table-bordered">
+<table class="table table-bordered" style="text-align:center;">
     <thead>
      
     </thead>
@@ -326,7 +326,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -362,7 +362,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -382,7 +382,7 @@ init();
 
 app.factory('Editorder_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/editorder',{
+var resource = $resource('http://81.137.131.58/api/editorder',{
 
 id:"@id",
 paymentdate : "@paymentdate",
@@ -405,7 +405,7 @@ app.controller('editorder', function($scope,Editorder_Service,$http,$resource) {
 
 var init = function () {
    
-$http.get("http://localhost:3000/api/banks").then(function(response) {
+$http.get("http://81.137.131.58/api/banks").then(function(response) {
 
 $scope.banklist = response.data;
 
@@ -421,16 +421,16 @@ $scope.agenttype = getCookie('agenttype') ;
 
 $scope.creditlimit = getCookie('agentcredit') ;
 
-$http.get("http://localhost:3000/api/editorder.php?transaction_number="+ getCookie('transaction_number')).then(function(response) {
+$http.get("http://81.137.131.58/api/editorder.php?transaction_number="+ getCookie('transaction_number')).then(function(response) {
 
 $scope.date = response.data[0].date ;
 $scope.transctionnumber = response.data[0].id;
 $scope.senderfirstname = response.data[0].senderfirstname;
 $scope.senderlastname = response.data[0].senderlasttname;
-$scope.amount = response.data[0].amount;
-$scope.fees = response.data[0].fee;
-$scope.gbptotal = response.data[0].totalgbp;
-$scope.ngntotal = response.data[0].totalngn;
+$scope.amount = $scope.tocurrency(response.data[0].amount);
+$scope.fees = $scope.tocurrency(response.data[0].fee);
+$scope.gbptotal = $scope.tocurrency(response.data[0].totalgbp);
+$scope.ngntotal = $scope.tocurrency(response.data[0].totalngn);
 $scope.staffref = response.data[0].agentusername;
 
 
@@ -448,7 +448,31 @@ $scope.recpaymentref = response.data[0].paymentmethod;
 };
 
 init();
+$scope.tocurrency = function (para) {
 
+
+var number = para.toString();
+
+var dollars = number.split('.')[0];
+
+var  cents = (number.split('.')[1] || '') +'00';
+
+var dollars = dollars.split('').reverse().join('').replace(/(\d{3}(?!$))/g, '$1,').split('').reverse().join('');
+
+var cent = cents.slice(0, 2);
+
+var decimal = ".";
+
+var cent2 = decimal.concat(cent);
+
+var dollars = dollars.concat(cent2);
+
+return dollars;
+
+
+
+
+}
 $scope.payorder = function () {
 
 var sendingbank = document.getElementById("recbank").value ;
@@ -490,7 +514,7 @@ paymentmethod : document.getElementById("paymenttextfeild").value ,
 alert(log.ERROR);
 
 
-window.location = "http://localhost:3000/daily-transactions-senders.html" ;
+window.location = "http://81.137.131.58/daily-transactions-senders.html" ;
 
 
 
@@ -508,7 +532,7 @@ window.location = "http://localhost:3000/daily-transactions-senders.html" ;
   $scope.printorder = function () {
 
 
-window.location = "http://localhost:3000/receipt.html" ;
+window.location = "http://81.137.131.58/receipt.html" ;
 
   }
 
@@ -543,14 +567,11 @@ if (r == true) {
 
 
 
-
-
-
-$http.delete("http://localhost:3000/api/editorder.php?id="+getCookie('transaction_number')).then(function(response) {
+$http.delete("http://81.137.131.58/api/editorder.php?id="+getCookie('transaction_number')+"&agentusername="+getCookie('agentusername') ).then(function(response) {
 
 alert(response.data.ERROR);
 
-window.location = "http://localhost:3000/daily-transactions-senders.html" ;
+window.location = "http://81.137.131.58/daily-transactions-senders.html" ;
 
 
 

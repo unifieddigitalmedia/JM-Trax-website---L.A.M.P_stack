@@ -137,6 +137,8 @@
  <div class="checkbox">
   <label> <input type="checkbox" class="form-control input-sm" name='uksms' id='uksms' value='on' checked ng-model="uksms" >Yes to receive sms confirmation to your mobile</label>
 </div>
+&nbsp;
+
   <div class="checkbox">
   <label><input type="checkbox" class="form-control input-sm" name='nigeriasms' id='nigeriasms' value='on' ng-model="ngnsms">Yes to send sms confirmation to your recipients mobile</label>
 </div>
@@ -222,7 +224,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Order_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://localhost:3000/api/transactions',{
+var resource = $resource('http://81.137.131.58/api/transactions',{
 
 
 username:"@username",
@@ -291,8 +293,8 @@ $scope.agentusername = getCookie('agentusername') ;
 $http.get(
 
 
-  //"http://localhost:3000/api/autofill.php?username="+getCookie('agentusername')+
-  "http://localhost:3000/api/autofill.php?username="+getCookie('agentid')+
+  //"http://81.137.131.58/api/autofill.php?username="+getCookie('agentusername')+
+  "http://81.137.131.58/api/autofill.php?username="+getCookie('agentid')+
   "&receipient_firstname="+getCookie('receipient_firstname')+
   "&receipient_lastname="+getCookie('receipient_lastname')+
   "&receipient_bank="+getCookie('receipient_bank')+
@@ -366,7 +368,7 @@ $scope.rate   = getCookie('rate') ;
 
 
 
-$http.get("http://localhost:3000/api/rates").then(function(response) {
+$http.get("http://81.137.131.58/api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -381,7 +383,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 }
@@ -405,7 +407,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://localhost:3000/index.html" ;
+window.location = "http://81.137.131.58/index.html" ;
 
 
 
@@ -522,7 +524,7 @@ document.cookie = "transaction_number=" + log.orderID;
 
 document.cookie = "gbp_total=" + $scope.total;
 
-window.location = "http://localhost:3000/checkout.html" ;
+window.location = "http://81.137.131.58/checkout.html" ;
 
 }
 else
@@ -553,7 +555,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://localhost:3000/api/charge.php?ngn="+para).then(function(response) {
+$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -568,7 +570,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://localhost:3000/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -585,7 +587,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://localhost:3000/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -601,7 +603,7 @@ $scope.rate = response.data.RATE;
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://localhost:3000/api/charge.php?amount="+para).then(function(response) {
+       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
