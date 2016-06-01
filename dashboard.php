@@ -129,7 +129,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
