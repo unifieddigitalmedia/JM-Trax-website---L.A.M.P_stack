@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -206,13 +206,11 @@
 
 	</section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -224,7 +222,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Order_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/transactions',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/transactions',{
 
 
 username:"@username",
@@ -293,8 +291,8 @@ $scope.agentusername = getCookie('agentusername') ;
 $http.get(
 
 
-  //"http://81.137.131.58/api/autofill.php?username="+getCookie('agentusername')+
-  "http://81.137.131.58/api/autofill.php?username="+getCookie('agentid')+
+  //"https://jmtrax.herokuapp.com/api/autofill.php?username="+getCookie('agentusername')+
+  "https://jmtrax.herokuapp.com/api/autofill.php?username="+getCookie('agentid')+
   "&receipient_firstname="+getCookie('receipient_firstname')+
   "&receipient_lastname="+getCookie('receipient_lastname')+
   "&receipient_bank="+getCookie('receipient_bank')+
@@ -368,7 +366,7 @@ $scope.rate   = getCookie('rate') ;
 
 
 
-$http.get("http://81.137.131.58/api/rates").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -383,7 +381,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 }
@@ -407,7 +405,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 
@@ -524,7 +522,7 @@ document.cookie = "transaction_number=" + log.orderID;
 
 document.cookie = "gbp_total=" + $scope.total;
 
-window.location = "http://81.137.131.58/checkout.html" ;
+window.location = "https://jmtrax.herokuapp.com/checkout.html" ;
 
 }
 else
@@ -555,7 +553,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -570,7 +568,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -587,7 +585,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -603,7 +601,7 @@ $scope.rate = response.data.RATE;
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
+       $http.get("https://jmtrax.herokuapp.com/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

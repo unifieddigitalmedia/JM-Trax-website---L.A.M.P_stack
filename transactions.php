@@ -183,7 +183,7 @@ $objWriter->save('php://output');
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -458,13 +458,11 @@ $objWriter->save('php://output');
 
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -506,7 +504,7 @@ var init = function () {
 {
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 }
@@ -542,13 +540,13 @@ if (counter == '1800')
 
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 
 } },1000);
 
-$http.get("http://81.137.131.58/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 
@@ -634,7 +632,7 @@ document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "http://81.137.131.58/editorder.html" ;
+window.location = "https://jmtrax.herokuapp.com/editorder.html" ;
 
 }
 

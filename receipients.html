@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -244,13 +244,11 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -290,7 +288,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 }
@@ -326,7 +324,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 
@@ -346,7 +344,7 @@ init();
 
 app.factory('Receipients_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
 
 firstname:"@firstname",
 lastname:"@lastname",
@@ -364,7 +362,7 @@ app.controller('receipients', function($scope,Receipients_Service,$http,$resourc
 
 $scope.beneficiarysearch = function () {
 
-$http.get("http://81.137.131.58/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.reclists = response.data;
 
@@ -375,7 +373,7 @@ $scope.reclists = response.data;
 $scope.receipient_summary = function () {
 
 
-window.location = "http://81.137.131.58/receipient-statement.html" ;
+window.location = "https://jmtrax.herokuapp.com/receipient-statement.html" ;
 
 
 }
@@ -384,7 +382,7 @@ window.location = "http://81.137.131.58/receipient-statement.html" ;
 
 $scope.beneficiary_transactions = function (para) {
 
-$http.get("http://81.137.131.58/api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
 
 
 

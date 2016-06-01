@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -344,13 +344,11 @@
   </section>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -412,7 +410,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Login_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/login',{});
+var resource = $resource('https://jmtrax.herokuapp.com/api/login',{});
 
 return resource;
 
@@ -463,7 +461,7 @@ if(log.USERTYPE === "customer")
 
 {
 
-window.location = "http://81.137.131.58/money-transfer-calculator.html" ;
+window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" ;
 
 }
 else
@@ -473,7 +471,7 @@ else
         
 
 
-window.location = "http://81.137.131.58/dashboard.php" ;
+window.location = "https://jmtrax.herokuapp.com/dashboard.php" ;
 
 }
 
@@ -527,7 +525,7 @@ else
 
 
 
-var resource = $resource('http://81.137.131.58/api/forgottenpassword',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/forgottenpassword',{
 
 email : "@email",
 
@@ -576,7 +574,7 @@ alert(log.ERROR);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
 
 
 
@@ -611,7 +609,7 @@ return resource;
 app.controller('signup', function($scope,Senders_Service,$http,$resource) {
 
 
-$http.get("http://81.137.131.58/api/occupations").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/occupations").then(function(response) {
 
 
 
@@ -743,7 +741,7 @@ $scope.mobileerror= '';
 $scope.passworderror='';
 
 
-$http.post("http://81.137.131.58/api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer").then(function(response) {
+$http.post("https://jmtrax.herokuapp.com/api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer").then(function(response) {
 
 
 
@@ -768,7 +766,7 @@ document.cookie = "sender_firstname=" + firstname ;
 
 document.cookie = "sender_lastname=" + lastname ;
 
-window.location = "http://81.137.131.58/money-transfer-calculator.html" ;
+window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" ;
 
 }
 

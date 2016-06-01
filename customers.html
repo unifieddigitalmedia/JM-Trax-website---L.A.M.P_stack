@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -547,13 +547,11 @@
 
   </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -594,7 +592,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 }
@@ -630,7 +628,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 
@@ -651,7 +649,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -704,7 +702,7 @@ var init = function () {
    
  
    
-$http.get("http://81.137.131.58/api/getoccupations.php").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(response) {
 
 
 
@@ -722,7 +720,7 @@ init();
 $scope.getsenderslist = function () {
 
 
-$http.get("http://81.137.131.58/api/senders.php?").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/senders.php?").then(function(response) {
 
 if(response.data.length == 0 )
 {
@@ -792,7 +790,7 @@ $scope.receipentlist = $scope.senderslist[para].senderdetails.receipients;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://81.137.131.58/senderstransactions.php" ;
+window.location = "https://jmtrax.herokuapp.com/senderstransactions.php" ;
 
 }
 
@@ -814,7 +812,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://81.137.131.58/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("https://jmtrax.herokuapp.com/api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 alert(response.data.ERROR);
 

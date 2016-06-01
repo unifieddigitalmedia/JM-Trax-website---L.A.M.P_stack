@@ -92,7 +92,7 @@ if (move_uploaded_file($_FILES["addressIDtoupload"]["tmp_name"], $target_file)) 
 
 function updatesender($para,$para1) {
 
-$url = "http://81.137.131.58/".$para;
+$url = "https://jmtrax.herokuapp.com/".$para;
 
 
 $sql1 = "UPDATE users SET para1 = '$url'  WHERE Mobile = '$_REQUEST[sendersID]' ";
@@ -129,7 +129,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <link rel="stylesheet" type="text/css" href="/styles/normal.css">
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap/dist/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -1402,13 +1402,11 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
+<script src="/scripts/jquery/dist/jquery.min.js" ></script>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -1448,7 +1446,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 }
@@ -1484,7 +1482,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://81.137.131.58/index.html" ;
+window.location = "https://jmtrax.herokuapp.com/index.html" ;
 
 
 
@@ -1506,7 +1504,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://81.137.131.58/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -1572,7 +1570,7 @@ $scope.agentemail = getCookie('agentemail') ;
 $scope.agenttype = getCookie('agenttype') ;
 
 
-$http.get("http://81.137.131.58/api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
 
 
 $scope.outstandingbalance = $scope.tocurrency(response.data.OUTSTANDING) ; 
@@ -1647,7 +1645,7 @@ $scope.recbank = $scope.bankdropdown.bankname ;
 $scope.getrates = function () {
 
 
-$http.get("http://81.137.131.58/api/rates").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
 
 
 
@@ -1657,7 +1655,7 @@ $http.get("http://81.137.131.58/api/rates").then(function(response) {
 
     });
 
-$http.get("http://81.137.131.58/api/banks").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
 
 
 
@@ -1668,7 +1666,7 @@ $http.get("http://81.137.131.58/api/banks").then(function(response) {
     });
 
 
-$http.get("http://81.137.131.58/api/getoccupations.php").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(response) {
 
 
 
@@ -1684,7 +1682,7 @@ $http.get("http://81.137.131.58/api/getoccupations.php").then(function(response)
 $scope.getreclist = function () {
 	
 
-$http.get("http://81.137.131.58/api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -1699,9 +1697,9 @@ $scope.receipentlist = response.data;
 $scope.getsenderslist = function () {
 
 
-//$http.get("http://81.137.131.58/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+//$http.get("https://jmtrax.herokuapp.com/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
-$http.get("http://81.137.131.58/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
+$http.get("https://jmtrax.herokuapp.com/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
 document.getElementById("customerlastname").value+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
@@ -1730,7 +1728,7 @@ $scope.senderslist = response.data;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://81.137.131.58/senderstransactions.php" ;
+window.location = "https://jmtrax.herokuapp.com/senderstransactions.php" ;
 
 }
 
@@ -1775,7 +1773,7 @@ document.getElementsByClassName("sendersid")[2].setAttribute("value", $scope.sen
 
 $scope.getreclist();
 
-$http.get("http://81.137.131.58/api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
 
 
 $scope.transactionlist = response.data;
@@ -2256,7 +2254,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://81.137.131.58/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("https://jmtrax.herokuapp.com/api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 
@@ -2303,7 +2301,7 @@ if (r == true) {
    $scope.senderdiv = false;
    
 } else {
-   window.location = "http://81.137.131.58/order.html" ;
+   window.location = "https://jmtrax.herokuapp.com/order.html" ;
 }
 
 
@@ -2326,7 +2324,7 @@ if (r == true) {
    $scope.senderdiv = false;
    
 } else {
-   window.location = "http://81.137.131.58/order.html" ;
+   window.location = "https://jmtrax.herokuapp.com/order.html" ;
 }
 
 
@@ -2336,7 +2334,7 @@ if (r == true) {
 else
 {
 
-window.location = "http://81.137.131.58/order.html" ;
+window.location = "https://jmtrax.herokuapp.com/order.html" ;
 
 
 
@@ -2356,7 +2354,7 @@ window.location = "http://81.137.131.58/order.html" ;
 $scope.receipient_summary = function () {
 
 
-window.location = "http://81.137.131.58/receipient-statement.html" ;
+window.location = "https://jmtrax.herokuapp.com/receipient-statement.html" ;
 
 
 }
@@ -2364,7 +2362,7 @@ window.location = "http://81.137.131.58/receipient-statement.html" ;
 $scope.beneficiarysearch = function () {
 
 
-$http.get("http://81.137.131.58/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -2409,7 +2407,7 @@ document.cookie = "receipient_banknumber=" + document.getElementById("recnumber"
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://81.137.131.58/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -2439,7 +2437,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("http://81.137.131.58/api/receipients.php?id="+$scope.recid).then(function(response) {
+$http.delete("https://jmtrax.herokuapp.com/api/receipients.php?id="+$scope.recid).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -2602,7 +2600,7 @@ else {
 
 
 
-var resource = $resource('http://81.137.131.58/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2705,7 +2703,7 @@ else
 {
 
 
-var resource = $resource('http://81.137.131.58/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2840,7 +2838,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://81.137.131.58/api/charge.php?ngn="+para).then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2854,7 +2852,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://81.137.131.58/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -2870,7 +2868,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://81.137.131.58/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2885,7 +2883,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calAMOUNT = function(para) {
 
-       $http.get("http://81.137.131.58/api/charge.php?amount="+para).then(function(response) {
+       $http.get("https://jmtrax.herokuapp.com/api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
