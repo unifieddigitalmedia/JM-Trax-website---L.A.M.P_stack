@@ -252,7 +252,7 @@ die('Error: ' . mysql_error());
 
 <script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
 
-<script src="/script/angular/angular.min.js" ></script><script src="/script/angular-resource/angular.min.js" ></script>
+<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
