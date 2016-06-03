@@ -10,17 +10,15 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$hostname = "localhost";
-$username = "jmtrax";
-$dbname = "jmtrax";
-
-//These variable values need to be changed by you before deploying
-$password = "s0na@bebe123";
+$servername = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$dbname = substr($url["path"], 1);
 
 
-//Connecting to your `Database`
-$link =   mysql_connect($hostname, $username, $password) ;
+$conn = new mysqli($servername, $username, $password,$dbname);
 
 
 
