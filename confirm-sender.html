@@ -448,7 +448,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -515,7 +515,7 @@ $scope.creditlimit = getCookie('agentcredit') ;
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/getoccupations").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(response) {
 
 
 
@@ -574,7 +574,7 @@ $scope.selectsender(0);
 
     });
 
-$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/banks.php").then(function(response) {
 
 
 

@@ -358,7 +358,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -408,7 +408,7 @@ $scope.paypaldiv = true;
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/rates.php").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -451,7 +451,7 @@ $scope.sendersid = getCookie('agentid') ;
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/banks.php").then(function(response) {
 
  $scope.banklist = response.data;
 
@@ -580,7 +580,7 @@ $scope.updatedreceipientaccountnumber = $scope.receipentlist[para].ReceipientAcc
 $scope.deleterec = function () {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -794,7 +794,7 @@ var shopacc = $scope.shopacc.bankholder
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -874,7 +874,7 @@ else
 {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 id:"@id",
 receipientfname : "@receipientfname",
