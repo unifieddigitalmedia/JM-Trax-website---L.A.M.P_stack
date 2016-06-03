@@ -1507,7 +1507,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -1648,7 +1648,7 @@ $scope.recbank = $scope.bankdropdown.bankname ;
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/rates.php").then(function(response) {
 
 
 
@@ -1658,7 +1658,7 @@ $http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
 
     });
 
-$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
+$http.get("https://jmtrax.herokuapp.com/api/banks.php").then(function(response) {
 
 
 
@@ -2410,7 +2410,7 @@ document.cookie = "receipient_banknumber=" + document.getElementById("recnumber"
 $scope.deleterec = function () {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -2603,7 +2603,7 @@ else {
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2706,7 +2706,7 @@ else
 {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
 
 id:"@id",
 receipientfname : "@receipientfname",
