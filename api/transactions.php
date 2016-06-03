@@ -132,6 +132,8 @@ else if ($_SERVER["REQUEST_METHOD"] === "POST")
 $date = date("Y-m-d");
 
 $ngn = str_replace(',', '' , $_REQUEST[ngn]);
+$amount = str_replace(',', '' , $_REQUEST[amount]);
+$totalgbp = str_replace(',', '' , $_REQUEST[totalgbp]);
 
 $sql2 = "INSERT INTO transfers (
 
@@ -191,8 +193,8 @@ VALUES ('$_REQUEST[senderfirstname]',
           '$_REQUEST[agentusername]',
           '$_REQUEST[remittance]',
           '$ngn',
-          '$_REQUEST[amount]',
-          '$_REQUEST[totalgbp]',
+          '$amount',
+          '$totalgbp',
           '$_REQUEST[fee]',
           '$date',
           '$_REQUEST[shop]',

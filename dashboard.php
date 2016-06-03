@@ -1201,7 +1201,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
       <label for="usr"></label>
 
 
- <select  class="form-control input-sm"  ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative; " ></select>
+ <select  class="form-control input-sm"  style="background-color:#FCC;" ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative; " ></select>
 
 
 
@@ -2522,7 +2522,7 @@ else if(document.getElementById("paymenttextfeild").value == 'Bank' && ($scope.s
 $scope.bankref= false;
 
 
-$scope.recerror = 'Select a bank account to make your payment. This will be used to pay your beneficiary.';
+$scope.recerror = 'Select a bank account from the highlighted list below. This will be used to pay your beneficiary.';
 
 $scope.shopaccdiv = false;
 
