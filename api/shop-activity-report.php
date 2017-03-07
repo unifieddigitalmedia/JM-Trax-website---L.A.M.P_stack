@@ -1,12 +1,7 @@
-<?php 
-
-
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
+<?php $servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -22,8 +17,16 @@ $shop_transfers =array();
 if ($_SERVER["REQUEST_METHOD"] === "GET")
 
 {
+if($_REQUEST[agenttype] != 'user'){
+	
+	$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' ";
+}
+else{
+	
+	$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' && agentusername = '$_REQUEST[agentusername]'";
+}
 
-$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' ";
+
 
 $result = $conn->query($sql);
 

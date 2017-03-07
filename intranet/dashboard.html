@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -14,7 +14,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -35,7 +35,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a class="dropbtn"> Dashboard</a>  
 
@@ -45,15 +45,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -66,19 +66,19 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -1378,7 +1378,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -1414,7 +1414,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -1436,7 +1436,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/senders',{
+var resource = $resource('api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -1501,7 +1501,7 @@ $scope.agentemail = getCookie('agentemail') ;
 $scope.agenttype = getCookie('agenttype') ;
 
 
-$http.get("http://192.168.0.90/intranet/api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
+$http.get("api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
 
 
 $scope.outstandingbalance = $scope.tocurrency(response.data.OUTSTANDING) ; 
@@ -1576,7 +1576,7 @@ $scope.recbank = $scope.bankdropdown.bankname ;
 $scope.getrates = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
 
@@ -1586,7 +1586,7 @@ $http.get("http://192.168.0.90/intranet/api/rates").then(function(response) {
 
     });
 
-$http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
 
 
@@ -1597,7 +1597,7 @@ $http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
     });
 
 
-$http.get("http://192.168.0.90/intranet/api/getoccupations.php").then(function(response) {
+$http.get("api/getoccupations.php").then(function(response) {
 
 
 
@@ -1613,7 +1613,7 @@ $http.get("http://192.168.0.90/intranet/api/getoccupations.php").then(function(r
 $scope.getreclist = function () {
 	
 
-$http.get("http://192.168.0.90/intranet/api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
+$http.get("api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -1628,9 +1628,9 @@ $scope.receipentlist = response.data;
 $scope.getsenderslist = function () {
 
 
-//$http.get("http://192.168.0.90/intranet/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+//$http.get("api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
-$http.get("http://192.168.0.90/intranet/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
+$http.get("api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
 document.getElementById("customerlastname").value+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
@@ -1659,7 +1659,7 @@ $scope.senderslist = response.data;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://192.168.0.90/intranet/senderstransactions.php" ;
+window.location = "senderstransactions.php" ;
 
 }
 
@@ -1704,7 +1704,7 @@ document.getElementsByClassName("sendersid")[2].setAttribute("value", $scope.sen
 
 $scope.getreclist();
 
-$http.get("http://192.168.0.90/intranet/api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
+$http.get("api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
 
 
 $scope.transactionlist = response.data;
@@ -2184,7 +2184,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://192.168.0.90/intranet/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 
@@ -2225,7 +2225,7 @@ if($scope.periodtotal >= 800 )
 
 alert('This sender has sent more than £800.00 with the last 30 days and needs to provide their ID to continue.');
 
-window.location = "http://192.168.0.90/intranet/order.html" ;
+window.location = "order.html" ;
 
 }
 
@@ -2239,12 +2239,12 @@ if($scope.LIMITAMOUNT >= 650 )
 
 alert('This sender is approaching the daily limit. Ask the amount they would like to send . If this amount brings their daily limit to £800.00 or more. an ID is required to continue.');
 
-window.location = "http://192.168.0.90/intranet/order.html" ;
+window.location = "order.html" ;
 }
 else
 {
 
-window.location = "http://192.168.0.90/intranet/order.html" ;
+window.location = "order.html" ;
 
 
 
@@ -2264,7 +2264,7 @@ window.location = "http://192.168.0.90/intranet/order.html" ;
 $scope.receipient_summary = function () {
 
 
-window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
+window.location = "receipient-statement.html" ;
 
 
 }
@@ -2272,7 +2272,7 @@ window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
 $scope.beneficiarysearch = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -2317,7 +2317,7 @@ document.cookie = "receipient_banknumber=" + document.getElementById("recnumber"
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -2347,7 +2347,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("http://192.168.0.90/intranet/api/receipients.php?receipientfname="+$scope.receipentlist[$scope.recipientsID].ReceipientFirstName+"&receipientlname="+$scope.receipentlist[$scope.recipientsID].ReceipientLastName+"&receipientbank="+$scope.receipentlist[$scope.recipientsID].ReceipientBank+"&receipientaccountnumber="+$scope.receipentlist[$scope.recipientsID].ReceipientAccountNumber).then(function(response) {
+$http.delete("api/receipients.php?receipientfname="+$scope.receipentlist[$scope.recipientsID].ReceipientFirstName+"&receipientlname="+$scope.receipentlist[$scope.recipientsID].ReceipientLastName+"&receipientbank="+$scope.receipentlist[$scope.recipientsID].ReceipientBank+"&receipientaccountnumber="+$scope.receipentlist[$scope.recipientsID].ReceipientAccountNumber).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -2510,7 +2510,7 @@ else {
 
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2613,7 +2613,7 @@ else
 {
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2748,7 +2748,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://192.168.0.90/intranet/api/charge.php?ngn="+para).then(function(response) {
+$http.get("api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2762,7 +2762,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://192.168.0.90/intranet/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -2778,7 +2778,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://192.168.0.90/intranet/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2793,7 +2793,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calAMOUNT = function(para) {
 
-       $http.get("http://192.168.0.90/intranet/api/charge.php?amount="+para).then(function(response) {
+       $http.get("api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

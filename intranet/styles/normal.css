@@ -1,3 +1,20 @@
+input[type=text] , input[type=password],input[type=email] , input {
+    width: 100%!important;
+    padding: 12px 20px!important;
+    margin: 8px 0!important;
+    box-sizing: border-box!important;
+    border: 3px solid #ccc!important;
+    -webkit-transition: 0.5s!important;
+    transition: 0.5s!important;
+    outline: none!important;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555!important;
+      background-color: lightblue!important;
+}
+
+
 @media only screen and (max-width: 1070px) {
 
 .footerimage {width:400px;height:5px;}
@@ -61,6 +78,18 @@ background-color: #fbfafa;
 font-size:90%;
 
 }
+
+
+.form-control,.input-group,.input-group-addon{
+
+
+  border: none!important;
+}
+
+
+
+
+
 header{
 
   width: 100%;
@@ -75,6 +104,8 @@ header{
   filter: alpha(opacity=60);*/
   background-color: #333333;
   box-shadow: 5px 5px 5px #888888;
+  position: fixed;
+  z-index:99;
 
 
 }
@@ -279,11 +310,25 @@ background-size:cover;
 
 .container-fluid{
 
+height:auto!important;
+position:relative; 
+padding:40px;
+margin-bottom:200px;
+
+}
+
+.container-fluid-modal{
 
 
+background-color: #fbfafa;
+
+font-size:90%;
 padding:40px;
 
 }
+
+
+
 .paralax_services {
 
 text-align:center; 
@@ -323,7 +368,7 @@ background-size:cover;
 
 text-align:center;
 
-z-index:-1;
+height:350px;
 
 }
 .prevalent_trends{
@@ -487,11 +532,13 @@ list-style-type: none;
 footer{
 
 
-    padding:30px;
+    padding:30px;height:auto;
     color:#e8e5e5;
     background-color:#333333;
-    margin-top: 20px;
+   
     border-bottom:black solid thin;
+
+   
 }
 
 
@@ -539,9 +586,9 @@ footer ul {
 }
 
 
-#footer_column_1 { border-right:grey thin solid; height:100%;}
+#footer_column_1 { border-right:grey thin solid; }
 
-#footer_column_2 {border-right:grey thin solid;  height:100%;}
+#footer_column_2 {border-right:grey thin solid;  height:100%; }
 
 #footer_column_2 img {height:200px;}
 
@@ -609,17 +656,29 @@ input:focus {
     color: #ff5a5a;
 }
 
-
 /*
+header {
+
+
+  position: fixed;
+
+  z-index:99;
+}
+
+
 * {box-sizing:border-box}
 body {margin:0}
 
  Slideshow container */
+
 .slideshow-container {
+
   max-width:100%;
   position: relative;
-  margin: auto;
+  margin:auto;
+  
 }
+
 
 /* Next & previous buttons */
 .prev, .next {
@@ -883,6 +942,23 @@ font-weight:bold;color:red;
 
   background-color:black;font-family:Arial; position:relative; font-size:12px;color:white;padding:5px;vertical-align:middle;
 }
+
+
+
+
+.cellcontainderhm {
+
+
+  font-family:Arial; position:relative; font-size:12px;color:white;padding:5px;
+}
+
+.cellcontainderhm td{
+
+
+ vertical-align:middle;
+}
+
+
 
 .headertext {
 

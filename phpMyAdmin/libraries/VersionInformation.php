@@ -1,16 +1,21 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Responsile for retrieving version information and notifiying about latest version
+ * Responsible for retrieving version information and notifiying about latest version
  *
  * @package PhpMyAdmin
  */
-if (! defined('PHPMYADMIN')) {
+namespace PMA\libraries;
+
+use PMA\libraries\Util;
+use stdClass;
+
+if (!defined('PHPMYADMIN')) {
     exit;
 }
 
 /**
- * Responsile for retrieving version information and notifiying about latest version
+ * Responsible for retrieving version information and notifiying about latest version
  *
  * @package PhpMyAdmin
  *
@@ -25,7 +30,7 @@ class VersionInformation
     public function getLatestVersion()
     {
         if (!$GLOBALS['cfg']['VersionCheck']) {
-            return new stdClass();
+            return null;
         }
 
         // wait 3s at most for server response, it's enough to get information
@@ -42,29 +47,16 @@ class VersionInformation
             $response = $_SESSION['cache']['version_check']['response'];
         } else {
             $save = true;
+            if (! defined('TESTSUITE')) {
+                session_write_close();
+            }
             $file = 'https://www.phpmyadmin.net/home_page/version.json';
-            if (ini_get('allow_url_fopen')) {
-                $context = array(
-                    'http' => array(
-                        'request_fulluri' => true,
-                        'timeout' => $connection_timeout,
-                    )
-                );
-                $context = PMA_Util::handleContext($context);
-                if (! defined('TESTSUITE')) {
-                    session_write_close();
-                }
-                $response = file_get_contents(
-                    $file,
-                    false,
-                    stream_context_create($context)
-                );
-            } else if (function_exists('curl_init')) {
+            if (function_exists('curl_init')) {
                 $curl_handle = curl_init($file);
                 if ($curl_handle === false) {
                     return null;
                 }
-                $curl_handle = PMA_Util::configureCurl($curl_handle);
+                $curl_handle = Util::configureCurl($curl_handle);
                 curl_setopt(
                     $curl_handle,
                     CURLOPT_HEADER,
@@ -80,24 +72,41 @@ class VersionInformation
                     CURLOPT_TIMEOUT,
                     $connection_timeout
                 );
-                if (! defined('TESTSUITE')) {
-                    session_write_close();
-                }
-                $response = curl_exec($curl_handle);
+                $response = @curl_exec($curl_handle);
+            } else if (ini_get('allow_url_fopen')) {
+                $context = array(
+                    'http' => array(
+                        'request_fulluri' => true,
+                        'timeout' => $connection_timeout,
+                    )
+                );
+                $context = Util::handleContext($context);
+                $response = @file_get_contents(
+                    $file,
+                    false,
+                    stream_context_create($context)
+                );
+            }
+            // Check possible failure of getting data
+            if ($response === false) {
+                $response = '{}';
             }
         }
 
+        /* Parse response */
         $data = json_decode($response);
-        if (is_object($data)
-            && ! empty($data->version)
-            && ! empty($data->date)
-            && $save
+
+        /* Basic sanity checking */
+        if (! is_object($data)
+            || empty($data->version)
+            || empty($data->releases)
+            || empty($data->date)
         ) {
+            return null;
+        }
+
+        if ($save) {
             if (! isset($_SESSION) && ! defined('TESTSUITE')) {
-                ini_set('session.use_only_cookies', 'false');
-                ini_set('session.use_cookies', 'false');
-                ini_set('session.use_trans_sid', 'false');
-                ini_set('session.cache_limiter', 'nocache');
                 session_start();
             }
             $_SESSION['cache']['version_check'] = array(
@@ -175,11 +184,11 @@ class VersionInformation
 
     /**
      * Returns the version and date of the latest phpMyAdmin version compatible
-     * with avilable PHP and MySQL versions
+     * with the available PHP and MySQL versions
      *
      * @param array $releases array of information related to each version
      *
-     * @return array containing the version and date of latest compatibel version
+     * @return array containing the version and date of latest compatible version
      */
     public function getLatestCompatibleVersion($releases)
     {
@@ -198,7 +207,7 @@ class VersionInformation
                 $mysqlVersions = $release->mysql_versions;
                 $mysqlConditions = explode(",", $mysqlVersions);
                 foreach ($mysqlConditions as $mysqlCondition) {
-                    if (! $this->evaluateVersionCondition('MySQL', $mysqlCondition)) {
+                    if (!$this->evaluateVersionCondition('MySQL', $mysqlCondition)) {
                         continue 2;
                     }
                 }
@@ -264,7 +273,6 @@ class VersionInformation
      */
     protected function getMySQLVersion()
     {
-        return PMA_Util::cacheGet('PMA_MYSQL_STR_VERSION');
+        return PMA_MYSQL_STR_VERSION;
     }
 }
-?>

@@ -82,7 +82,7 @@ $user = array(
 'username' => $row2[username] , 
 'password'  =>  $row2[password] , 
 'secretquestion'  =>  $row2[secretquestion] , 
-'secretanswer'  =>  $row2[answer] , 
+'secretanswer'  =>  $row2[secretanswer] , 
 'datemodified'  =>  $row2[datemodified], 
 'usertype'  =>  $row2[usertype], 
 'limit'  =>  $row2[limit], 
@@ -132,7 +132,7 @@ else if ($_SERVER["REQUEST_METHOD"] === "POST")
 
 $date = date("Y-m-d");
 
-$sql = "SELECT * FROM users WHERE username = '$_REQUEST[username]' ";
+$sql = "SELECT * FROM users WHERE username = '$_REQUEST[username_field]' ";
 
 $result = $conn->query($sql);
 
@@ -343,14 +343,13 @@ else if ($_SERVER["REQUEST_METHOD"] === "PUT")
 $date = date("Y-m-d");
 
 
-$sql = "SELECT * FROM users WHERE username = '$_REQUEST[username]' && id <> '$_REQUEST[id]' ";
+$sql = "SELECT * FROM users WHERE username = '$_REQUEST[username_field]' && id <> '$_REQUEST[id]' ";
 
 $result = $conn->query($sql);
 
 $row = $result->fetch_assoc();
 
 if ($result->num_rows > 0) {
-
 
 echo json_encode(array(
 

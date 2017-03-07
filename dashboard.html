@@ -6,15 +6,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -35,7 +35,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a class="dropbtn"> Dashboard</a>  
 
@@ -45,15 +45,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -66,7 +66,7 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
@@ -74,11 +74,11 @@
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -1330,11 +1330,13 @@ Click <a href='banking.html' style="colour:red,font-weight:bold;"> here </a> to 
 
 </section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -1376,7 +1378,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -1412,7 +1414,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -1434,7 +1436,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -1499,7 +1501,7 @@ $scope.agentemail = getCookie('agentemail') ;
 $scope.agenttype = getCookie('agenttype') ;
 
 
-$http.get("https://jmtrax.herokuapp.com/api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
+$http.get("api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
 
 
 $scope.outstandingbalance = $scope.tocurrency(response.data.OUTSTANDING) ; 
@@ -1574,7 +1576,7 @@ $scope.recbank = $scope.bankdropdown.bankname ;
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
 
@@ -1584,7 +1586,7 @@ $http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
 
     });
 
-$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
 
 
@@ -1595,7 +1597,7 @@ $http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
     });
 
 
-$http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(response) {
+$http.get("api/getoccupations.php").then(function(response) {
 
 
 
@@ -1611,7 +1613,7 @@ $http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(r
 $scope.getreclist = function () {
 	
 
-$http.get("https://jmtrax.herokuapp.com/api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
+$http.get("api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -1626,9 +1628,9 @@ $scope.receipentlist = response.data;
 $scope.getsenderslist = function () {
 
 
-//$http.get("https://jmtrax.herokuapp.com/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+//$http.get("api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
-$http.get("https://jmtrax.herokuapp.com/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
+$http.get("api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
 document.getElementById("customerlastname").value+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
@@ -1657,7 +1659,7 @@ $scope.senderslist = response.data;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "https://jmtrax.herokuapp.com/senderstransactions.php" ;
+window.location = "senderstransactions.php" ;
 
 }
 
@@ -1702,7 +1704,7 @@ document.getElementsByClassName("sendersid")[2].setAttribute("value", $scope.sen
 
 $scope.getreclist();
 
-$http.get("https://jmtrax.herokuapp.com/api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
+$http.get("api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
 
 
 $scope.transactionlist = response.data;
@@ -2182,7 +2184,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("https://jmtrax.herokuapp.com/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 
@@ -2223,7 +2225,7 @@ if($scope.periodtotal >= 800 )
 
 alert('This sender has sent more than £800.00 with the last 30 days and needs to provide their ID to continue.');
 
-window.location = "https://jmtrax.herokuapp.com/order.html" ;
+window.location = "order.html" ;
 
 }
 
@@ -2237,12 +2239,12 @@ if($scope.LIMITAMOUNT >= 650 )
 
 alert('This sender is approaching the daily limit. Ask the amount they would like to send . If this amount brings their daily limit to £800.00 or more. an ID is required to continue.');
 
-window.location = "https://jmtrax.herokuapp.com/order.html" ;
+window.location = "order.html" ;
 }
 else
 {
 
-window.location = "https://jmtrax.herokuapp.com/order.html" ;
+window.location = "order.html" ;
 
 
 
@@ -2262,7 +2264,7 @@ window.location = "https://jmtrax.herokuapp.com/order.html" ;
 $scope.receipient_summary = function () {
 
 
-window.location = "https://jmtrax.herokuapp.com/receipient-statement.html" ;
+window.location = "receipient-statement.html" ;
 
 
 }
@@ -2270,7 +2272,7 @@ window.location = "https://jmtrax.herokuapp.com/receipient-statement.html" ;
 $scope.beneficiarysearch = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -2315,7 +2317,7 @@ document.cookie = "receipient_banknumber=" + document.getElementById("recnumber"
 $scope.deleterec = function () {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -2345,7 +2347,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("https://jmtrax.herokuapp.com/api/receipients.php?receipientfname="+$scope.receipentlist[$scope.recipientsID].ReceipientFirstName+"&receipientlname="+$scope.receipentlist[$scope.recipientsID].ReceipientLastName+"&receipientbank="+$scope.receipentlist[$scope.recipientsID].ReceipientBank+"&receipientaccountnumber="+$scope.receipentlist[$scope.recipientsID].ReceipientAccountNumber).then(function(response) {
+$http.delete("api/receipients.php?receipientfname="+$scope.receipentlist[$scope.recipientsID].ReceipientFirstName+"&receipientlname="+$scope.receipentlist[$scope.recipientsID].ReceipientLastName+"&receipientbank="+$scope.receipentlist[$scope.recipientsID].ReceipientBank+"&receipientaccountnumber="+$scope.receipentlist[$scope.recipientsID].ReceipientAccountNumber).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -2508,7 +2510,7 @@ else {
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2611,7 +2613,7 @@ else
 {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients',{
+var resource = $resource('api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2746,7 +2748,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("https://jmtrax.herokuapp.com/api/charge.php?ngn="+para).then(function(response) {
+$http.get("api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2760,7 +2762,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -2776,7 +2778,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2791,7 +2793,7 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     $scope.calAMOUNT = function(para) {
 
-       $http.get("https://jmtrax.herokuapp.com/api/charge.php?amount="+para).then(function(response) {
+       $http.get("api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

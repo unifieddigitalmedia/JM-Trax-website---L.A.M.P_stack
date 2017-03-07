@@ -1,13 +1,9 @@
 <?php 
 
-
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
-
+$servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -28,7 +24,7 @@ $totalbanked = 0;
 $totaltransfered = 0;
 
 
-$getavailable = "SELECT SUM(remittance) AS TotalCashCollected FROM transfers WHERE agentusername = '$_REQUEST[agentusername]' AND (date <= '$date' && date >= $pastdate ) ";
+$getavailable = "SELECT SUM(remittance) AS TotalCashCollected FROM transfers WHERE shop = '$_REQUEST[agentshop]' AND Tdate = '$date' ";
 
 $getavailable = $conn->query($getavailable);
 
@@ -40,7 +36,7 @@ if ($getavailable->num_rows > 0) {
     }
 
 
-$checkbalance = "SELECT SUM(amount) AS TotalBanking FROM banking WHERE (date >= '$passdate' AND date <= '$date') AND agent = '$_REQUEST[agentusername]' ";
+$checkbalance = "SELECT SUM(amount) AS TotalBanking FROM banking WHERE date = '$date' AND shop = '$_REQUEST[agentshop]' ";
 
 $resultbalance = $conn->query($checkbalance);
 
@@ -51,7 +47,7 @@ if ($resultbalance->num_rows > 0) {
 }
 
 
-$checknewuser = "SELECT * FROM users WHERE BINARY username = '$_REQUEST[agentusername]' ";
+$checknewuser = "SELECT * FROM shops WHERE BINARY name = '$_REQUEST[agentshop]' ";
 
 $resultNEWSenderDetails = $conn->query($checknewuser);
 
@@ -61,16 +57,16 @@ $rowNEWSender = $resultNEWSenderDetails->fetch_assoc();
 }
 
 
-$availableamt =  $rowNEWSender[limit] - $rowavailable[TotalCashCollected];
+$availableamt =  $rowNEWSender[shop_limit] - $rowavailable[TotalCashCollected] + $rowbalance[TotalBanking];
 
-$availableamt = number_format($availableamt, 2, '.', ',');
+$availableamt = $availableamt ;
 
 
 $out =  $rowavailable[TotalCashCollected] - $rowbalance[TotalBanking];
 
-$out = number_format($out, 2, '.', ',');
+$out = $out ;
 
-$limit =  $rowNEWSender[limit];
+$limit =  $rowNEWSender[shop_limit];
 
 $agent_details = array();
 
@@ -84,6 +80,7 @@ echo json_encode(array(
       
      
 ));
+
 
 
 

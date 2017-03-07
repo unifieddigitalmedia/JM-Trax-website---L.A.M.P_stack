@@ -3,6 +3,7 @@ $username = "jmtrax";
 $password = "s0na@bebe123";
 $dbname = "jmtrax";
 
+
 $conn = new mysqli($servername, $username, $password,$dbname);
 
 
@@ -14,13 +15,31 @@ if ($conn->connect_error) {
 
 $receipient_transfers =array();
 
-if ($_SERVER["REQUEST_METHOD"] === "GET")
+if ($_SERVER["REQUEST_METHOD"] === "GET" && !$_REQUEST[username])
 {
 
 
+$sql = "SELECT * FROM transfers WHERE recipientfirstname = '$_REQUEST[firstname]' &&  recipientsurname = '$_REQUEST[lastname]'  ";
 
 
-$sql = "SELECT * FROM transfers WHERE ReceipientFirstName = '$_REQUEST[firstname]' &&  ReceipientLastName = '$_REQUEST[lastname]'  ";
+
+
+
+
+}else{
+
+
+
+
+$sql = "SELECT * FROM transfers WHERE sendermobile = '$_REQUEST[username]' &&  recipientfirstname = '$_REQUEST[firstname]' &&   recipientsurname= '$_REQUEST[lastname]' ";
+
+
+
+
+
+}
+
+
 
 $result = $conn->query($sql);
 
@@ -86,9 +105,6 @@ array_push($receipient_transfers,$receipient_transfer);
 
 
 echo json_encode($receipient_transfers);
-
-
-}
 
 
 ?>

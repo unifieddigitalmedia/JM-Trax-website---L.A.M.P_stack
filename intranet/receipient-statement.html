@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,33 +13,64 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <title> Just Money Transfers | Receipient Transaction Statement </title>
+<style>
 
+td {
+
+padding:10px;
+
+}
+
+th{
+
+text-align:center;
+
+}
+</style>
 </head>
 
 <body ng-cloak ng-app="justmoneytransfers" >
   
+  
+<div >
+
+
+<ul style="list-style-type: none;;" >
+
+<li class="logo_link"> <img src="images/logo.png" class="logo" > </li>
+<li style="padding:10px;">
+Address: 82 High St, London SE25 6EA
+Phone: 020 8771 5353
+
+</li>
+
+
+
+
+</ul></div>
 <div class="container-fluid"  ng-controller='transactions'   >
 
-<div class="table-responsive" >
+<div  >
+
 
 <h1> Statement summary for  {{receipientname}}</h1>
 
 &nbsp;
-
-   <table class="table table-bordered">
+<table class=" table-bordered" style='font-size:80%;text-align:center;color:black;position:relative; margin:0px auto;width:100%;'>
+ 
     <thead>
       <tr>
         <th>DATE</th>
         <th>T NO.</th>
         <th>SENDER F.NAME</th>
         <th>SENDER L.NAME</th>
-        <th>AMT £ </th>
-        <th>FEES £</th>
-        <th>GBP DUE £</th>
-        <th>NGN DUE  £</th>
+        <th>AMT &pound; </th>
+        <th>FEES &pound;</th>
+        <th>GBP DUE &pound;</th>
+        <th>NGN DUE  </th>
         <th>STAFF REF</th>
         <th>STATUS</th>
       </tr>
@@ -64,9 +95,9 @@
  
  <tr>
         <td colspan='4'></td>
-        <td>AMOUNT £</td>
-        <td>FEES £</td>
-        <td>TOTAL GBP DUE £</td>
+        <td>AMOUNT &pound;</td>
+        <td>FEES &pound;</td>
+        <td>TOTAL GBP DUE &pound;</td>
         <td>TOTAL NGN DUE</td>
          <td> </td>
         <td> </td>
@@ -112,7 +143,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipient-statement',{});
+var resource = $resource('api/receipient-statement',{});
 
 return resource;
 
@@ -128,9 +159,7 @@ var init = function () {
    
 $scope.receipientname = getCookie('receipient_firstname') + "  " + getCookie('receipient_lastname') ;
 
-
-
-$http.get("http://192.168.0.90/intranet/api/receipient-statement.php?firstname="+getCookie('receipient_firstname')+"&lastname="+getCookie('receipient_lastname')).then(function(response) {
+$http.get("api/receipient-statement.php?username="+getCookie('sender_username')+"&firstname="+getCookie('receipient_firstname')+"&lastname="+getCookie('receipient_lastname')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 

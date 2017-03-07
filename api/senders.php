@@ -1,11 +1,7 @@
-<?php 
-
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
+<?php $servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -82,7 +78,7 @@ else
   $lastthree  = substr($_REQUEST[lastname], 0, 3);
 
 
-  $sql = "SELECT * FROM users WHERE SendersFirstName LIKE '%$firstthree%'  ||  SendersLastName LIKE '%$lastthree%'  || Mobile ='$_REQUEST[mobile]' ";
+  $sql = "SELECT * FROM users WHERE SendersFirstName LIKE '%$firstthree%'  &&  SendersLastName && '%$lastthree%'  || Mobile ='$_REQUEST[mobile]' ";
 
 
 	
@@ -154,9 +150,23 @@ else if ($_SERVER["REQUEST_METHOD"] === "POST")
 {
 
 
+
+if(!$_REQUEST[username])
+
+{
+
+$username = $_REQUEST[mobile];
+
+}
+else 
+{
+$username = $_REQUEST[username] ;
+
+}
+
 $date = date("Y-m-d");
 
-$sql = "SELECT * FROM users WHERE username = '$_REQUEST[username]' ";
+$sql = "SELECT * FROM users WHERE username = '$username' ";
 
 $result = $conn->query($sql);
 
@@ -219,10 +229,11 @@ $username = $_REQUEST[username] ;
 
 }
 
+/*QWERTYUIOPLKJHGFDSAZXCVBNM*/
 
-$temppassword = str_shuffle("1234567890qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM");
+$temppassword = str_shuffle("1234567890qwertyuioplkjhgfdsazxcvbnm");
 
-$temppassword = substr($temppassword,0,8);
+$temppassword = substr($temppassword,0,5);
 
 
 if(!$_REQUEST[password])
@@ -321,18 +332,16 @@ $recipient = $countrycode."".$_REQUEST[mobile]."".$email;
 
 
 $subject = "Welcome to JM Transfers" ;
-$message =" This is an email to confirm that you are newly register customer of JM Transfers can cannot make transfers from the convince of your home. Please see you login details below. You can change this at anytime from the settings menu.
+$message =" This is an email to confirm that you are newly register customer of JM Transfers can can now make transfers from the convince of your home. Please see you login details below. You can change this at anytime from the settings menu.
 
-USERNAME: $useername
+USERNAME: $username
 
 PASSWORD: $password
 
 ";
 
 
-mail("$recipient", "Subject: $subject",
-$message, "From:service@ifixedcomputers.com" );
-
+mail($recipient,"Subject: $subject", $message, "From: justmtrax@gmail.com" );
 
 
 

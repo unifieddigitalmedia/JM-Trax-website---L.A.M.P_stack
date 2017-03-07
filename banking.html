@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -33,7 +33,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -43,15 +43,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -74,11 +74,11 @@
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -107,28 +107,61 @@
 <div class="row"  ng-init="getbanking()">
 
 
-    <div class="col-sm-4" >
+    <div class="col-sm-4"  style="background-color:black;color:white;padding:10px;" >
+
+
+<form name='transsearchform' >
+<table class="table " >
+    <thead>
+      
+    </thead>
+    <tbody>
+      <tr>
+        <td>START DATE (dd/mm/yyyy) </td>
+        <td><input type="text" class="form-control" id="datepicker" ng-model='startdate' required ></td>
+        <td> 
 
 
 
+        </td>
+      </tr>
+      <tr>
+        <td>END DATE (dd/mm/yyyy)</td>
+        <td><input type="text" class="form-control" id="datepicker1" required ng-model="enddate"></td>
+         <td> 
 
+
+
+         </td>
+      </tr>
+      <tr>
+        <td><button type="button" class="form-control" id="" ng-click='clear()' > CLEAR</button></td>
+        <td colspan="2"><button type="button" class="form-control" id="" ng-click='gettransactionsbysearch()' > SEARCH</button></td>
+ 
+      </tr>
+    </tbody>
+  </table>
+
+</form>
 
   
 </div>
  <div class="col-sm-8" >
 
 
-
 <div class="row">
   <div class="col-sm-2"> <label for="usr">*DATE</label><input type="text" class="form-control input-sm" id='datepicker2' name='startdate'   ></div>
   <div class="col-sm-2"> <label for="usr">*AMOUNT</label><input type="text" class="form-control input-sm"  id='amount' name='amount' class=''   ng-model='amount'></div>
-  <div class="col-sm-2"> <label for="usr">*PAYMENT REF</label><select name='payment' ng-model='payment' class="form-control input-sm"><option value='ONLINE' > ONLINE </option> <option value='CASH' > CASH </option> <option value='BANK' > BANK </option> <option value='CASH PICKUP' > CASH PICKUP </option><option value='CUSTOMER TRANSFER' > CUSTOMER TRANSFER </option></select> </div>
+  <div class="col-sm-2"> <label for="usr">*PAYMENT REF</label><select name='payment' style="background-color:#FCC;" ng-model='payment' class="form-control input-sm"><option value='ONLINE' > ONLINE </option> <option value='CASH' > CASH </option> <option value='BANK' > BANK </option> <option value='CASH PICKUP' > CASH PICKUP </option><option value='CUSTOMER TRANSFER' > CUSTOMER TRANSFER </option></select> </div>
   <div class="col-sm-2"> <label for="usr">BANK</label>
-  <select class="form-control input-sm"  ng-options="bank as bank.bankname for bank in bankslist | filter:bank.type='payee' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown" style="position:relative; " id="bank"></select>
+  <select class="form-control input-sm" style="background-color:#FCC;" ng-options="bank as bank.bankname for bank in bankslist  "  ng-change="bankdropdownfunction()" ng-model="bankdropdown"  id="bank"></select>
 </div>
-  <div class="col-sm-2"> <label for="usr">*DAILY SALES</label><input type="text" class="form-control input-sm" id='sales' name='sales' class=''   ng-model='sales'></div>
-  <div class="col-sm-2"> <label for="usr">*NUM TRANS.</label><input type="text" class="form-control input-sm"  id='transfers' name='transfers' class='' ng-model='transfers'></div>
+<div class="col-sm-2"> <label for="usr">SHOP</label>
+
+<input type="text" class="form-control input-sm"  id='shop' name='shop' class='' ng-model='shop'>
+
 </div>
+  </div>
 &nbsp;
 <span style='color:red;font-weight:bold;'> {{bankingerrors}} </span>
 &nbsp;
@@ -156,51 +189,94 @@
 </div>
 </div>
 
+&nbsp;
+
+<div class="row">
+  <div class="col-sm-12" >
+    <div style='float:right;'>
+  <p>
+
+<a href="banking-reports.html" style="color:red;font-weight:bold;" > Export to PDF </a>
+  </p>
+    <p>
+
+
+  </p>
+  </div>
+ </div>
+</div>
 
 
 
-  <table class="table table-bordered">
-    <thead>
+&nbsp;
+
+
+ <table >
+   
+    <tbody>
+      <tr ng-repeat="(key, value) in banklist | groupBy: 'shop' " >
+
+        <td colspan="11">  <b style="cursor: pointer;"> {{key}}</b>  </br> 
+
+<table class="table table-bordered " id="{{key}}" >
+
+ <thead>
+
       <tr>
-<td>AGENT</td>
+        <td>AGENT</td>
         <td>DATE</td>
         <td>AMOUNT</td>
         <td>PAYMENT REFERENCE</td>
         <td>BANK</td>
-        <td>DAILY SALES</td>
-        <td>NUM TRANSFERS</td>
         <td>COMMENTS</td>
+         <td>SHOP</td>
       </tr>
-    </thead>
-    <tbody>
 
-    <tr ng-repeat='bank in banklist'>
+
+
+    </thead>
+       <tbody>
+
+
+        <tr ng-repeat='bank in value'>
         <td>{{bank.agent}}</td>        
         <td>{{bank.date}}</td>
         <td>{{bank.amount}}</td>
-        <td>{{bank.paymentref}}</td>
-        <td>{{bank.bank}}</td>
-        <td>{{bank.dailysales}}</td>
-        <td>{{bank.transfers}}</td>
+        <td>{{bank.paymenttype}}</td>
+        <td>{{bank.bankname}}</td>
         <td>{{bank.comments}}</td>
-        <td><button type='button' ng-click='deletedeposit($index)' class="btn btn-link" > DELETE </button> </td>
-      </tr>
+        <td>{{bank.shop}}</td>
+        <td><button type='button' ng-click='deletedeposit($index)' class="btn btn-link"  ng-show="reportrights"> DELETE </button> </td>
+        </tr>
 
-   <tr>  <td colspan='2'> </td>
+<tr>  <td colspan='2'> </td>
 
-  <td>{{ banklist | sumByKey:'amount' }}  </td> 
+  <td>{{ value | sumByKey:'amount' }}  </td> 
 
-  <td colspan='2'> </td> 
+  <td colspan='4'> </td> 
 
-  <td>{{ banklist | sumByKey:'dailysales' }} </td> 
-
-  <td>{{ banklist | sumByKey:'transfers' }}</td> <td> </td>
   
   </tr> 
 
-   </tbody>
+</table>
+
+
+
+
+      </tbody>
 
 </table>
+
+
+
+
+
+        </td>
+       
+      </tr>
+
+    </tbody>
+  </table>
 
 
 </div>
@@ -219,7 +295,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -241,18 +317,22 @@
 
 
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
 <script type="text/javascript">
 
 
-var app = angular.module('justmoneytransfers', ['ngResource','calfilter']);
+var app = angular.module('justmoneytransfers', ['ngResource','calfilter','angular.filter']);
 
 app.controller('menucontroller', function($scope,$http,$resource) {
 
@@ -285,7 +365,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -300,7 +380,22 @@ $scope.usertype = true;
 
 
 }
+if( getCookie('agenttype') == 'supervisor'  )
 
+{ 
+
+$scope.reportrights = false;
+
+
+}
+if( getCookie('agenttype') == 'user'   )
+
+{ 
+
+$scope.reportrights = false;
+
+
+}
 
 var counter = 0;
 
@@ -321,7 +416,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -341,17 +436,16 @@ init();
 
 app.factory('Banking_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/banking.php',{
+var resource = $resource('api/banking.php',{
 
 date:"@date",
 amount:"@amount",
 payment_ref:"@payment_ref",
 bank:"@bank",
-sales:"@sales",
-num_transfers:"@num_transfers",
 agent:"@agent",
 comment:"@comment",
-agentype:"@agentype"
+agentype:"@agentype",
+shop:"@shop"
 
 
 
@@ -383,8 +477,9 @@ $scope.agenttype = getCookie('agenttype') ;
 
 $scope.creditlimit = getCookie('agentcredit') ;
 
+$scope.shop = getCookie('agentshop') ;
 
-$http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
+$http.get("api/banks.php").then(function(response) {
 
 
 
@@ -394,10 +489,13 @@ $http.get("https://jmtrax.herokuapp.com/api/banks").then(function(response) {
 
     });
     
-   
-$http.get("https://jmtrax.herokuapp.com/api/banking.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+
+$http.get("api/banking.php?agentshop="+getCookie('agentshop')+"&agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+
+
 
 $scope.banklist = response.data;
+
 
 
     });
@@ -406,6 +504,47 @@ $scope.banklist = response.data;
 };
 
 init();
+
+$scope.clear = function () {
+
+
+
+$scope.startdate = null;
+
+$scope.enddate = null;
+
+document.cookie = "fromdate=";
+document.cookie = "enddate=";
+
+
+
+document.getElementsByClassName("fromdate")[0].setAttribute("value","");
+
+
+
+}
+
+$scope.gettransactionsbysearch = function () {
+
+
+$scope.startdate = document.getElementById('datepicker').value;
+
+$scope.enddate = document.getElementById('datepicker1').value;
+
+
+document.cookie = "fromdate=" + document.getElementById('datepicker').value;
+document.cookie = "enddate=" + document.getElementById('datepicker1').value;
+$http.get("api/banking.php?agentshop="+getCookie('agentshop')+"&agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')+"&startdate="+$scope.startdate+"&enddate="+$scope.enddate).then(function(response) {
+
+$scope.banklist = response.data;
+
+
+    });
+
+
+
+}
+
 
 
 function getCookie(cname) {
@@ -439,7 +578,7 @@ var date = document.getElementById("datepicker2").value;
 
 
 if(date == "" ||
-$scope.amount == undefined || $scope.payment == undefined || $scope.sales == undefined ||  $scope.transfers == undefined || $scope.comments == undefined || agent == "")
+$scope.amount == undefined || $scope.payment == undefined ||  $scope.comments == undefined || agent == "")
 
 {
 
@@ -448,6 +587,12 @@ $scope.bankingerrors = 'Fields with an asterisk are mandatory';
 }
 else
 {
+
+var r = confirm("You are about to add this deposit");
+
+
+if (r == true) {
+
 
 
 var log = Banking_Service.save(
@@ -461,10 +606,9 @@ date:document.getElementById("datepicker2").value,
 amount:$scope.amount,
 payment_ref:$scope.payment,
 bank:$scope.bankdropdown.bankname,
-sales:$scope.sales,
-num_transfers:$scope.transfers,
 agent:$scope.agentusername,
 comment:$scope.comments,
+shop:getCookie('agentshop')
 
 
 
@@ -478,8 +622,6 @@ document.getElementById("datepicker2").value = "";
 $scope.amount = "";
 $scope.payment = "";
 document.getElementById("bank").value = "";
-$scope.sales = "";
-$scope.transfers = "";
 $scope.comments = "";
 
 init();
@@ -487,6 +629,12 @@ init();
   });
 
 
+}else{
+	
+	
+	
+	
+}
 
 
 
@@ -514,7 +662,7 @@ if (r == true) {
 
 $http.delete(
 
-  "https://jmtrax.herokuapp.com/api/banking.php?id="+$scope.banklist[para].id).then(function(response) {
+  "api/banking.php?id="+$scope.banklist[para].id).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -590,7 +738,20 @@ $(function() {
 
  
 
-    $( "#datepicker2" ).datepicker({ dateFormat: "dd-m-yy" });
+    $( "#datepicker2" ).datepicker({ dateFormat: "dd-mm-yy" });
+  
+  });
+
+
+</script>
+
+<script type="text/javascript">
+
+$(function() {
+
+    $( "#datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
+
+    $( "#datepicker1" ).datepicker({ dateFormat: "dd-mm-yy" });
   
   });
 

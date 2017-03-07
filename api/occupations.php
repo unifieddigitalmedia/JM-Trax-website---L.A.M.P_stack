@@ -5,12 +5,10 @@ header("Access-Control-Allow-Origin: *");
 
 header("Content-Type: application/json; charset=UTF-8");
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
+$servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 

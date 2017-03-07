@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,13 +13,13 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -40,7 +40,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -50,15 +50,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -71,7 +71,7 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
   <a href="daily-transactions-receipients.html"> Daily Transactions </a>
 
@@ -81,11 +81,11 @@
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -125,9 +125,9 @@
         <th style='tablecells' >TRANS. NO.</th>
         <th style='tablecells'>SENDER FIRST NAME</th>
         <th style='tablecells'>SENDER LAST NAME</th>
-        <th style='tablecells'>AMOUNT £</th>
-        <th style='tablecells'>FEES £</th>
-        <th style='tablecells'>TOTAL GBP DUE £</th>
+        <th style='tablecells'>AMOUNT &pound;</th>
+        <th style='tablecells'>FEES &pound;</th>
+        <th style='tablecells'>TOTAL GBP DUE &pound;</th>
         <th style='tablecells'>TOTAL NGN DUE</th>
         <th style='tablecells'>STATUS</th>
       </tr>
@@ -150,9 +150,9 @@
 
  <tr>
         <td colspan='6'></td>
-        <td>AMOUNT £</td>
-        <td>FEES £</td>
-        <td>TOTAL GBP DUE £</td>
+        <td>AMOUNT &pound;</td>
+        <td>FEES &pound;</td>
+        <td>TOTAL GBP DUE &pound;</td>
         <td>TOTAL NGN DUE</td>
         
       </tr>
@@ -189,7 +189,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center">  
 
-<img src='/images/Photo2_small.png' class="footerimage"alt="Collection of logo representing Nigeria Banks that Jm Trax are associated with" />
+<img src='images/Photo2_small.png' class="footerimage"alt="Collection of logo representing Nigeria Banks that Jm Trax are associated with" />
 
    </div>
 
@@ -231,11 +231,27 @@ var init = function () {
 
 $scope.usertype = false;
 
-if( getCookie('agenttype') === 'user'  )
+if( getCookie('agenttype') == 'user'  )
 
 { 
 
 $scope.usertype = true;
+
+
+}
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
+
+
+}
+if( getCookie('agenttype') == 'user'   )
+
+{ 
+
+$scope.reportrights = false;
 
 
 }
@@ -246,7 +262,7 @@ $scope.usertype = true;
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -270,7 +286,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -278,7 +294,7 @@ window.location = "http://192.168.0.90/intranet/index.html" ;
 
 
 
-$http.get("http://192.168.0.90/intranet/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')+"&agentshop="+getCookie('agentshop')).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 
@@ -324,7 +340,7 @@ document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "http://192.168.0.90/intranet/editorder.html" ;
+window.location = "editorder.html" ;
 
 }
 
@@ -488,7 +504,7 @@ angular.module('calfilter', [])
 
             for (var i = data.length - 1; i >= 0; i--) {
             
-                sum += parseInt(data[i][key].replace(",", ""));
+                sum += parseFloat(data[i][key].replace(",", ""));
             
             }
             

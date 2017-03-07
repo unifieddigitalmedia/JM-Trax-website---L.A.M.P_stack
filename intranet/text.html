@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="http://192.168.0.90/intranet/styles/normal.css">
 
 
 
@@ -15,7 +15,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="http://192.168.0.90/intranet/images/jmtrax_icon.png">
 
 </head>
 
@@ -24,7 +24,7 @@
 <header> 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="http://192.168.0.90/intranet/images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="" class="dropbtn"> Dashboard</a>  
 
@@ -57,17 +57,17 @@
 
   <a href="banking.html"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" ng-hide="usertype"> Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 

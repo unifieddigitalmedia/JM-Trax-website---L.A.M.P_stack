@@ -15,7 +15,7 @@
 <div ng-controller='receipt' >
 
 
-   <table border='1' style='margin:0 auto;font-size:9px;font-family:Arial, Helvetica, sans-serif;  position:relative; top:-10px; width:700px; left:-5px;' ><tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;margin:0 auto;' > <p> CLIENT'S COPY<br/> Just Money Transfers <br/> 82 High Street, London, SE25 6EA  <br/>Tel:02087715353 Fax:02087717766 Email:service@jmtransfers.co.uk</p> </td> <td colspan='2' style='font-size:9px;font-weight:bold; text-align:center;'> <img src='http://justcomputersparts.co.uk/logocopy.png' width='180px' height='50px'/></td></tr>
+   <table border='1' style='font-size:9px;font-family:Arial, Helvetica, sans-serif;  position:relative; top:-10px; width:700px; left:-5px;' ><tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;' > <p> CLIENT'S COPY<br/> Just Money Transfers <br/> 82 High Street, London, SE25 6EA  <br/>Tel:02087715353 Fax:02087717766 Email:service@jmtransfers.co.uk</p> </td> <td colspan='2' style='font-size:9px;font-weight:bold; text-align:center;'> <img src='http://justcomputersparts.co.uk/logocopy.png' width='180px' height='50px'/></td></tr>
 
 <tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;'>SENDER DETAILS   </td> <th colspan='2' rowspan='2'> Transaction No: {{tnum}}   </th>  </tr>
 
@@ -86,7 +86,7 @@ PLEASE READ CAREFULLY, BY SIGNING THE PAYMENT ORDER FORM (THE FORM) YOU ARE ENTR
 </div>
 
 
-<table border='1' style='margin:0 auto;font-size:9px;font-family:Arial, Helvetica, sans-serif;  position:relative; top:-10px; width:700px; left:-5px;' ><tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;' > <p> AGENTS'S COPY<br/> Just Money Transfers <br/> 82 High Street, London, SE25 6EA  <br/>Tel:02087715353 Fax:02087717766 Email:service@jmtransfers.co.uk</p> </td> <td colspan='2' style='font-size:9px;font-weight:bold; text-align:center;'> <img src='http://justcomputersparts.co.uk/logocopy.png' width='180px' height='50px'/></td></tr>
+<table border='1' style='font-size:9px;font-family:Arial, Helvetica, sans-serif;  position:relative; top:-10px; width:700px; left:-5px;' ><tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;' > <p> AGENTS'S COPY<br/> Just Money Transfers <br/> 82 High Street, London, SE25 6EA  <br/>Tel:02087715353 Fax:02087717766 Email:service@jmtransfers.co.uk</p> </td> <td colspan='2' style='font-size:9px;font-weight:bold; text-align:center;'> <img src='http://justcomputersparts.co.uk/logocopy.png' width='180px' height='50px'/></td></tr>
 
 <tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;'>SENDER DETAILS   </td> <th colspan='2' rowspan='2'> Transaction No: {{tnum}}   </th>  </tr>
 
@@ -185,7 +185,7 @@ app.controller('receipt', function($scope,$http,$resource) {
 $scope.getrates = function () {
 
 
-$http.get("http://81.137.131.58/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -207,7 +207,7 @@ var init = function () {
 
 $scope.agentusername = getCookie('agentusername') ;
 
-$http.get("http://192.168.0.90/intranet/api/receipt.php?id="+getCookie('transaction_number')) .then(function(response) {
+$http.get("api/receipt.php?id="+getCookie('transaction_number')) .then(function(response) {
 
 
 $scope.date = response.data[0].tdate;
@@ -256,6 +256,7 @@ $scope.cash =  $scope.tocurrency(response.data[0].cash);
 $scope.change = $scope.tocurrency(response.data[0].change);
 $scope.paypalemail = response.data[0].paypalemail;
 $scope.customerref = response.data[0].customerref;
+
 
 //
  
@@ -312,7 +313,7 @@ function gotohome() {
 {
 
 
-window.location = "http://192.168.0.90/intranet/money-transfer-calculator.html" ;
+window.location = "money-transfer-calculator.html" ;
 
 }
 
@@ -320,11 +321,40 @@ else
 {
 
 	
- window.location = "http://192.168.0.90/intranet/dashboard.php" ;
+if(getCookie('print_location') === 'reports') {
+	
+	window.location ="transactions.php" ;
+	
+}
+else{
+	window.location = "dashboard.php" ;
+	
+}
+	
  
 
 }
 
+
+}
+
+function getCookie(cname) {
+
+    var name = cname + "=";
+  
+    var ca = document.cookie.split(';');
+  
+    for(var i=0; i<ca.length; i++) {
+  
+        var c = ca[i];
+  
+        while (c.charAt(0)==' ') c = c.substring(1);
+  
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  
+    }
+  
+    return "";
 
 }
 

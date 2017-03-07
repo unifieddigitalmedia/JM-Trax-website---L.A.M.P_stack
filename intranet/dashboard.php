@@ -92,7 +92,7 @@ if (move_uploaded_file($_FILES["addressIDtoupload"]["tmp_name"], $target_file)) 
 
 function updatesender($para,$para1) {
 
-$url = "http://192.168.0.90/intranet/".$para;
+$url = "".$para;
 
 
 $sql1 = "UPDATE users SET para1 = '$url'  WHERE Mobile = '$_REQUEST[sendersID]' ";
@@ -127,7 +127,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -135,7 +135,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -157,7 +157,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a class="dropbtn"> Dashboard</a>  
 
@@ -167,15 +167,15 @@ if ($conn->query($sql1) === TRUE) {
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -188,21 +188,21 @@ if ($conn->query($sql1) === TRUE) {
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
   
   <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -390,7 +390,7 @@ if ($conn->query($sql1) === TRUE) {
 
     <label for="GBP"></label>
 
-<input type="text" class="form-control input-sm" value="" name="paymentsterling" class="paymentsterling" id="paymentsterling" ng-model="paymentsterling" ng-blur="calAMOUNT(paymentsterling)"   >
+<input type="text" class="form-control input-sm AMOUNT" value="" name="paymentsterling"  id="paymentsterling" ng-model="paymentsterling" >
 
 
       </div>
@@ -420,7 +420,7 @@ if ($conn->query($sql1) === TRUE) {
     
 
  <label for="GBP"></label>
-<input style="color:blue;font-weight:bold;" type="text" class="form-control input-sm" name="paymentlocal" class="NGN" id="NGN" ng-model="NGN" ng-blur="calNGN(NGN)" >
+<input style="color:blue;font-weight:bold;" type="text" class="form-control input-sm NGN" name="paymentlocal"  id="NGN" ng-model="NGN" ng-blur="calNGN(NGN)" >
 
 
       </div>
@@ -437,7 +437,7 @@ if ($conn->query($sql1) === TRUE) {
 
  <label for="GBP"></label>
 
-<input type="text" class="form-control input-sm"  value="" name="paymentduegbp" class="total" id="total" style="color:red;font-weight:bold;" ng-model="total" ng-blur="calTOTALGBP(total)">
+<input type="text" class="form-control input-sm TOTALGBP"  value="" name="paymentduegbp"  id="total" style="color:red;font-weight:bold;" ng-model="total" ng-blur="calTOTALGBP(total)">
 
 
       </div>
@@ -526,6 +526,7 @@ if ($conn->query($sql1) === TRUE) {
 &nbsp;
 
 
+
 <div class="row" ng-init="checkuser();getreceipientsandtransactions()">
 
 
@@ -536,45 +537,33 @@ if ($conn->query($sql1) === TRUE) {
 
 <form role="form" name="sendersmobileform" >
 
-<div class="form-group" >
+<div class="row">
 
-
-  <div class="row">
-
-    <div class="col-sm-6" >
-
-<input type="text"  class="form-control input-sm"   id="customerfirstname" ng-model='FirstName' placeholder="* First Name :" autocomplete="on"  />
+<div class="col-sm-6" >
+      <label for="usr">* First Name :</label>
+<input type="text" style="background-color:#FCC;" class="form-control input-sm" id="customerfirstname" ng-model='FirstName' placeholder=""autocomplete="on" />
 
 
 </div>
-    <div class="col-sm-6" >
+<div class="col-sm-6" >
 
-
-<input type="text"  class="form-control input-sm"  id="customerlastname" ng-model='LastName' placeholder="* LAST NAME :" autocomplete="on"  />
+      <label for="usr">* Last Name :</label>
+<input type="text" style="background-color:#FCC;" class="form-control input-sm"  id="customerlastname" ng-model='LastName' placeholder="" autocomplete="on"  />
 
 
 </div>
     
-
-
-  </div>
-
-
-&nbsp;
-
-  <div class="row">
-
-    <div class="col-sm-3" ><input type="text"  class="form-control input-sm"  value ='+44' disabled style='font-weight:bold;color:red;' ></div>
-    <div class="col-sm-2" ><input type="sendersmobile"  class="form-control input-sm"  value ='0'  disabled style='font-weight:bold;color:red;'></div>
-    <div class="col-sm-7" ><input type="text"  class="form-control input-sm redtext"   name='sendersmobile' placeholder='Senders Mobile' required  id="customermobile" ng-model='MobilePhone' autocomplete="on" /></div>
-  </div>
-
-
-
-
 </div>
 
 &nbsp;
+
+<div class="row">
+
+    <div class="col-sm-3" ><label for="usr"></label><input type="text"  class="form-control input-sm"  value ='+44' disabled style='font-weight:bold;color:red;' ></div>
+    <div class="col-sm-2" ><label for="usr"></label><input type="sendersmobile"  class="form-control input-sm"  value ='0'  disabled style='font-weight:bold;color:red;'></div>
+    <div class="col-sm-7" > <label for="usr">* Senders Mobile :</label><input type="text"  style="background-color:#FCC;" class="form-control input-sm redtext"   name='sendersmobile' placeholder='' required  id="customermobile" ng-model='MobilePhone' autocomplete="on" /></div>
+
+</div>
 
 &nbsp;
 
@@ -582,115 +571,83 @@ if ($conn->query($sql1) === TRUE) {
 
 &nbsp;
 
-&nbsp;
-
-
 <div class="row">
-<div class="col-sm-3" style=""></div>
-<div class="col-sm-3" style=""></div>
-<div class="col-sm-3" style=""> 
 
-<button type="submit" class="btn btn-primary btn-block" ng-click='getsenderslist()' ng-disabled="sendersmobileform.$invalid" >SEARCH</button>
+<div class="col-sm-3"></div>
+<div class="col-sm-3"> <button type="submit" class="btn btn-primary btn-block" ng-click='clearSender()'  >CLEAR </button></div>
+<div class="col-sm-3" style=""> <button type="submit" class="btn btn-primary btn-block" ng-click='getsenderslist()' ng-disabled="sendersmobileform.$invalid" >SEARCH</button></div>
+<div class="col-sm-3" style="">  <button type="button" class="btn btn-primary btn-block"  ng-click='addsender()' >ADD NEW </button> </div>
 
 
 </div>
-<div class="col-sm-3" style="">  
 
-<button type="button" class="btn btn-primary btn-block"  ng-click='addsender()' >ADD NEW </button>
 
-</br>
 &nbsp;
+
 <span id="sendererror redtext" class="redtext"> {{sendererror}}  </span>
 
 
 
-
-</div>
-
-
-
-</div>
-
-&nbsp;
-
 </form>
-
 
 </div>
 
 
 <div class="col-sm-6" style="">
 
-
-<h6>RECEIPIENTS DETAILS</h6></span>
+<h6>RECEIPIENTS DETAILS</h6> 
 
 <form role="form" name="sendersmobileform" >
 
-<div class="form-group" style='height:100px;'>
-
-
-  <div class="row">
-
-    <div class="col-sm-6" >
-
-<input value="{{recfname}}"  class="form-control input-sm"   id='recfirstnamepop' name="recfirstname" onkeyup="showResult(this.value)" ng-model='recfirstname'  placeholder="* First Name:"  autocomplete="on" />
-
-
-</div>
-    <div class="col-sm-6" >
-
-
-<input type="text" value="{{reclname}}"  class="form-control input-sm"   id='reclastnamepop' name="recsurname" onkeyup="showresult(this.value)"  ng-model='reclastname'  placeholder="* Last Name:" autocomplete="on" /> 
-
-
-</div>
-    
-
-
-  </div>
-
-&nbsp;
-
-  <div class="row">
-
-    <div class="col-sm-4" ><input type="text"  class="form-control input-sm redtext"  value ='+234' disabled ></div>
-    <div class="col-sm-8" ><input value="{{recphone}}"  class="form-control input-sm"   id='recmobile'  name="recmobilephone" ng-model='recphone' autocomplete="on" ></div>
-  </div>
-
-</div>
 <div class="row">
-<div class="col-sm-3" style=""></div>
-<div class="col-sm-3" style=""></div>
-<div class="col-sm-3" style="">
 
-  <button type="submit" class="btn btn-primary btn-block" ng-click='beneficiarysearch()'  >SEARCH</button>
+<div class="col-sm-6" >
+ <label for="usr">* First Name :</label>
+<input value="{{recfname}}"  style="background-color:#FCC;" class="form-control input-sm"   id='recfirstnamepop' name="recfirstname" onkeyup="showResult(this.value)" ng-model='recfirstname'  placeholder=""  autocomplete="on" />
+
 
 </div>
-<div class="col-sm-3" style="">  
+<div class="col-sm-6" >
 
-<button type="button" class="btn btn-primary btn-block"  ng-click='addrec()' >ADD NEW </button>
-</br>
+ <label for="usr">* Last Name:</label>
+<input type="text" value="{{reclname}}"  style="background-color:#FCC;" class="form-control input-sm"   id='reclastnamepop' name="recsurname" onkeyup="showresult(this.value)"  ng-model='reclastname'  placeholder="" autocomplete="on" /> 
+
+
+</div>
+
+</div>
+
 &nbsp;
+
+  <div class="row">
+
+    <div class="col-sm-4" ><label for="usr"></label><input type="text"  class="form-control input-sm redtext"  value ='+234' disabled ></div>
+    <div class="col-sm-8" ><label for="usr">* Phone:</label><input value="{{recphone}}"  style="background-color:#FCC;" class="form-control input-sm"   id='recmobile'  name="recmobilephone" ng-model='recphone' autocomplete="on" ></div>
+  </div>
+
+&nbsp;
+
+<div class="row">
+
+<div class="col-sm-3"><button type="button" class="btn btn-primary btn-block" ng-click='clearReceipient()'>CLEAR</button></div> 
+<div class="col-sm-3"><button type="button" class="btn btn-primary btn-block" ng-click='sendmoney()'>SEND MONEY</button> </div>
+<div class="col-sm-3" style=""><button type="submit" class="btn btn-primary btn-block" ng-click='beneficiarysearch()'  >SEARCH</button> </div>
+<div class="col-sm-3" style="">  <button type="button" class="btn btn-primary btn-block"  ng-click='addrec()' >ADD NEW </button> </div>
+
+
+
+</div>
+
+&nbsp;
+
 <span id="recerror redtext" class="redtext"> {{recerror}}  </span>
 
 
-</div>
 
 
-
-</div>
-
-&nbsp;
 
 </form>
 
-
-
-</div>
-
-
-
-<div class="col-sm-2" style="">
 
 </div>
 
@@ -751,14 +708,15 @@ if ($conn->query($sql1) === TRUE) {
 <span id="sendererror redtext" class="redtext"> {{sendererror}}  </span>
 
 
+
 <div class="row">
 
    <div class="col-sm-4">
 
 
       <div class="form-group">
-     <label for="usr"></label>
-      <input type="text"  class="form-control input-sm"   id="postcode" ng-model='SenderPostcode' placeholder="* POSTCODE :" autocomplete="on" >
+     <label for="usr">* POSTCODE :</label>
+      <input type="text"  class="form-control input-sm"  style="background-color:#FCC;" id="postcode" ng-model='SenderPostcode' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -792,8 +750,8 @@ if ($conn->query($sql1) === TRUE) {
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text"  class="form-control input-sm" id="line1" ng-model='line1' placeholder="* 1ST LINE :" autocomplete="on" >
+ <label for="usr">* 1ST LINE :</label>
+      <input type="text" style="background-color:#FCC;" class="form-control input-sm" id="line1" ng-model='line1' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -802,8 +760,8 @@ if ($conn->query($sql1) === TRUE) {
 
 
 <div class="form-group">
-  <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="*2ND LINE :" autocomplete="on" />
+  <label for="usr">2ND LINE :</label>
+      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="" autocomplete="on" />
       </div>
 
 
@@ -814,8 +772,8 @@ if ($conn->query($sql1) === TRUE) {
 
 
 <div class="form-group">
-    <label for="usr"></label>
-     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="3RD LINE :" autocomplete="on" >
+    <label for="usr">3RD LINE :</label>
+     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -832,8 +790,8 @@ if ($conn->query($sql1) === TRUE) {
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="* TOWN :" autocomplete="on" >
+ <label for="usr">* TOWN :</label>
+      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -842,8 +800,8 @@ if ($conn->query($sql1) === TRUE) {
     <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="COUNTY :" autocomplete="on" >
+ <label for="usr">COUNTY :</label>
+      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -855,9 +813,9 @@ if ($conn->query($sql1) === TRUE) {
       <input type="text" class="form-control input-sm" id="customeremail" ng-model='EMAIL' placeholder="* EMAIL :">-->
 
 
-<label for="usr"></label>
+<label for="usr">OCCUPATION</label>
 
- <select  class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
+ <select style="background-color:#FCC;" class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
 
 
 
@@ -899,7 +857,7 @@ if ($conn->query($sql1) === TRUE) {
 
 <!-- <button type="button" class="btn btn-primary btn-block" ng-hide="senderdetail.USERID" ng-click='convertcustomer()'> ENABLE CUSTOMER</button> --> 
 
- <button type='submit' name='printsenders' class="btn btn-primary btn-block"  ng-click="printsenderstransaction()" >PRINT</button> 
+ <button type='submit' name='printsenders' class="btn btn-primary btn-block"  ng-click="printsenderstransaction()"  > SENDERS TRANSFERS</button> 
 
 
 
@@ -915,12 +873,12 @@ if ($conn->query($sql1) === TRUE) {
 
 
 &nbsp;
-<h6 ng-hide"senderdiv"> SENDERS ID DETAILS</h6>
+<h6 ng-hide="senderdiv"> SENDERS ID DETAILS</h6>
 
 
 
 
-<div ng-hide"senderdiv">
+<div ng-hide="senderdiv">
 
 <div class="row">
   <div class="col-sm-4"> TYPE OF ID <select name=''  ng-model="IDtype" id="IDtype"  class="form-control input-sm"  >
@@ -1000,7 +958,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
 
-<table class="table table-bordered " ng-hide"senderdiv">
+<table class="table table-bordered " ng-hide="senderdiv">
 <thead>
 
 
@@ -1091,7 +1049,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
      <div class="form-group">
       <label for="usr"></label>
-     <input type="text" name="recbank" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank' placeholder="*  Bank:" autocomplete="on" /> 
+     <input type="text" name="recbank"  style="background-color:#FCC;" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank' placeholder="" autocomplete="on" /> 
       </div>
 
 
@@ -1102,9 +1060,9 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
  <div class="form-group">
-      <label for="usr"></label>
+      <label for="usr">*  Bank:</label>
 
-       <select class="form-control input-sm"  ng-options="bank as bank.bankname for bank in banklist | filter:bank.type='receipient' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown"style="position:relative; " ></select>
+       <select class="form-control input-sm" style="background-color:#FCC;" ng-options="bank as bank.bankname for bank in banklist | filter:bank.type='receipient' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown"style="position:relative; " ></select>
 
 
 
@@ -1122,8 +1080,8 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
       <div class="form-group">
-      <label for="usr"></label>
-      <input name='recbankaccount' type='text' class="form-control input-sm"   value="{{recaccount}}"  id='recnumber' ng-model='recaccount'  autocomplete="on"  placeholder="* Bank Account:" /> 
+      <label for="usr">* Bank Account:</label>
+      <input name='recbankaccount' type='text'  style="background-color:#FCC;" class="form-control input-sm"   value="{{recaccount}}"  id='recnumber' ng-model='recaccount'  autocomplete="on"  placeholder="" /> 
       </div>
 
 
@@ -1141,7 +1099,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
  <div class="form-group">
       <label for="usr"></label>
-     <input type="text" id='paymenttextfeild'  class="form-control input-sm"  name="payment"  value="{{recpaymentref}}" id='paymentref' autocomplete="on"  ng-model='recpaymentref' placeholder="*Payment Reference :"/> 
+     <input type="text" id='paymenttextfeild'   style="background-color:#FCC;" class="form-control input-sm"  name="payment"  value="{{recpaymentref}}" id='paymentref' autocomplete="on"  ng-model='recpaymentref' placeholder=""/> 
       </div>
 
 
@@ -1152,8 +1110,8 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
 <div class="form-group">
-      <label for="usr"></label>
-    <select  id='paymentdropdown' class="form-control input-sm"  ng-change="paymentdropdownfunction()" ng-model="paymentdropdown">
+      <label for="usr">*PAYMENT TYPE</label>
+    <select  id='paymentdropdown' class="form-control input-sm"  style="background-color:#FCC;" ng-change="paymentdropdownfunction()" ng-model="paymentdropdown">
 
 
 <option value='Cash' >Cash </option>
@@ -1195,7 +1153,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
       <label for="usr"></label>
 
 
- <select  class="form-control input-sm"  ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative; " ></select>
+ <select  style="background-color:#FCC;" class="form-control input-sm"  ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative; " ></select>
 
 
 
@@ -1214,7 +1172,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 <div class="form-group">
       <label for="usr"></label>
-      <input type="text" id='reasonfortransfer'  name="reasonfortransfer"  class="form-control input-sm" value="{{recreasonfortransfer}}"  class='recreason' ng-model='recreasonfortransfer' placeholder="*Reason:" autocomplete="on" /> 
+      <input type="text" id='reasonfortransfer'  style="background-color:#FCC;"  name="reasonfortransfer"  class="form-control input-sm" value="{{recreasonfortransfer}}"  class='recreason' ng-model='recreasonfortransfer' placeholder="" autocomplete="on" /> 
       </div>
 
 
@@ -1225,8 +1183,8 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
  <div class="form-group">
-      <label for="usr"></label>
-    <select name='' id='transferreason' class="form-control input-sm"  ng-change="transferreasonfunction()" ng-model="transferreason">
+      <label for="usr">*Reason For Transfer:</label>
+    <select name=''  id='transferreason' class="form-control input-sm"  style="background-color:#FCC;" ng-change="transferreasonfunction()" ng-model="transferreason">
 
 <option value="Family Assistance">Family Assistance</option>
 <option value="Commercial">Commercial</option>
@@ -1249,10 +1207,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
    <div class="col-sm-4">
 
-<div class="form-group">
 
-<button type="button" class="btn btn-primary btn-block" ng-click='sendmoney()'>SEND MONEY</button> 
-      </div>
 
 
    </div>
@@ -1288,7 +1243,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 <div class="form-group">
      
-<button  type="submit" class="btn btn-primary btn-block"  name='printsenders'  ng-click="receipient_summary()">PRINT </button> 
+<button  type="submit" class="btn btn-primary btn-block"  name='printsenders'  ng-click="receipient_summary()">RECEIPIENT TRANSFER </button> 
 
       </div>
 
@@ -1300,7 +1255,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 &nbsp;
 
 
-<h6 >PREVIOUS TRANSACTIONS <a ng-click="printall()"  ng-hide='senderdetails'> PRINT ALL  <form id="alltransactions" action='senderstransactions.php' method='get' >  <input type='hidden' name='sendersID' value='{{sendersid}}' /> </form> </a> </h6> 
+<h6 >PREVIOUS TRANSACTIONS  </h6> 
 
 
 <table class="table borderless ">
@@ -1363,7 +1318,117 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 
 
+&nbsp;
+<h3> Historic Banking </h3>
+&nbsp;
+<div class="row"  ng-init="getbanking()">
 
+
+    <div class="col-sm-4"  style="background-color:black;color:white;padding:10px;" >
+
+
+<form name='transsearchform' >
+<table class="table " >
+    <thead>
+      
+    </thead>
+    <tbody>
+      <tr>
+        <td>START DATE (dd/mm/yyyy) </td>
+        <td><input type="text" class="form-control" id="datepicker1" ng-model='startdate' required ></td>
+        <td> 
+
+
+
+        </td>
+      </tr>
+      <tr>
+        <td>END DATE (dd/mm/yyyy)</td>
+        <td><input type="text" class="form-control" id="datepicker2" required ng-model="enddate"></td>
+         <td> 
+
+
+
+         </td>
+      </tr>
+      <tr>
+        <td><button type="button" class="form-control" id="" ng-click='clear()' > CLEAR</button></td>
+        <td colspan="2"><button type="button" class="form-control" id="" ng-click='gettransactionsbysearch()' > SEARCH</button></td>
+ 
+      </tr>
+    </tbody>
+  </table>
+
+</form>
+
+  
+</div>
+ <div class="col-sm-8" >
+
+
+
+
+
+</div>
+</div>
+
+&nbsp;
+
+<div class="row">
+  <div class="col-sm-12" >
+    <div style='float:right;'>
+  <p>
+
+<a href="banking-reports.html" style="color:red;font-weight:bold;" > Export to PDF </a>
+  </p>
+    <p>
+
+
+  </p>
+  </div>
+ </div>
+</div>
+
+<div class="div_list"  >
+
+  <table class="table table-bordered table-responsive">
+    <thead>
+      <tr>
+<td>AGENT</td>
+        <td>DATE</td>
+        <td>AMOUNT</td>
+        <td>PAYMENT REFERENCE</td>
+        <td>BANK</td>
+       <td>COMMENTS</td>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tr ng-repeat='bankDETAILS in historicbanklist' style="color:black;">
+
+        <td >{{bankDETAILS.agent}}</td>        
+        <td>{{bankDETAILS.date}}</td>
+        <td>{{bankDETAILS.amount}}</td>
+        <td>{{bankDETAILS.paymenttype}}</td>
+        <td>{{bankDETAILS.bank}}</td>
+        <td>{{bankDETAILS.comments}}</td>
+        <td><button type='button' ng-click='deletedeposit($index)' class="btn btn-link" > DELETE </button> </td>
+      
+      </tr>
+
+   <tr>  <td colspan='2'> </td>
+
+  <td>{{ banklist | sumByKey:'amount' }}  </td> 
+
+  <td colspan='4'> </td> 
+
+  
+  </tr> 
+
+   </tbody>
+
+</table>
+</div>
 
 </div>
 
@@ -1382,7 +1447,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center">  
 
-<img src='/images/Photo2_small.png' class="footerimage"alt="Collection of logo representing Nigeria Banks that Jm Trax are associated with" />
+<img src='images/Photo2_small.png' class="footerimage"alt="Collection of logo representing Nigeria Banks that Jm Trax are associated with" />
 
    </div>
 
@@ -1395,7 +1460,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 
 <section class="copywright">
 
-<p style='color:white;'>&copy; UNIFIED DIGITAL MEDIA  - http://www.unifieddigitalmedia.co.uk</p>
+<p style='color:white;'>&copy; This website was designed by UNIFIED DIGITAL MEDIA </p>
 
 </section>
 
@@ -1412,7 +1477,7 @@ EXPIRY DATE <input type="text"  ng-model="IDexpiry" id="datepicker"/>
 <script type="text/javascript">
 
 
-var app = angular.module('justmoneytransfers', ['ngResource']);
+var app = angular.module('justmoneytransfers', ['ngResource','calfilter']);
 
 app.controller('menucontroller', function($scope,$http,$resource) {
 
@@ -1445,7 +1510,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -1457,6 +1522,14 @@ if( getCookie('agenttype') == 'user'  )
 { 
 
 $scope.usertype = true;
+
+
+}
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
 
 
 }
@@ -1474,14 +1547,14 @@ counter = 0;
 
 });
 
-if (counter == '1800')
+if (counter == '1200')
 
 {
 
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -1503,7 +1576,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/senders',{
+var resource = $resource('api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -1558,9 +1631,9 @@ $scope.paypaldiv = true;
 
 $scope.senderdiv = true;
 
-
 var init = function () {
    
+   document.cookie = "print_location=";
 $scope.agentid = getCookie('agentid') ;
 
 $scope.agentusername = getCookie('agentusername') ;
@@ -1570,7 +1643,11 @@ $scope.agentemail = getCookie('agentemail') ;
 $scope.agenttype = getCookie('agenttype') ;
 
 
-$http.get("http://192.168.0.90/intranet/api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
+
+
+
+
+$http.get("api/agent_balance.php?agentusername="+getCookie('agentusername')).then(function(response) {
 
 
 $scope.outstandingbalance = $scope.tocurrency(response.data.OUTSTANDING) ; 
@@ -1592,9 +1669,30 @@ alert("You are approaching your daily credit limit and need to bank.");
 
 });
 
+
+$http.get("api/historicbanking.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+
+
+
+$scope.banklist = response.data;
+
+
+    });
+
+
 };
 
 init();
+
+
+$scope.$watch('banklist', function() {
+
+
+
+
+  $scope.historicbanklist = $scope.banklist;
+
+  });
 
 function getCookie(cname) {
 
@@ -1645,7 +1743,7 @@ $scope.recbank = $scope.bankdropdown.bankname ;
 $scope.getrates = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/rates").then(function(response) {
+$http.get("api/rates.php").then(function(response) {
 
 
 
@@ -1655,7 +1753,7 @@ $http.get("http://192.168.0.90/intranet/api/rates").then(function(response) {
 
     });
 
-$http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
+$http.get("api/banks.php").then(function(response) {
 
 
 
@@ -1666,7 +1764,7 @@ $http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
     });
 
 
-$http.get("http://192.168.0.90/intranet/api/getoccupations.php").then(function(response) {
+$http.get("api/getoccupations.php").then(function(response) {
 
 
 
@@ -1682,7 +1780,7 @@ $http.get("http://192.168.0.90/intranet/api/getoccupations.php").then(function(r
 $scope.getreclist = function () {
 	
 
-$http.get("http://192.168.0.90/intranet/api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
+$http.get("api/receipients.php?sendersID="+$scope.sendersid).then(function(response) {
 
 
 $scope.receipentlist = response.data;
@@ -1697,16 +1795,16 @@ $scope.receipentlist = response.data;
 $scope.getsenderslist = function () {
 
 
-//$http.get("http://192.168.0.90/intranet/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+//$http.get("api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
-$http.get("http://192.168.0.90/intranet/api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
+$http.get("api/user.php?firstname="+document.getElementById("customerfirstname").value+"&lastname="+
 document.getElementById("customerlastname").value+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
 if(response.data.length == 0 )
 {
 
-alert('Sender is not found.');
+alert('Sender is not found ! Please add new.');
 
 }else{
 
@@ -1728,7 +1826,7 @@ $scope.senderslist = response.data;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://192.168.0.90/intranet/senderstransactions.php" ;
+window.location = "senderstransactions.php" ;
 
 }
 
@@ -1773,7 +1871,7 @@ document.getElementsByClassName("sendersid")[2].setAttribute("value", $scope.sen
 
 $scope.getreclist();
 
-$http.get("http://192.168.0.90/intranet/api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
+$http.get("api/transactions.php?sendersMobile="+$scope.senderslist[para].Mobile).then(function(response) {
 
 
 $scope.transactionlist = response.data;
@@ -1784,6 +1882,9 @@ $scope.calculatetotals($scope.transactionlist);
 
 
 $scope.periodtotal = $scope.calculate30daytotals($scope.transactionlist);
+
+
+alert('Please select a receipient');
 
 });
 
@@ -2047,7 +2148,7 @@ var county = document.getElementById("county").value;
 
 var postcode = document.getElementById("postcode").value;
 
-if(line1 == '' || town=='' || postcode =='')
+if(line1 == ''  || town=='' || postcode =='')
 
 {
 
@@ -2101,6 +2202,7 @@ IDcountry:$scope.IDcountry,
 occupation:$scope.occupation.occupation,
 
 }, function() {
+
 
 
 if(log.ERROR){ alert(log.ERROR);}
@@ -2206,7 +2308,7 @@ $scope.getsenderslist();
 
 
 
-$scope.clearsender = function () {
+$scope.clearSender = function () {
 
 $scope.FirstName = "";
 $scope.LastName = "";
@@ -2254,7 +2356,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://192.168.0.90/intranet/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 
@@ -2301,7 +2403,7 @@ if (r == true) {
    $scope.senderdiv = false;
    
 } else {
-  window.location = "http://192.168.0.90/intranet/order.html" ;
+   window.location = "order.html" ;
 }
 
 
@@ -2324,7 +2426,7 @@ if (r == true) {
    $scope.senderdiv = false;
    
 } else {
-  window.location = "http://192.168.0.90/intranet/order.html" ;
+   window.location = "order.html" ;
 }
 
 
@@ -2334,7 +2436,7 @@ if (r == true) {
 else
 {
 
-window.location = "http://192.168.0.90/intranet/order.html" ;
+window.location = "order.html" ;
 
 
 
@@ -2344,6 +2446,7 @@ window.location = "http://192.168.0.90/intranet/order.html" ;
 
 
 }
+
 
 
 }
@@ -2353,7 +2456,7 @@ window.location = "http://192.168.0.90/intranet/order.html" ;
 $scope.receipient_summary = function () {
 
 
-window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
+window.location = "receipient-statement.html" ;
 
 
 }
@@ -2361,7 +2464,7 @@ window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
 $scope.beneficiarysearch = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -2398,6 +2501,7 @@ document.cookie = "receipient_bank=" + document.getElementById("recbank").value;
 document.cookie = "receipient_firstname=" + $scope.recfirstname;
 document.cookie = "receipient_banknumber=" + document.getElementById("recnumber").value;
 
+alert('Please click SEND MONEY button');
 };
 
 
@@ -2406,7 +2510,7 @@ document.cookie = "receipient_banknumber=" + document.getElementById("recnumber"
 $scope.deleterec = function () {
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients.php',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -2436,7 +2540,7 @@ if($scope.recipientsID !== undefined || document.getElementById("username").valu
 
 
 
-$http.delete("http://192.168.0.90/intranet/api/receipients.php?id="+$scope.recid).then(function(response) {
+$http.delete("api/receipients.php?id="+$scope.recid).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -2518,7 +2622,7 @@ else if(document.getElementById("paymenttextfeild").value == 'Bank' && ($scope.s
 $scope.bankref= false;
 
 
-$scope.recerror = 'Select a bank account to make your payment. This will be used to pay your beneficiary.';
+$scope.recerror = 'Select a bank account from the highlighted field below. This will be used to pay your beneficiary.';
 
 $scope.shopaccdiv = false;
 
@@ -2599,7 +2703,7 @@ else {
 
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients.php',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2702,7 +2806,7 @@ else
 {
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients.php',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -2803,6 +2907,32 @@ $scope.getreclist();
 
 }
 
+$scope.clearReceipient = function(){
+
+
+$scope.reclastname = "";
+document.getElementById("recbank").value = "";
+$scope.recfirstname = "";
+document.getElementById("recnumber").value = "";
+
+
+
+$scope.recipientsID = "";
+$scope.recfirstname = "";
+$scope.reclastname = "";
+document.getElementById("recbank").value = "";
+document.getElementById("recnumber").value = "";
+document.getElementById("reasonfortransfer").value = "";
+document.getElementById("paymenttextfeild").value = "";
+$scope.recphone = "";
+$scope.paypal = "";
+$scope.shopacc = "";
+$scope.thirdpartycomment = "";
+
+
+
+}
+
 
 $scope.popform = function ()
 
@@ -2832,12 +2962,14 @@ PostcodeAnywhere_Interactive_Find_v1_10Begin('JJ14-GM21-XW16-FU78',sendermobile)
 
 
 
+$(document).ready(function(){
+   
 
-$scope.calNGN = function(para) {
 
-     
+$(".NGN").change(function(){
+   
 
-$http.get("http://192.168.0.90/intranet/api/charge.php?ngn="+para).then(function(response) {
+   $http.get("api/charge.php?ngn="+$(".NGN").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2847,11 +2979,16 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
   });
 
   
-    };
 
-    $scope.calTOTALNGN = function(para) {
 
- $http.get("http://192.168.0.90/intranet/api/charge.php?totalngn="+para).then(function(response) {
+});
+
+
+
+$(".TOTALNGN").change(function(){
+
+
+ $http.get("api/charge.php?totalngn="+$(".TOTALNGN").val()).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -2862,12 +2999,17 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     });
 
-  
-    };
 
-    $scope.calTOTALGBP = function(para) {
+
+});
+
+
+
+$(".TOTALGBP").change(function(){
   
-     $http.get("http://192.168.0.90/intranet/api/charge.php?totalgbp="+para).then(function(response) {
+
+
+    $http.get("api/charge.php?totalgbp="+$(".TOTALGBP").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2876,13 +3018,16 @@ $scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2))
 $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
    });
-    };
+
+
+});
 
 
 
-    $scope.calAMOUNT = function(para) {
+$(".AMOUNT").change(function(){
+  
 
-       $http.get("http://192.168.0.90/intranet/api/charge.php?amount="+para).then(function(response) {
+   $http.get("api/charge.php?amount="+$(".AMOUNT").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -2892,8 +3037,16 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
 
     });
-       
-    };
+
+
+
+});
+
+
+
+})
+
+
 
 
 $scope.tocurrency = function (para) {
@@ -2924,9 +3077,119 @@ return dollars;
 
 
 
+$scope.clear = function () {
+
+
+
+$scope.startdate = null;
+
+$scope.enddate = null;
+
+document.cookie = "fromdate=";
+document.cookie = "enddate=";
+
+
+
+document.getElementsByClassName("fromdate")[0].setAttribute("value","");
+
+
+
+}
+
+$scope.gettransactionsbysearch = function () {
+
+
+$scope.startdate = document.getElementById('datepicker1').value;
+
+$scope.enddate = document.getElementById('datepicker2').value;
+
+
+document.cookie = "fromdate=" + document.getElementById('datepicker1').value;
+document.cookie = "enddate=" + document.getElementById('datepicker2').value;
+
+  
+
+$http.get("api/banking.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')+"&startdate="+$scope.startdate+"&enddate="+$scope.enddate).then(function(response) {
+
+
+
+$scope.banklist = response.data;
+
+
+    });
+
+
+
+}
+
+
+
+$scope.deletedeposit = function (para) {
+
+var r = confirm("You are about to delete this deposit");
+
+
+if (r == true) {
+
+
+
+$http.delete(
+
+  "api/banking.php?id="+$scope.banklist[para].id).then(function(response) {
+
+alert(response.data.ERROR);
+
+init();
 
 });
 
+
+}
+else
+{
+
+
+
+}
+
+}
+
+
+
+});
+
+angular.module('calfilter', [])
+    .filter('sumByKey', function() {
+        return function(data, key) {
+        
+            var sum = 0;
+
+            for (var i = data.length - 1; i >= 0; i--) {
+            
+                sum += parseInt(data[i][key].replace(",", ""));
+            
+            }
+            
+      
+            var number = sum.toString();
+
+            var dollars = number.split('.')[0];
+
+            var  cents = (number.split('.')[1] || '') +'00';
+
+            var dollars = dollars.split('').reverse().join('').replace(/(\d{3}(.php?!$))/g, '$1,').split('').reverse().join('');
+
+            var cent = cents.slice(0, 2);
+
+            var decimal = ".";
+
+            var cent2 = decimal.concat(cent);
+
+            var dollars = dollars.concat(cent2);
+            
+            return dollars;
+        };
+    });
 
 function PostcodeAnywhere_Interactive_Find_v1_10Begin(Key,Postcode)
 
@@ -3082,6 +3345,18 @@ $(function() {
 
 </script>
 
+<script type="text/javascript">
+
+$(function() {
+
+    $( "#datepicker1" ).datepicker({ dateFormat: "dd-mm-yy" });
+
+    $( "#datepicker2" ).datepicker({ dateFormat: "dd-mm-yy" });
+  
+  });
+
+
+</script>
 
 </body>
 

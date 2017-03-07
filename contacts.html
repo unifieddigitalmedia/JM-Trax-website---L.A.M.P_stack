@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>  
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>  
 
   <li class="dropdown-link"> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; 
 
@@ -192,8 +192,8 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="signupclose">×</span>
-    <div class="container-fluid"  ng-controller='signup' id='signuppage' >
+    <span class="signupclose">�</span>
+    <div class="container-fluid-modal"  ng-controller='signup' id='signuppage' >
 
 <h1 style='text-align:center;'> SIGN UP FOR FREE TODAY </h1>
 
@@ -210,11 +210,11 @@
 
 
 <div class="row">
-  <div class="col-sm-6"> <div class="form-group">
- <input type='text'  name='firstname' placeholder='*FIRST NAME:' id="firstname" class="form-control"/> 
+  <div class="col-sm-6"> <div class="form-group"><label for="usr">* FIRST NAME :</label>
+ <input type='text'  name='firstname' id="firstname" class="form-control"/> 
 </div></div>
-  <div class="col-sm-6"><div class="form-group">
- <input type='text'  name='lastname' placeholder='*LAST NAME:' id="lastname" class="form-control"/> 
+  <div class="col-sm-6"><div class="form-group"><label for="usr">* LAST NAME :</label>
+ <input type='text'  name='lastname'  id="lastname" class="form-control"/> 
 </div></div>
 
 
@@ -228,10 +228,10 @@
 
 
 <div class="row">
-  <div class="col-sm-6"> <div class="form-group">
- <input type='text'  name='username' id='userusername' placeholder='USERNAME:' class="form-control" /> 
+  <div class="col-sm-6"> <div class="form-group"><label for="usr">* USERNAME :</label>
+ <input type='text'  name='username' id='userusername'  class="form-control" /> 
 </div></div>
-  <div class="col-sm-6"><div class="form-group">
+  <div class="col-sm-6"><div class="form-group"><label for="usr">* OCCUPATION :</label>
   <select  class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
 
 </div></div>
@@ -249,14 +249,14 @@
 
 
 <div class="row">
-  <div class="col-sm-6"> <div class="form-group">
- <input type='password'  name='password' id='userpassword' placeholder='*PASSWORD (min 8):' class="form-control"/> 
+  <div class="col-sm-6"> <div class="form-group"><label for="usr">* PASSWORD (min 8):</label>
+ <input type='password'  name='password' id='userpassword'  class="form-control"/> 
 
 </div><p class="spanerror"> <span id='passworderror' class='passworderror' style='color:red;'> {{passworderror}} </span>
 </p> 
 </div>
-  <div class="col-sm-6"><div class="form-group">
- <input type='password'  name='confirmpassword' id='confirmedpassword' placeholder='CONFIRM PASSWORD:' class="form-control"/> 
+  <div class="col-sm-6"><div class="form-group"><label for="usr">* CONFIRM PASSWORD :</label>
+ <input type='password'  name='confirmpassword' id='confirmedpassword'  class="form-control"/> 
 </div><p class="spanerror"> <span id='confirmedpassworderror' class='confirmedpassworderror' style='color:red;'> {{passworderror}} </span>
 </p></div>
 
@@ -265,9 +265,9 @@
 <div class="row">
 
 
-  <div class="col-sm-2"> <input type='text'  placeholder='44' class="form-control"/> </div>
-  <div class="col-sm-2"> <input type='text' placeholder='0' class="form-control"/> </div>
-  <div class="col-sm-8"> <input type='text'  name='mobile' id='mobile' placeholder='xxxxxxxxxx' class="form-control"/> </div>
+  <div class="col-sm-2"><label for="usr">COUNTRY CODE :</label> <input type='text'  placeholder='44' class="form-control" disabled/> </div>
+  <div class="col-sm-2"><label for="usr">AREA CODE :</label> <input type='text' placeholder='0' class="form-control" disabled/> </div>
+  <div class="col-sm-8"><label for="usr">* MOBILE :</label> <input type='text'  name='mobile' id='mobile' placeholder='xxxxxxxxxx' class="form-control"/> </div>
 
 
 
@@ -275,7 +275,120 @@
 <p class="spanerror"> <span id='phoneerror' class='phoneerror' style='color:red;'> {{mobileerror}} </span>
 </p> 
 
+<div class="row">
 
+   <div class="col-sm-4">
+
+
+      <div class="form-group">
+     <label for="usr">* POSTCODE :</label>
+      <input type="text"  class="form-control input-sm"  style="background-color:#FCC;" id="postcode" ng-model='SenderPostcode' placeholder="" autocomplete="on" >
+      </div>
+
+
+   </div>
+
+    <div class="col-sm-4">
+
+      <div class="form-group">
+     <label for="usr"></label>
+      <button type='button'  id='find'  ng-click='searchpostcode()' class="btn btn-primary btn-block" > Find </button>
+      
+      </div>
+
+   </div>
+
+    <div class="col-sm-4">
+
+      <div class="form-group">
+    <label for="usr"></label>
+      <select name='building' id='building' ng-change='popform()' style='width:100%;' ng-model='streetvalue' > </select>
+      </div>
+
+
+   </div>
+
+
+</div>
+
+<div class="row">
+
+   <div class="col-sm-4">
+
+ <div class="form-group">
+ <label for="usr">* 1ST LINE :</label>
+      <input type="text" style="background-color:#FCC;" class="form-control input-sm" id="line1" ng-model='line1' placeholder="" autocomplete="on" >
+      </div>
+
+   </div>
+
+    <div class="col-sm-4">
+
+
+<div class="form-group">
+  <label for="usr">2ND LINE :</label>
+      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="" autocomplete="on" />
+      </div>
+
+
+
+   </div>
+
+    <div class="col-sm-4">
+
+
+<div class="form-group">
+    <label for="usr">3RD LINE :</label>
+     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="" autocomplete="on" >
+      </div>
+
+
+
+   </div>
+
+
+</div>
+
+
+
+<div class="row">
+
+   <div class="col-sm-4">
+
+ <div class="form-group">
+ <label for="usr">* TOWN :</label>
+      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="" autocomplete="on" >
+      </div>
+
+
+   </div>
+
+    <div class="col-sm-4">
+
+ <div class="form-group">
+ <label for="usr">COUNTY :</label>
+      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="" autocomplete="on" >
+      </div>
+
+   </div>
+
+    <div class="col-sm-4">
+
+ <div class="form-group">
+   <!-- <label for="usr"></label>
+      <input type="text" class="form-control input-sm" id="customeremail" ng-model='EMAIL' placeholder="* EMAIL :">-->
+
+
+
+{{sendererror}}
+
+
+      </div>
+
+   </div>
+
+
+</div>
 
 <!--<div class="form-group">
 <label> Prove you are not a robot </label>
@@ -288,7 +401,7 @@
 
 <span id='agreementerror' class='agreementerror' > </span> <span style='color:red;'> {{agreement}}</span> <p class="spanerror"> 
 
-<label style="position:relative; font-family:Arial, Helvetica, sans-serif; font-size:11px;" > <input type='checkbox' name='agreement' id='agreement' class='agreement'/>&nbsp;You must agree to the JUST MONEY TRANSFER terms & conditions (the “T&C” (which are available at <a href='../termsandconditions/' > www.justcomputersparts.co.uk </a> Our Customer Services number is 020 8771 5353 and or our email address is <a href='mailto:service@justcomputersparts.co.uk' > service@justcomputersparts.co.uk </a> Please feel free to contact us during normal business hours 09:00 to 19:00 </label>
+<label style="position:relative; font-family:Arial, Helvetica, sans-serif; font-size:11px;" > <input type='checkbox' name='agreement' id='agreement' class='agreement'/>&nbsp;You must agree to the JUST MONEY TRANSFER terms & conditions (the T&C (which are available at <a href='../termsandconditions/' > www.justcomputersparts.co.uk </a> Our Customer Services number is 020 8771 5353 and or our email address is <a href='mailto:service@justcomputersparts.co.uk' > service@justcomputersparts.co.uk </a> Please feel free to contact us during normal business hours 09:00 to 19:00 </label>
   </span>
 </p>  
 
@@ -313,6 +426,7 @@
 </div>
   </div>
   </div>
+
 <footer>
 <div class="row">
 
@@ -326,7 +440,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -344,11 +458,13 @@
   </section>
 
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -410,7 +526,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Login_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/login',{});
+var resource = $resource('api/login',{});
 
 return resource;
 
@@ -461,7 +577,7 @@ if(log.USERTYPE === "customer")
 
 {
 
-window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" ;
+window.location = "money-transfer-calculator.html" ;
 
 }
 else
@@ -471,7 +587,7 @@ else
         
 
 
-window.location = "https://jmtrax.herokuapp.com/dashboard.php" ;
+window.location = "dashboard.php" ;
 
 }
 
@@ -525,7 +641,7 @@ else
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/forgottenpassword',{
+var resource = $resource('api/forgottenpassword',{
 
 email : "@email",
 
@@ -574,7 +690,7 @@ alert(log.ERROR);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('api/senders',{
 
 
 
@@ -609,7 +725,7 @@ return resource;
 app.controller('signup', function($scope,Senders_Service,$http,$resource) {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/occupations").then(function(response) {
+$http.get("api/occupations").then(function(response) {
 
 
 
@@ -618,6 +734,33 @@ $http.get("https://jmtrax.herokuapp.com/api/occupations").then(function(response
  
 
     });
+
+
+$scope.searchpostcode = function ()
+
+{
+
+var sendermobile = document.getElementById("postcode").value;
+
+
+
+PostcodeAnywhere_Interactive_Find_v1_10Begin('JJ14-GM21-XW16-FU78',sendermobile);
+
+}
+
+$scope.popform = function ()
+
+{
+
+
+var sendermobile = document.getElementById("building").value;
+
+
+
+PostcodeAnywhere_Interactive_RetrieveById_v1_30Begin ('JJ14-GM21-XW16-FU78',sendermobile,'');
+
+
+}
 
 
 $scope.savesender = function() {
@@ -639,7 +782,7 @@ var mobile = document.getElementById("mobile").value;
 
 
 
-var occupation = $scope.occupation
+var occupation = $scope.occupation;
 
 
 
@@ -649,13 +792,19 @@ var firstname = document.getElementById("firstname").value;
 
 var lastname = document.getElementById("lastname").value;
 
+var line1 = document.getElementById("line1").value;
+
+var town = document.getElementById("town").value;
 
 
-if(password.length < 8 )
+var postcode = document.getElementById("postcode").value;
+
+
+if(password.length < 6 )
 
 {
 
-$scope.passworderror = 'Password must be 8 characters in length.';}
+$scope.passworderror = 'Password must be 6 characters in length.';}
 
 else
 
@@ -734,14 +883,29 @@ if(comp == true)
 {
 
 
-$scope.usernameerror= '';
+if(line1 == ''  || town=='' || postcode =='')
+
+{
+
+
+
+
+$scope.sendererror = 'All fields are required marked with an asterick * are requiered '; 
+
+
+
+}else{
+  
+  
+  $scope.usernameerror= '';
 $scope.nameerror= '';
 $scope.emailerror='';
 $scope.mobileerror= '';
 $scope.passworderror='';
 
 
-$http.post("https://jmtrax.herokuapp.com/api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer").then(function(response) {
+$http.post("api/senders.php?firstname="+firstname+"&lastname="+lastname+"&mobile="+mobile+"&username="+username+"&password="+password+"&occupation="+$scope.occupation.occupation+"&user_type=customer&line1="+document.getElementById("line1").value+"&town="+document.getElementById("town").value+"&postcode="+document.getElementById("postcode").value).then(function(response) {
+
 
 
 
@@ -750,25 +914,31 @@ if(response.data.ERROR){ alert(response.data.ERROR);}else {
 
 
 
-if(response.data.TYPE === 'customer')
-
-{
 
 
 
 document.cookie = "agentusername=" + username ;
 
-document.cookie = "sendersid=" + response.data._id ;
+document.cookie = "sendersid=" + response.data.id ;
 
 document.cookie = "agenttype=customer"  ;
+
+document.cookie = "agentid=" + response.data.id ;
+
+
+
+document.cookie = "agentemail=" + mobile ;
+
+
+
 
 document.cookie = "sender_firstname=" + firstname ;
 
 document.cookie = "sender_lastname=" + lastname ;
 
-window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" ;
+window.location = "money-transfer-calculator.html" ;
 
-}
+
 
 
 
@@ -779,6 +949,14 @@ window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" 
 
 
     });
+    
+  
+  }
+
+
+
+
+
 
 
 }
@@ -830,6 +1008,144 @@ $scope.agreement='You must agree to the terms and conditions';
 
 });
 
+</script>
+
+<script>
+
+function PostcodeAnywhere_Interactive_Find_v1_10Begin(Key,Postcode)
+
+{
+
+
+var scriptTag = document.getElementById("PCAe4b2e7e1d8a241dead6229b29fb22327");
+var headTag = document.getElementsByTagName("head").item(0);
+var strUrl = "";
+
+strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/Find/v1.10/json.ws?";
+strUrl += "&Key=" + encodeURI(Key);
+strUrl += "&SearchTerm=" + encodeURI(Postcode);
+strUrl += "&CallbackFunction=PostcodeAnywhere_Interactive_Find_v1_10End";
+
+
+if (scriptTag)
+{
+try
+{
+headTag.removeChild(scriptTag);
+}
+catch (e)
+{
+//Ignore
+}
+}
+scriptTag = document.createElement("script");
+scriptTag.src = strUrl
+scriptTag.type = "text/javascript";
+scriptTag.id = "PCAe4b2e7e1d8a241dead6229b29fb22327";
+headTag.appendChild(scriptTag);
+
+}
+
+
+
+function PostcodeAnywhere_Interactive_Find_v1_10End(response)
+{
+var i = 0;
+
+
+//Test for an error
+if (response.length==1 && typeof(response[0].Error) != 'undefined')
+{
+//Show the error message
+alert(response[0].Description);
+}
+else
+{
+//Check if there were any items found
+if (response.length==0)
+{
+alert("Sorry, no matching items found");
+}
+else
+{
+document.getElementById('building').options.length= response.length;
+while (i < response.length)
+{
+document.getElementById('building').options[i].label= response[i].StreetAddress;
+document.getElementById('building').options[i].value= response[i].Id;
+i++;                }
+}
+}
+}
+
+
+function PostcodeAnywhere_Interactive_RetrieveById_v1_30Begin(Key,Id, UserName)
+{
+
+var scriptTag = document.getElementById("PCAb9b445072c50417b82ad4204c2ec66c1");
+var headTag = document.getElementsByTagName("head").item(0);
+var strUrl = "";
+
+
+
+
+strUrl = "http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/RetrieveById/v1.30/json.ws?";
+strUrl += "&Key=" + encodeURI(Key);
+strUrl += "&Id=" + encodeURI(Id);
+strUrl += "&UserName=" + encodeURI(UserName);
+strUrl += "&CallbackFunction=PostcodeAnywhere_Interactive_RetrieveById_v1_30End";
+//Make the request
+if (scriptTag)
+{
+try
+{
+headTag.removeChild(scriptTag);
+}
+catch (e)
+{
+//Ignore
+}
+}
+
+
+
+scriptTag = document.createElement("script");
+scriptTag.src = strUrl
+scriptTag.type = "text/javascript";
+scriptTag.id = "PCAb9b445072c50417b82ad4204c2ec66c1";
+headTag.appendChild(scriptTag);
+}
+
+function PostcodeAnywhere_Interactive_RetrieveById_v1_30End(response)
+{
+//Test for an error
+if (response.length==1 && typeof(response[0].Error) != 'undefined')
+{
+//Show the error message
+alert(response[0].Description);
+}
+else
+{
+//Check if there were any items found
+if (response.length==0)
+{
+alert("Sorry, no matching items found");
+}
+else
+{
+
+document.getElementById("line1").value= response[0].Line1;
+document.getElementById("line2").value= response[0].Line2;
+document.getElementById("line3").value= response[0].Line3;
+document.getElementById("town").value= response[0].PostTown;
+document.getElementById("county").value= response[0].County;
+document.getElementById("postcode").value= response[0].Postcode;
+
+}
+
+}
+
+}
 </script>
 </body>
 

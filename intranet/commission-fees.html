@@ -90,7 +90,7 @@ die('Error: ' . mysql_error());
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="http://localhost:8888/jmtrax/intranet/images/jmtrax_icon.png">
 
 
 
@@ -107,7 +107,7 @@ die('Error: ' . mysql_error());
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="http://localhost:8888/jmtrax/intranet/images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -138,11 +138,11 @@ die('Error: ' . mysql_error());
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
@@ -227,7 +227,7 @@ die('Error: ' . mysql_error());
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='http://localhost:8888/jmtrax/intranet/images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -293,7 +293,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "http://localhost:8888/jmtrax/intranet/index.html" ;
 
 
 }
@@ -329,7 +329,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "http://localhost:8888/jmtrax/intranet/index.html" ;
 
 
 
@@ -351,7 +351,7 @@ app.factory('Money_Transfer_Service', ['$resource', function($resource) {
 
 
 
-var resource = $resource('http://192.168.0.90/intranet/api/fees',{
+var resource = $resource('http://localhost:8888/jmtrax/intranet/api/fees',{
 
 
 },{ 'update': { method:'PUT' } } );
@@ -369,7 +369,7 @@ var init = function () {
 
 
 
-$http.get("http://192.168.0.90/intranet/api/charge").then(function(response) {
+$http.get("http://localhost:8888/jmtrax/intranet/api/charge").then(function(response) {
 
 $scope.fees = response.data;
 

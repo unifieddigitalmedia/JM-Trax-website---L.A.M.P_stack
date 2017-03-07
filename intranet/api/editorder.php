@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT")
 
 
 
-$sql = "UPDATE transfers SET paymentdate = '$_REQUEST[paymentdate]' , sendingbank ='$_REQUEST[sendingbank]' , paymentmethod = '$_REQUEST[paymentmethod]' , status = 'paid' WHERE id = '$_REQUEST[id]' ";
+$sql = "UPDATE transfers SET paymentdate = '$_REQUEST[paymentdate]' , sendingbank ='$_REQUEST[sendingbank]' , paymentmethod = '$_REQUEST[paymentmethod]' , status = 'PAID' WHERE id = '$_REQUEST[id]' ";
  
 if ($conn->query($sql) === TRUE) {
 
@@ -111,7 +111,12 @@ $t = array(
 "date" => $date,
 "shop"=>$row2[shop],
 "customerref"=>$row2[customerref],
-"rate"=>$row2[rate]
+"rate"=>$row2[rate],
+"paymentdate"=>$row2[paymentdate],
+"status"=>$row2[status],
+"sendingbank"=>$row2[sendingbank],
+"paymentmethod"=>$row2[paymentmethod],
+
 
       );
 
@@ -207,17 +212,25 @@ VALUES ('$row2[senderfirstname]',
 
 if ($conn->query($sql2) === TRUE) {
 
+$ngn = str_replace(',', '' , $row2[ngn]);
+
+$email = "vamoslawanson@gmail.com" ;
+$subject = "Transaction Deleted";
+$message =" Transaction JM$_REQUEST[id] sending N $ngn to $row2[recipientfirstname] $row2[recipientsurname] has beeen deleted by $_REQUEST[agentusername] ." ;
+mail($email, "Subject: $subject",$message, "From:just-computers@hotmail.com");
+
+
+$countrycode = "44";
+$phone = "7506775414";
+$email = "@textmagic.com";
+$recipient = $countrycode."".$phone."".$email;
+
+mail($recipient,"Subject: $subject", $message, "From: justmtrax@gmail.com" );
+
 
 $sql3 = "DELETE FROM transfers WHERE id = '$_REQUEST[id]' ";
 
 if ($conn->query($sql3) === TRUE) {
-
-
-
-$email = "service@jmtrax.com,justmtransfers@gmail.com" ;
-$subject = "Transaction Deleted";
-$message =" $_REQUEST[agentusername] deleted transaction JM$_REQUEST[id]. That was sending to $row2[senderfirstname] $row2[senderlasttname] in the amount of £ $row2[amount] - $row2[ngn] NGN." ;
-mail($email, "Subject: $subject",$message, "From:just-computers@hotmail.com");
 
 
 

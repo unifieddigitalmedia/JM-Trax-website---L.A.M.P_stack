@@ -3,6 +3,7 @@ $username = "jmtrax";
 $password = "s0na@bebe123";
 $dbname = "jmtrax";
 
+
 $conn = new mysqli($servername, $username, $password,$dbname);
 
 
@@ -53,9 +54,9 @@ else if ($_SERVER["REQUEST_METHOD"] === "POST")
 {
 
 
-$sql1 = "INSERT INTO shops (name, address)
+$sql1 = "INSERT INTO shops (name, address,shop_limit)
 
-VALUES ('$_REQUEST[shop_name]', '$_REQUEST[shop_address]')";
+VALUES ('$_REQUEST[shop_name]', '$_REQUEST[shop_address]','$_REQUEST[shop_limit]')";
 
 if ($conn->query($sql1) === TRUE) {
 

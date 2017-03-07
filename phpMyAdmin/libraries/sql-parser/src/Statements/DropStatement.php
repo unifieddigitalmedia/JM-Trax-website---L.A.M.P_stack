@@ -17,8 +17,7 @@ use SqlParser\Components\Expression;
  * @category   Statements
  * @package    SqlParser
  * @subpackage Statements
- * @author     Dan Ungureanu <udan1107@gmail.com>
- * @license    http://opensource.org/licenses/GPL-2.0 GNU Public License
+ * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class DropStatement extends Statement
 {
@@ -39,6 +38,7 @@ class DropStatement extends Statement
         'SCHEMA'                        => 1,
         'SERVER'                        => 1,
         'TABLE'                         => 1,
+        'VIEW'                          => 1,
         'TABLESPACE'                    => 1,
         'TRIGGER'                       => 1,
 
@@ -59,6 +59,7 @@ class DropStatement extends Statement
         '_OPTIONS'                      => array('_OPTIONS',    1),
         // Used for select expressions.
         'DROP_'                         => array('DROP',        1),
+        'ON'                            => array('ON',          3),
     );
 
     /**
@@ -67,4 +68,11 @@ class DropStatement extends Statement
      * @var Expression[]
      */
     public $fields;
+
+    /**
+     * Table of the dropped index.
+     *
+     * @var Expression
+     */
+    public $table;
 }

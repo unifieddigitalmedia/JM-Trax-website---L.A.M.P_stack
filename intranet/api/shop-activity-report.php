@@ -17,8 +17,16 @@ $shop_transfers =array();
 if ($_SERVER["REQUEST_METHOD"] === "GET")
 
 {
+if($_REQUEST[agenttype] != 'user'){
+	
+	$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' ";
+}
+else{
+	
+	$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' && agentusername = '$_REQUEST[agentusername]'";
+}
 
-$sql = "SELECT * FROM transfers WHERE shop = '$_REQUEST[shop]' ";
+
 
 $result = $conn->query($sql);
 

@@ -1,11 +1,7 @@
-<?php 
-
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
+<?php $servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -17,19 +13,20 @@ if ($conn->connect_error) {
 
 $transfers = array();
 
+
+
 if ($_SERVER["REQUEST_METHOD"] === "GET")
 
 {
-	
-	if($_REQUEST[firstname] && $_REQUEST[lastname])
-	
-	
-	{
-		$sql2 = "SELECT * FROM transfers WHERE recipientfirstname = '$_REQUEST[firstname]' && recipientsurname ='$_REQUEST[lastname]' ";
+  
+  if($_REQUEST[firstname] && $_REQUEST[lastname])
+  
+  
+  {
+    $sql2 = "SELECT * FROM transfers WHERE recipientfirstname = '$_REQUEST[firstname]' && recipientsurname ='$_REQUEST[lastname]' ";
 
-	}
-else
-if ($_REQUEST[agenttype] === 'administrator')
+  }
+else if ($_REQUEST[agenttype] === 'administrator')
 
 {
 
@@ -47,15 +44,24 @@ $sql2 = "SELECT * FROM transfers WHERE agentusername = '$_REQUEST[agentusername]
 
 
 }
+else if ($_REQUEST[agenttype] === 'supervisor')
+
+{
+
+
+$sql2 = "SELECT * FROM transfers WHERE shop = '$_REQUEST[agentshop]'";
+
+
+}
 else if($_REQUEST[sendersMobile])
 {
-	
-	
-	$sql2 = "SELECT * FROM transfers WHERE sendermobile = '$_REQUEST[sendersMobile]' ";
+  
+  
+  $sql2 = "SELECT * FROM transfers WHERE sendermobile = '$_REQUEST[sendersMobile]' ";
 
 
-	
-	
+  
+  
 }
 
 
@@ -66,7 +72,7 @@ if ($result2->num_rows > 0) {
     while($row2 = $result2->fetch_assoc()) {
 
 
-$value =  $row2[date] ;
+$value =  $row2[Tdate] ;
 $day =  substr("$value",8,2);
 $month = substr("$value",5,2);
 $year =  substr("$value",0,4);
@@ -125,15 +131,44 @@ echo json_encode($transfers);
 
 
 }
+
 else if ($_SERVER["REQUEST_METHOD"] === "POST")
 
 {
 
-$date = date("Y-m-d");
+
 
 $ngn = str_replace(',', '' , $_REQUEST[ngn]);
-$amount = str_replace(',', '' , $_REQUEST[amount]);
+
 $totalgbp = str_replace(',', '' , $_REQUEST[totalgbp]);
+
+$amount = str_replace(',', '' , $_REQUEST[amount]);
+
+$amount = str_replace(',', '' , $_REQUEST[amount]);
+
+$date = date("Y-m-d h:i:sa");
+
+$Tdate = date("Y-m-d");
+
+$sql1 = "SELECT * FROM `transfers` WHERE date >= DATE_ADD('$date', INTERVAL -5 MINUTE) &&  date <= '$date'";
+
+$result = $conn->query($sql1);
+
+$row = $result->fetch_assoc();
+
+if ($result->num_rows > 0) {
+
+
+
+
+if($row[senderfirstname] == $_REQUEST[senderfirstname] && 
+  $row[senderlasttname] == $_REQUEST[senderlasttname] && 
+  $row[recipientfirstname] == $_REQUEST[recipientfirstname] && 
+  $row[recipientsurname] == $_REQUEST[recipientsurname] && 
+  $row[bankac] == $_REQUEST[bankac] && 
+  $row[bankname] == $_REQUEST[bankname] && 
+  $row[amount] == $amount) {
+
 
 $sql2 = "INSERT INTO transfers (
 
@@ -167,7 +202,7 @@ $sql2 = "INSERT INTO transfers (
                 date,
                 shop,
                 customeref,
-                rate,uksms,ngnsms)
+                rate,uksms,ngnsms,Tdate)
 
 VALUES ('$_REQUEST[senderfirstname]',
           '$_REQUEST[senderlasttname]',
@@ -191,7 +226,7 @@ VALUES ('$_REQUEST[senderfirstname]',
           '$_REQUEST[paypalemail]',
           '$_REQUEST[reasonfortransfer]',
           '$_REQUEST[agentusername]',
-          '$_REQUEST[remittance]',
+          '$amount',
           '$ngn',
           '$amount',
           '$totalgbp',
@@ -201,7 +236,101 @@ VALUES ('$_REQUEST[senderfirstname]',
           '$_REQUEST[customerref]',
           '$_REQUEST[rate]',
           '$_REQUEST[uksms]',
-          '$_REQUEST[ngnsms]')";
+          '$_REQUEST[ngnsms]','$Tdate')";
+
+
+if ($conn->query($sql2) === TRUE) {
+
+  
+$last_id = $conn->insert_id;
+
+  echo json_encode(array(
+
+
+
+      "ERROR" => "TThis may be a duplicate transaction","orderID"=>$last_id,"ERRORTYPE" => "1",
+      
+     
+));
+
+
+}
+
+
+} else{
+
+
+
+
+
+$sql2 = "INSERT INTO transfers (
+
+                senderfirstname,
+                senderlasttname,
+                line1,
+                line2,
+                line3,
+                town,
+                sendercounty,
+                postcode,
+                senderphone,
+                sendermobile,
+                senderemail,
+                recipientsurname,
+                recipientfirstname,
+                recipientphone,
+                bankac,
+                bankname,
+                recmobilephoneprex,
+                paymentref,
+                shopacc,
+                paypalemail,
+                reasonfortransfer,
+                agentusername,
+                remittance,
+                ngn,
+                amount,
+                totalgbp,
+                fee,
+                date,
+                shop,
+                customeref,
+                rate,uksms,ngnsms,Tdate)
+
+VALUES ('$_REQUEST[senderfirstname]',
+          '$_REQUEST[senderlasttname]',
+          '$_REQUEST[line1]',
+          '$_REQUEST[line2]',
+          '$_REQUEST[line3]',
+          '$_REQUEST[town]',
+          '$_REQUEST[sendercounty]',
+          '$_REQUEST[postcode]',
+          '$_REQUEST[senderphone]',
+          '$_REQUEST[sendermobile]',
+          '$_REQUEST[senderemail]',
+          '$_REQUEST[recipientsurname]',
+          '$_REQUEST[recipientfirstname]',
+          '$_REQUEST[recipientphone]',
+          '$_REQUEST[bankac]',
+          '$_REQUEST[bankname]',
+          '$_REQUEST[recmobilephoneprex]',
+          '$_REQUEST[paymentref]',
+          '$_REQUEST[shopacc]',
+          '$_REQUEST[paypalemail]',
+          '$_REQUEST[reasonfortransfer]',
+          '$_REQUEST[agentusername]',
+          '$amount',
+          '$ngn',
+          '$amount',
+          '$totalgbp',
+          '$_REQUEST[fee]',
+          '$date',
+          '$_REQUEST[shop]',
+          '$_REQUEST[customerref]',
+          '$_REQUEST[rate]',
+          '$_REQUEST[uksms]',
+          '$_REQUEST[ngnsms]','$Tdate')";
+
 
 if ($conn->query($sql2) === TRUE) {
 
@@ -240,6 +369,134 @@ $last_id = $conn->insert_id;
 
 
 }
+
+
+
+
+
+}
+
+}
+else{
+
+
+
+
+
+$sql2 = "INSERT INTO transfers (
+
+                senderfirstname,
+                senderlasttname,
+                line1,
+                line2,
+                line3,
+                town,
+                sendercounty,
+                postcode,
+                senderphone,
+                sendermobile,
+                senderemail,
+                recipientsurname,
+                recipientfirstname,
+                recipientphone,
+                bankac,
+                bankname,
+                recmobilephoneprex,
+                paymentref,
+                shopacc,
+                paypalemail,
+                reasonfortransfer,
+                agentusername,
+                remittance,
+                ngn,
+                amount,
+                totalgbp,
+                fee,
+                date,
+                shop,
+                customeref,
+                rate,uksms,ngnsms,Tdate)
+
+VALUES ('$_REQUEST[senderfirstname]',
+          '$_REQUEST[senderlasttname]',
+          '$_REQUEST[line1]',
+          '$_REQUEST[line2]',
+          '$_REQUEST[line3]',
+          '$_REQUEST[town]',
+          '$_REQUEST[sendercounty]',
+          '$_REQUEST[postcode]',
+          '$_REQUEST[senderphone]',
+          '$_REQUEST[sendermobile]',
+          '$_REQUEST[senderemail]',
+          '$_REQUEST[recipientsurname]',
+          '$_REQUEST[recipientfirstname]',
+          '$_REQUEST[recipientphone]',
+          '$_REQUEST[bankac]',
+          '$_REQUEST[bankname]',
+          '$_REQUEST[recmobilephoneprex]',
+          '$_REQUEST[paymentref]',
+          '$_REQUEST[shopacc]',
+          '$_REQUEST[paypalemail]',
+          '$_REQUEST[reasonfortransfer]',
+          '$_REQUEST[agentusername]',
+          '$amount',
+          '$ngn',
+          '$amount',
+          '$totalgbp',
+          '$_REQUEST[fee]',
+          '$date',
+          '$_REQUEST[shop]',
+          '$_REQUEST[customerref]',
+          '$_REQUEST[rate]',
+          '$_REQUEST[uksms]',
+          '$_REQUEST[ngnsms]','$Tdate')";
+
+
+if ($conn->query($sql2) === TRUE) {
+
+  
+$last_id = $conn->insert_id;
+
+  echo json_encode(array(
+
+
+
+      "ERROR" => "Transaction has been posted. Proceed to checkout.","orderID"=>$last_id
+      
+     
+));
+
+
+
+
+
+
+
+} else {
+
+    
+     echo json_encode(array(
+
+
+
+      "ERROR" => "There was an error contact administrator"
+      
+     
+));
+
+
+
+
+
+}
+
+
+
+
+}
+
+
+
 
 }
 else if ($_SERVER["REQUEST_METHOD"] === "DELETE")

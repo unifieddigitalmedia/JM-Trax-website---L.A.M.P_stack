@@ -5,43 +5,50 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      href="images/jmtrax_icon.png">
 
 <title> Just Money Transfers | Report </title>
-<style>
 
-table td , th  {vertical-align:middle;text-align:center;}
-
-</style>
 
 </head>
 
 <body ng-cloak ng-app="justmoneytransfers" >
 
+    
   
+<div >
+
+
+<ul style="list-style-type: none;;" >
+
+<li class="logo_link"> <img src="images/logo.png" class="logo" > </li>
+<li style="padding:10px;">
+Address: 82 High St, London SE25 6EA
+Phone: 020 8771 5353
+
+</li>
+
+
+
+
+</ul></div>
+
+
 
 <div class="container-fluid"  ng-controller='transactions'   >
 
 
 <div class="table"  ng-init="getdaily()">
 
- <table class="table table-bordered" style='position:relative;color:black; margin:0 auto;font-size:70%;'>
+ <table class="table " border = "1" style='position:relative;color:black; margin:0 auto;font-size:70%;' >
     <thead>
       <tr>
          <th style='tablecells'>STAFF REF.</th>
         <th style='tablecells'>SHOP</th>
-        <th  style='tablecells'>DATE</th>
-        <th style='tablecells' >TRANS. NO.</th>
+        <th  style='tablecells' colspan='2'>DATE</th>
+        <th style='tablecells' >T NO.</th>
         <th style='tablecells'>SENDER FIRST NAME</th>
         <th style='tablecells'>SENDER LAST NAME</th>
         <th style='tablecells'>AMOUNT £</th>
@@ -49,27 +56,30 @@ table td , th  {vertical-align:middle;text-align:center;}
         <th style='tablecells'>TOTAL GBP DUE £</th>
         <th style='tablecells'>TOTAL NGN DUE</th>
         <th style='tablecells'>STATUS</th>
+         <th style='tablecells'>BANK</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat='daily in ( filteredTransactions = ( dailytransactionlist |  todaystransfers : startdate : enddate : status ) )' ng-click="selecttransfer($index)" style="cursor:pointer">
         <td style='tablecells'>{{daily.agentusername}}</td>
         <td style='tablecells'>{{daily.shop}}</td>
-        
-        <td style='tablecells'  ><p style="font-size:100%!important;">{{daily.date}}</p></td>
+        <td style='tablecells' colspan='2'>{{daily.date}}</td>
         <td style='tablecells'>JM{{daily.id}}</td>
         <td style='tablecells'>{{daily.senderfirstname}}</td>
         <td style='tablecells'>{{daily.senderlasttname}}</td>
-        <td style='tablecells'>{{tocurrency(daily.amount)}}</td>
-        <td style='tablecells' >{{tocurrency(daily.fee)}}</td>
-        <td style='tablecells'>{{tocurrency(daily.totalgbp)}}</td>
-        <td style='tablecells'>{{tocurrency(daily.totalngn)}}</td>
+        <td style='tablecells'>{{daily.amount}}</td>
+        <td style='tablecells' >{{daily.fee}}</td>
+        <td style='tablecells'>{{daily.totalgbp}}</td>
+        <td style='tablecells'>{{daily.totalngn}}</td>
         <td style='tablecells'>{{daily.status}}</td>
+         <td style='tablecells'>{{daily.bankname}}</td
 
       </tr>
  
+  <table class='dailylisttransactiontable' border='1' style='color:black;position:relative; margin:30px auto;' >
+ <tbody>
  <tr>
-        <td colspan='6'></td>
+      
         <td>AMOUNT £</td>
         <td>FEES £</td>
         <td>TOTAL GBP DUE £</td>
@@ -78,7 +88,7 @@ table td , th  {vertical-align:middle;text-align:center;}
       </tr>
 
  <tr>
-         <td colspan='6'></td>
+         
         <td>{{ TOTALAMOUNT }}</td>
         <td>{{ TOTALFEE }}</td>
         <td>{{ TOTALGBP }}</td>
@@ -88,7 +98,7 @@ table td , th  {vertical-align:middle;text-align:center;}
 
 
     </tbody>
-  </table>
+    </table>
 
 </div>
 
@@ -120,7 +130,7 @@ var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/transactions',{});
+var resource = $resource('api/transactions',{});
 
 return resource;
 
@@ -135,7 +145,7 @@ app.controller('transactions', function($scope,Transactions_Service,$http,$resou
 $scope.getdaily = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+$http.get("api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')+"&agentshop="+getCookie('agentshop')).then(function(response) {
 
 
 $scope.dailytransactionlist = response.data;
@@ -213,13 +223,13 @@ var log = [];
 
 angular.forEach($scope.filteredTransactions, function(value, key) {
 
-$scope.TOTALAMOUNT += parseInt(value.amount) ;
+$scope.TOTALAMOUNT += parseFloat(value.amount) ;
 
-$scope.TOTALFEE += parseInt(value.fee);
+$scope.TOTALFEE += parseFloat(value.fee);
 
-$scope.TOTALGBP += parseInt(value.totalgbp) ;
+$scope.TOTALGBP += parseFloat(value.totalgbp) ;
 
-$scope.TOTALNGN += parseInt(value.totalngn) ;
+$scope.TOTALNGN += parseFloat(value.totalngn) ;
 
 
 
@@ -261,20 +271,49 @@ return function(input,para,para1,para2) {
 
 
 
-if (para2 === 'paid')
-{
+var fromDate = para.split("-") ;
+var fDate = new Date(fromDate[2],fromDate[1] - 1 ,fromDate[0]);
 
-
-
-if(para != undefined && para1 != undefined)
-
-{
+var toDate =  para1.split("-") ; 
+var tDate = new Date(toDate[2],toDate[1] - 1 ,toDate[0]);
 
 
 
 angular.forEach(input, function(value, key) {
 
-if (value.date >= para && value.date  <= para1 && value.status == 'paid' )  { this.push(value); }
+var valueDate =  value.date.split("-") ; 
+
+var vDate = new Date(valueDate[2],valueDate[1] - 1 ,valueDate[0]);
+
+if (vDate >= fDate && vDate  <= tDate)  { 
+
+
+
+	/*if(typeof para2 != "undefined" ){
+	
+	
+	if(value.status === para2){
+		
+		this.push(value); 
+		
+	}
+	
+	
+} else {
+	
+this.push(value); 	
+
+	
+}*/
+this.push(value); 	
+
+
+
+
+
+
+
+}
 
 
 }, log);
@@ -283,68 +322,11 @@ if (value.date >= para && value.date  <= para1 && value.status == 'paid' )  { th
 return log;
 
 
-}
 
 
 
 
 
-
-}
-else if(para2 === 'unpaid')
-{
-
-
-
-if(para != undefined && para1 != undefined)
-
-{
-
-
-
-angular.forEach(input, function(value, key) {
-
-if (value.date >= para && value.date  <= para1 && value.status != 'paid' )  { this.push(value); }
-
-
-}, log);
-
-
-return log;
-
-
-}
-
-
-
-}
-else 
-{
-  
-
-
-if(para != undefined && para1 != undefined)
-
-{
-
-
-
-angular.forEach(input, function(value, key) {
-
-if (value.date >= para && value.date  <= para1)  { this.push(value); }
-
-
-}, log);
-
-
-return log;
-
-
-}
-
-
-
-}
 
 
 
@@ -355,7 +337,6 @@ return log;
 
 
 });
-
 
 
 </script>

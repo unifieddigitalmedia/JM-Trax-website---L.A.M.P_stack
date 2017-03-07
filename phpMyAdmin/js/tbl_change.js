@@ -100,7 +100,7 @@ function isDate(val, tmstmp)
     }
     val = arrayVal.join("-");
     var pos = 2;
-    var dtexp = new RegExp(/^([0-9]{4})-(((01|03|05|07|08|10|12)-((0[1-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)-((0[1-9])|([1-2][0-9])|30)))$/);
+    var dtexp = new RegExp(/^([0-9]{4})-(((01|03|05|07|08|10|12)-((0[0-9])|([1-2][0-9])|(3[0-1])))|((02|04|06|09|11)-((0[0-9])|([1-2][0-9])|30))|((00)-(00)))$/);
     if (val.length == 8) {
         pos = 0;
     }
@@ -143,7 +143,7 @@ function isTime(val)
         }
     }
     val = arrayVal.join(":");
-    var tmexp = new RegExp(/^(([0-1][0-9])|(2[0-3])):((0[0-9])|([1-5][0-9])):((0[0-9])|([1-5][0-9]))(\.[0-9]{1,6}){0,1}$/);
+    var tmexp = new RegExp(/^(-)?(([0-7]?[0-9][0-9])|(8[0-2][0-9])|(83[0-8])):((0[0-9])|([1-5][0-9])):((0[0-9])|([1-5][0-9]))(\.[0-9]{1,6}){0,1}$/);
     return tmexp.test(val);
 }
 
@@ -168,7 +168,10 @@ function verificationsAfterFieldChange(urlField, multi_edit, theType)
     var $this_function = $("select[name='funcs[multi_edit][" + multi_edit + "][" +
         urlField + "]']");
     var function_selected = false;
-    if (typeof $this_function.val() !== 'undefined' && $this_function.val().length > 0) {
+    if (typeof $this_function.val() !== 'undefined' &&
+        $this_function.val() !== null &&
+        $this_function.val().length > 0
+    ) {
         function_selected = true;
     }
 
@@ -345,9 +348,9 @@ AJAX.registerOnload('tbl_change.js', function () {
                 return false;
             }
 
-            return !(value.substring(0, 3) === "MD5"
-            && typeof options.data('maxlength') !== 'undefined'
-            && options.data('maxlength') < 32);
+            return !(value.substring(0, 3) === "MD5" &&
+                typeof options.data('maxlength') !== 'undefined' &&
+                options.data('maxlength') < 32);
         });
 
         jQuery.validator.addMethod("validationFunctionForDateTime", function(value, element, options) {
@@ -376,8 +379,8 @@ AJAX.registerOnload('tbl_change.js', function () {
                     return isDate(dt_value, tmstmp);
                 }
 
-                return isDate(dt_value.substring(0, dv), tmstmp)
-                    && isTime(dt_value.substring(dv + 1));
+                return isDate(dt_value.substring(0, dv), tmstmp) &&
+                    isTime(dt_value.substring(dv + 1));
             }
         });
         /*
@@ -434,7 +437,7 @@ AJAX.registerOnload('tbl_change.js', function () {
      * "Continue insertion" are handled in the "Continue insertion" code
      *
      */
-    $(document).on('click', 'input.checkbox_null', function (e) {
+    $(document).on('click', 'input.checkbox_null', function () {
         nullify(
             // use hidden fields populated by tbl_change.php
             $(this).siblings('.nullify_code').val(),
@@ -450,7 +453,7 @@ AJAX.registerOnload('tbl_change.js', function () {
      * when we are in edit-mode, and not in insert-mode(no previous value
      * available).
      */
-    $('select[name="submit_type"]').bind('change', function (e) {
+    $('select[name="submit_type"]').bind('change', function () {
         var thisElemSubmitTypeVal = $(this).val();
         var $table = $('table.insertRowTable');
         var auto_increment_column = $table.find('input[name^="auto_increment"]');
@@ -548,8 +551,9 @@ AJAX.registerOnload('tbl_change.js', function () {
                 }
 
                 // handle input text fields and textareas
-                if ($this_element.is('.textfield') || $this_element.is('.char')) {
+                if ($this_element.is('.textfield') || $this_element.is('.char') || $this_element.is('textarea')) {
                     // do not remove the 'value' attribute for ENUM columns
+                    // special handling for radio fields after updating ids to unique - see below
                     if ($this_element.closest('tr').find('span.column_type').html() != 'enum') {
                         $this_element.val($this_element.closest('tr').find('span.default_value').html());
                     }
@@ -562,7 +566,7 @@ AJAX.registerOnload('tbl_change.js', function () {
                         // will change
                         .data('hashed_field', hashed_field)
                         .data('new_row_index', new_row_index)
-                        .bind('change', function (e) {
+                        .bind('change', function () {
                             var $changed_element = $(this);
                             verificationsAfterFieldChange(
                                 $changed_element.data('hashed_field'),
@@ -581,7 +585,7 @@ AJAX.registerOnload('tbl_change.js', function () {
                         // will be clicked
                         .data('hashed_field', hashed_field)
                         .data('new_row_index', new_row_index)
-                        .bind('click', function (e) {
+                        .bind('click', function () {
                             var $changed_element = $(this);
                             nullify(
                                 $changed_element.siblings('.nullify_code').val(),
@@ -672,6 +676,15 @@ AJAX.registerOnload('tbl_change.js', function () {
                 $(this).attr('tabindex', tabindex);
                 // update the IDs of textfields to ensure that they are unique
                 $(this).attr('id', "field_" + tabindex + "_3");
+
+                // special handling for radio fields after updating ids to unique
+                if ($(this).closest('tr').find('span.column_type').html() === 'enum') {
+                    if ($(this).val() === $(this).closest('tr').find('span.default_value').html()) {
+                        $(this).prop('checked', true);
+                    } else {
+                        $(this).prop('checked', false);
+                    }
+                }
             });
             $('.control_at_footer')
             .each(function () {

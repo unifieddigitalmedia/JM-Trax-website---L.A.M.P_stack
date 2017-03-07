@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -31,7 +31,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="money-transfer-calculator.html" class="dropbtn"> Transfer Calculator</a>  
 
@@ -136,8 +136,8 @@
 
 
       <div class="form-group">
-     <label for="usr"></label>
-      <input type="text"  class="form-control input-sm"   id="postcode" ng-model='SenderPostcode' placeholder="* POSTCODE :">
+     <label for="usr">* POSTCODE :</label>
+      <input type="text"  class="form-control input-sm"  style="background-color:#FCC;" id="postcode" ng-model='SenderPostcode' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -157,7 +157,7 @@
 
       <div class="form-group">
     <label for="usr"></label>
-      <select name='building' id='building' ng-change='popform()' style='width:100%;' ng-model='streetvalue'> </select>
+      <select name='building' id='building' ng-change='popform()' style='width:100%;' ng-model='streetvalue' > </select>
       </div>
 
 
@@ -166,14 +166,13 @@
 
 </div>
 
-
 <div class="row">
 
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text"  class="form-control input-sm" id="line1" ng-model='line1' placeholder="* 1ST LINE :">
+ <label for="usr">* 1ST LINE :</label>
+      <input type="text" style="background-color:#FCC;" class="form-control input-sm" id="line1" ng-model='line1' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -182,8 +181,8 @@
 
 
 <div class="form-group">
-  <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="2ND LINE :" />
+  <label for="usr">2ND LINE :</label>
+      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="" autocomplete="on" />
       </div>
 
 
@@ -194,8 +193,8 @@
 
 
 <div class="form-group">
-    <label for="usr"></label>
-     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="3RD LINE :">
+    <label for="usr">3RD LINE :</label>
+     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -212,8 +211,8 @@
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="* TOWN :">
+ <label for="usr">* TOWN :</label>
+      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -222,8 +221,8 @@
     <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="COUNTY :" >
+ <label for="usr">COUNTY :</label>
+      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -231,9 +230,14 @@
     <div class="col-sm-4">
 
  <div class="form-group">
-    <label for="usr"></label>
-     
-      <select  class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
+   <!-- <label for="usr"></label>
+      <input type="text" class="form-control input-sm" id="customeremail" ng-model='EMAIL' placeholder="* EMAIL :">-->
+
+
+<label for="usr">OCCUPATION</label>
+
+ <select style="background-color:#FCC;" class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
+
 
 
       </div>
@@ -242,6 +246,7 @@
 
 
 </div>
+
 
 
 <div class="row">
@@ -413,7 +418,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -450,7 +455,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/senders',{
+var resource = $resource('api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -517,7 +522,7 @@ $scope.creditlimit = getCookie('agentcredit') ;
 
 
 
-$http.get("http://192.168.0.90/intranet/api/getoccupations").then(function(response) {
+$http.get("api/getoccupations").then(function(response) {
 
 
 
@@ -534,7 +539,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -558,7 +563,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -566,7 +571,7 @@ window.location = "http://192.168.0.90/intranet/index.html" ;
 
 
 
-$http.get("http://192.168.0.90/intranet/api/senders.php?id="+getCookie('agentid')).then(function(response) {
+$http.get("api/senders.php?id="+getCookie('agentid')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -576,7 +581,7 @@ $scope.selectsender(0);
 
     });
 
-$http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
 
 
@@ -714,7 +719,7 @@ var county = document.getElementById("county").value;
 
 var postcode = document.getElementById("postcode").value;
 
-if(line1 == '' || line2 =='' || town=='' || postcode =='')
+if(line1 == '' || town=='' || postcode =='')
 
 {
 
@@ -770,7 +775,7 @@ occupation:$scope.occupation.occupation,
 
 if(log.ERROR){ alert(log.ERROR);}
 
-window.location = "http://192.168.0.90/intranet/transfer.html" ;
+window.location = "transfer.html" ;
 
   });
 
@@ -818,7 +823,7 @@ occupation:$scope.occupation.occupation,
 }, function() {
 
 
-if(log.ERROR){ alert(log.ERROR);} else {  window.location = "http://192.168.0.90/intranet/transfer.html" ;  }
+if(log.ERROR){ alert(log.ERROR);} else {  window.location = "transfer.html" ;  }
 
 
 

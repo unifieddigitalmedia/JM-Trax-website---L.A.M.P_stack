@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -33,7 +33,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link" > <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -43,15 +43,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -64,7 +64,7 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
@@ -76,7 +76,7 @@
 
   <a> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -176,15 +176,14 @@
 
 <p class="redtext"> {{sendererror}}  </p>
 
-
 <div class="row">
 
    <div class="col-sm-4">
 
 
       <div class="form-group">
-     <label for="usr"></label>
-      <input type="text"  class="form-control input-sm"   id="postcode" ng-model='SenderPostcode' placeholder="* POSTCODE :">
+     <label for="usr">* POSTCODE :</label>
+      <input type="text"  class="form-control input-sm"  style="background-color:#FCC;" id="postcode" ng-model='SenderPostcode' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -204,7 +203,7 @@
 
       <div class="form-group">
     <label for="usr"></label>
-      <select name='building' id='building' ng-change='popform()' style='width:100%;' ng-model='streetvalue'> </select>
+      <select name='building' id='building' ng-change='popform()' style='width:100%;' ng-model='streetvalue' > </select>
       </div>
 
 
@@ -213,14 +212,13 @@
 
 </div>
 
-
 <div class="row">
 
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text"  class="form-control input-sm" id="line1" ng-model='line1' placeholder="* 1ST LINE :">
+ <label for="usr">* 1ST LINE :</label>
+      <input type="text" style="background-color:#FCC;" class="form-control input-sm" id="line1" ng-model='line1' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -229,8 +227,8 @@
 
 
 <div class="form-group">
-  <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="2ND LINE :" />
+  <label for="usr">2ND LINE :</label>
+      <input type="text" class="form-control input-sm" id="line2" ng-model='line2' placeholder="" autocomplete="on" />
       </div>
 
 
@@ -241,8 +239,8 @@
 
 
 <div class="form-group">
-    <label for="usr"></label>
-     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="3RD LINE :">
+    <label for="usr">3RD LINE :</label>
+     <input type="text" class="form-control input-sm" id="line3" ng-model='line3' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -259,8 +257,8 @@
    <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="* TOWN :">
+ <label for="usr">* TOWN :</label>
+      <input type="text" class="form-control input-sm" id="town" ng-model='TOWN' placeholder="" autocomplete="on" >
       </div>
 
 
@@ -269,8 +267,8 @@
     <div class="col-sm-4">
 
  <div class="form-group">
- <label for="usr"></label>
-      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="COUNTY :" >
+ <label for="usr">COUNTY :</label>
+      <input type="text" class="form-control input-sm" id="county" ng-model='COUNTY' placeholder="" autocomplete="on" >
       </div>
 
    </div>
@@ -278,9 +276,14 @@
     <div class="col-sm-4">
 
  <div class="form-group">
-    <label for="usr"></label>
-     
-      <select  class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
+   <!-- <label for="usr"></label>
+      <input type="text" class="form-control input-sm" id="customeremail" ng-model='EMAIL' placeholder="* EMAIL :">-->
+
+
+<label for="usr">OCCUPATION</label>
+
+ <select style="background-color:#FCC;" class="form-control input-sm"  ng-options="occupation as occupation.occupation for occupation in occupations "  ng-model='occupation' style="position:relative; " ></select>
+
 
 
       </div>
@@ -504,7 +507,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -521,11 +524,13 @@
 
   </section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -566,7 +571,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -582,6 +587,14 @@ $scope.usertype = true;
 
 }
 
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
+
+
+}
 
 var counter = 0;
 
@@ -602,7 +615,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -622,7 +635,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders',{
+var resource = $resource('api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -675,7 +688,7 @@ $scope.senderdetails = true;
 
 var init = function () {
   
-$http.get("https://jmtrax.herokuapp.com/api/getoccupations.php").then(function(response) {
+$http.get("api/getoccupations.php").then(function(response) {
 
  $scope.occupations = response.data;
 
@@ -694,7 +707,7 @@ $scope.getsenderslist = function () {
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
+$http.get("api/senders.php?firstname="+$scope.FirstName+"&lastname="+$scope.LastName+"&mobile="+$scope.MobilePhone).then(function(response) {
 
 
 
@@ -758,7 +771,7 @@ $scope.receipentlist = $scope.senderslist[para].senderdetails.receipients;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "https://jmtrax.herokuapp.com/senderstransactions.php" ;
+window.location = "senderstransactions.php" ;
 
 }
 
@@ -1078,7 +1091,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("https://jmtrax.herokuapp.com/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 
 if(log.ERROR){ alert(log.ERROR);}

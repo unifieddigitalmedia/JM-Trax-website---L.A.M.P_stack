@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -32,7 +32,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="money-transfer-calculator.html" class="dropbtn"> Transfer Calculator</a>  
 
@@ -189,7 +189,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -224,7 +224,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Order_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/transactions',{
+var resource = $resource('api/transactions',{
 
 
 username:"@username",
@@ -293,8 +293,8 @@ $scope.agentusername = getCookie('agentusername') ;
 $http.get(
 
 
-  //"http://192.168.0.90/intranet/api/autofill.php?username="+getCookie('agentusername')+
-  "http://192.168.0.90/intranet/api/autofill.php?username="+getCookie('agentid')+
+  //"api/autofill.php?username="+getCookie('agentusername')+
+  "api/autofill.php?username="+getCookie('agentid')+
   "&receipient_firstname="+getCookie('receipient_firstname')+
   "&receipient_lastname="+getCookie('receipient_lastname')+
   "&receipient_bank="+getCookie('receipient_bank')+
@@ -368,7 +368,7 @@ $scope.rate   = getCookie('rate') ;
 
 
 
-$http.get("http://192.168.0.90/intranet/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -383,7 +383,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -407,7 +407,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -524,7 +524,7 @@ document.cookie = "transaction_number=" + log.orderID;
 
 document.cookie = "gbp_total=" + $scope.total;
 
-window.location = "http://192.168.0.90/intranet/checkout.html" ;
+window.location = "checkout.html" ;
 
 }
 else
@@ -555,7 +555,7 @@ $scope.calNGN = function(para) {
 
      
 
-$http.get("http://192.168.0.90/intranet/api/charge.php?ngn="+para).then(function(response) {
+$http.get("api/charge.php?ngn="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -570,7 +570,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALNGN = function(para) {
 
- $http.get("http://192.168.0.90/intranet/api/charge.php?totalngn="+para).then(function(response) {
+ $http.get("api/charge.php?totalngn="+para).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -587,7 +587,7 @@ $scope.rate = response.data.RATE;
 
     $scope.calTOTALGBP = function(para) {
   
-     $http.get("http://192.168.0.90/intranet/api/charge.php?totalgbp="+para).then(function(response) {
+     $http.get("api/charge.php?totalgbp="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -603,7 +603,7 @@ $scope.rate = response.data.RATE;
     $scope.calAMOUNT = function(para) {
 
 
-       $http.get("http://192.168.0.90/intranet/api/charge.php?amount="+para).then(function(response) {
+       $http.get("api/charge.php?amount="+para).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));

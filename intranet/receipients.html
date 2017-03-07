@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -31,7 +31,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -41,15 +41,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -62,21 +62,23 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
   
   <a href="deleted-transactions.html"> Deleted Transactions </a>   
 
-  <a> Recipients </a> 
 
 
+  <a href="receipients.html" > Recipients </a> 
+
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -88,7 +90,7 @@
 </li>  
 
 <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">â˜°</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">  /a>
 </li>
 
 
@@ -161,6 +163,20 @@
 
   </div>
 
+<div class="row">
+  <div class="col-sm-12" >
+    <div style='float:right;'>
+  <p>
+
+<a  href="receipient-statement.html"> Print Summary </a>
+  </p>
+    <p>
+
+  </p>
+  </div>
+ </div>
+</div>
+
 <div class="div_list table-responsive" >
 
 <table class="table borderless">
@@ -173,9 +189,9 @@
         <th style='tablecells' >TRANS. NO.</th>
         <th style='tablecells'>SENDERS FIRST NAME</th>
         <th style='tablecells'>SENDERS LAST NAME</th>
-        <th style='tablecells'>AMOUNT Â£</th>
-        <th style='tablecells'>FEES Â£</th>
-        <th style='tablecells'>TOTAL GBP DUE Â£</th>
+        <th style='tablecells'>AMOUNT £</th>
+        <th style='tablecells'>FEES £</th>
+        <th style='tablecells'>TOTAL GBP DUE £</th>
         <th style='tablecells'>TOTAL NGN DUE</th>
         <th style='tablecells'>STATUS</th>
       </tr>
@@ -222,7 +238,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -290,7 +306,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -306,6 +322,15 @@ $scope.usertype = true;
 
 }
 
+
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
+
+
+}
 
 var counter = 0;
 
@@ -326,7 +351,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -346,7 +371,7 @@ init();
 
 app.factory('Receipients_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/receipients',{
+var resource = $resource('api/receipients.php',{
 
 firstname:"@firstname",
 lastname:"@lastname",
@@ -364,18 +389,18 @@ app.controller('receipients', function($scope,Receipients_Service,$http,$resourc
 
 $scope.beneficiarysearch = function () {
 
-$http.get("http://192.168.0.90/intranet/api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
+$http.get("api/receipients.php?firstname="+$scope.recfirstname+"&lastname="+$scope.reclastname).then(function(response) {
 
 $scope.reclists = response.data;
-
+document.cookie = "sender_username=";
 
 });
 
 
-$scope.receipient_summary = function () {
+$scope.receipients_summary = function () {
 
 
-window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
+window.location = "receipient-statement.html" ;
 
 
 }
@@ -384,9 +409,10 @@ window.location = "http://192.168.0.90/intranet/receipient-statement.html" ;
 
 $scope.beneficiary_transactions = function (para) {
 
-$http.get("http://192.168.0.90/intranet/api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
+$http.get("api/transactions.php?firstname="+$scope.reclists[para].ReceipientFirstName+"&lastname="+$scope.reclists[para].ReceipientLastName).then(function(response) {
 
-
+document.cookie = "receipient_lastname=" + $scope.reclists[para].ReceipientLastName;
+document.cookie = "receipient_firstname=" + $scope.reclists[para].ReceipientFirstName;
 
 $scope.transactions = response.data;
 
@@ -394,6 +420,7 @@ $scope.transactions = response.data;
 
 
 });
+
 
 
 

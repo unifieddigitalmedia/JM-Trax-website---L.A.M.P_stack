@@ -1,13 +1,10 @@
 <?php
 
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
-
+$servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
 $conn = new mysqli($servername, $username, $password,$dbname);
 
@@ -74,7 +71,7 @@ $enddate = "20".$endyear."-".$endmonth."-".$endday;
 		
 	
 
-     $sql2 = "SELECT * FROM transfers WHERE date >= '$startdate' && date <= '$enddate' ";
+     $sql2 = "SELECT * FROM transfers WHERE Tdate >= '$startdate' && Tdate <= '$enddate' ";
 
 
     }
@@ -87,12 +84,12 @@ else
           {
           	
           	
-          	$sql2 =  "SELECT * FROM transfers WHERE (date >= '$startdate' && date<= '$enddate' ) && status = '$_REQUEST[status]' ";
+          	$sql2 =  "SELECT * FROM transfers WHERE (Tdate >= '$startdate' && Tdate<= '$enddate' ) && status = '$_REQUEST[status]' ";
 
           }
           else{
           
-          	$sql2 =  "SELECT * FROM transfers WHERE (date >= '$startdate' && date<= '$enddate' ) && status != 'paid' ";
+          	$sql2 =  "SELECT * FROM transfers WHERE (Tdate >= '$startdate' && Tdate<= '$enddate' ) && status != 'paid' ";
 
           	
           }
@@ -184,15 +181,15 @@ $objWriter->save('php://output');
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -214,7 +211,7 @@ $objWriter->save('php://output');
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -224,15 +221,15 @@ $objWriter->save('php://output');
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -245,7 +242,7 @@ $objWriter->save('php://output');
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
@@ -254,11 +251,11 @@ $objWriter->save('php://output');
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.html"> Transactions </a>  
+  <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>  
 
 </nav>
 
@@ -283,7 +280,7 @@ $objWriter->save('php://output');
 
 &nbsp;
 
-<div class="row">
+<div class="row" style="position:relative!important;top:100px!important;">
 
 
     <div class="col-sm-4" >
@@ -342,7 +339,7 @@ $objWriter->save('php://output');
 
 
 
-<div class="row">
+<div class="row" style="position:relative!important;top:100px!important;">
   <div class="col-sm-12" >
     <div style='float:right;'>
   <p>
@@ -367,11 +364,21 @@ $objWriter->save('php://output');
 
 
 
-<div class="table-responsive"  ng-init="getdaily()">
+<div class="table-responsive"  ng-init="getdaily()" style="position:relative!important;top:100px!important;">
 
 
- <table class="table table-bordered">
-    <thead>
+
+
+ <table >
+   
+    <tbody>
+      <tr ng-repeat="(key, value) in dailytransactionlist | todaystransfers : startdate : enddate : status | groupBy: 'shop' " >
+
+        <td colspan="11">  <b style="cursor: pointer;" data-toggle="collapse" data-target="#{{key}}"> {{key}}</b>  </br> 
+
+<table class="table table-bordered " id="{{key}}" >
+
+ <thead>
 
    <tr>
         <th style='tablecells'>STAFF REF.</th>
@@ -380,19 +387,21 @@ $objWriter->save('php://output');
         <th style='tablecells' >TRANS. NO.</th>
         <th style='tablecells'>SENDER FIRST NAME</th>
         <th style='tablecells'>SENDER LAST NAME</th>
-        <th style='tablecells'>AMOUNT £</th>
-        <th style='tablecells'>FEES £</th>
-        <th style='tablecells'>TOTAL GBP DUE £</th>
+        <th style='tablecells'>AMOUNT &pound;</th>
+        <th style='tablecells'>FEES &pound;</th>
+        <th style='tablecells'>TOTAL GBP DUE &pound;</th>
         <th style='tablecells'>TOTAL NGN DUE</th>
         <th style='tablecells'>STATUS</th>
+        <th style='tablecells'>BANK</th>
       </tr>
     </thead>
-    <tbody>
-      <tr ng-repeat='daily in ( filteredTransactions = ( dailytransactionlist |  todaystransfers : startdate : enddate : status ) )' ng-click="selecttransfer($index)" style="cursor:pointer">
+       <tbody>
+        <tr ng-repeat="daily in value" ng-click="selecttransfer(daily.id)" style="cursor:pointer">
+
         <td style='tablecells'>{{daily.agentusername}}</td>
         <td style='tablecells'>{{daily.shop}}</td>
         <td style='tablecells'>{{daily.date}}</td>
-         <td style='tablecells'>JM{{daily.id}}</td>
+        <td style='tablecells'>JM{{daily.id}}</td>
         <td style='tablecells'>{{daily.senderfirstname}}</td>
         <td style='tablecells'>{{daily.senderlasttname}}</td>
         <td style='tablecells'>{{tocurrency(daily.amount)}}</td>
@@ -400,31 +409,51 @@ $objWriter->save('php://output');
         <td style='tablecells'>{{tocurrency(daily.totalgbp)}}</td>
         <td style='tablecells'>{{tocurrency(daily.totalngn)}}</td>
         <td style='tablecells'>{{daily.status}}</td>
+         <td style='tablecells'>{{daily.bankname}}</td>
+
 
       </tr>
 
- <tr>
+      <tr>
         <td colspan='6'></td>
-        <td>AMOUNT £</td>
-        <td>FEES £</td>
-        <td>TOTAL GBP DUE £</td>
+        <td>AMOUNT &pound;</td>
+        <td>FEES &pound;</td>
+        <td>TOTAL GBP DUE &pound;</td>
         <td>TOTAL NGN DUE</td>
         
       </tr>
 
- <tr>
+       <tr>
         <td colspan='6'></td>
-        <td>{{ TOTALAMOUNT }}</td>
-        <td>{{ TOTALFEE }}</td>
-        <td>{{ TOTALGBP }}</td>
-        <td>{{ TOTALNGN }}</td>
+        <td>{{ value | sumByKey:'amount' }}</td>
+        <td>{{ value | sumByKey:'fee' }}</td>
+        <td>{{ value | sumByKey:'totalgbp' }}</td>
+        <td>{{ value | sumByKey:'totalngn' }}</td>
+        <td></td>
   
         
       </tr>
 
 
+      </tbody>
+
+</table>
+
+
+
+
+
+        </td>
+       
+      </tr>
+
     </tbody>
   </table>
+
+
+
+
+
 
 </div>
 
@@ -457,22 +486,27 @@ $objWriter->save('php://output');
 
 <section class="copywright">
 
-<p style='color:white;'>&copy; UNIFIED DIGITAL MEDIA  - http://www.unifieddigitalmedia.co.uk</p>
+.left-panel
 
 </section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js" ></script>
+
 
 <script src="scripts/main.js"> </script>
 
 <script type="text/javascript">
 
 
-var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter']);
+var app = angular.module('justmoneytransfers', ['ngResource','dailyFilter','angular.filter','calfilter']);
 
 
 app.controller('menucontroller', function($scope,$http,$resource) {
@@ -498,16 +532,57 @@ function getCookie(cname) {
 
 }
 
+$scope.indexShops = [];
+
+
+$scope.transfersFilter = function() {
+
+alert('asd');
+        $scope.indexShops = [];
+
+        return $scope.dailytransactionlist;
+
+    }
+    
+
+$scope.filterShops = function(transfer){
+
+var boolenExpr = $scope.indexShops.indexOf(transfer.shop) == -1; 
+
+if( boolenExpr) {
+
+
+$scope.indexShops.push(transfer.shop);
+
+   
+} 
+
+  return boolenExpr;
+
+
+
+
+
+
+}
+
+
 var init = function () {
   
+$scope.startdate = getCookie('fromdate'); 
+$scope.enddate = getCookie('enddate'); 
   
-  
+document.getElementsByClassName("fromdate")[0].setAttribute("value",$scope.startdate);
+document.getElementsByClassName("todate")[0].setAttribute("value",$scope.enddate);
+
+
+
   if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -519,6 +594,14 @@ if( getCookie('agenttype') == 'user'  )
 { 
 
 $scope.usertype = true;
+
+
+}
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
 
 
 }
@@ -536,20 +619,22 @@ counter = 0;
 
 });
 
-if (counter == '1800')
+if (counter == '1200')
 
 {
 
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
 } },1000);
 
-$http.get("https://jmtrax.herokuapp.com/api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')).then(function(response) {
+
+$http.get("api/transactions.php?agentusername="+ getCookie('agentusername')+"&agenttype="+getCookie('agenttype')+"&agentshop="+getCookie('agentshop')).then(function(response) {
+
 
 $scope.dailytransactionlist = response.data;
 
@@ -630,12 +715,14 @@ return dollars;
 
 $scope.selecttransfer = function (para) {
 
-document.cookie = "transaction_number=" + $scope.filteredTransactions[para].id;
+
+
+document.cookie = "transaction_number=" + para;
 document.cookie = "fromdate=" + $scope.startdate;
 document.cookie = "enddate=" + $scope.enddate;
 document.cookie = "status=" + $scope.status;
 document.cookie = "trans_pos=" + para;
-window.location = "https://jmtrax.herokuapp.com/editorder.html" ;
+window.location = "editorder.php" ;
 
 }
 
@@ -713,6 +800,37 @@ init();
 
 });
 
+angular.module('calfilter', []).filter('sumByKey', function() {
+        return function(data, key) {
+        
+            var sum = 0;
+
+            for (var i = data.length - 1; i >= 0; i--) {
+            
+                sum += parseFloat(data[i][key].replace(",", ""));
+            
+            }
+            
+      
+            var number = sum.toString();
+
+            var dollars = number.split('.')[0];
+
+            var  cents = (number.split('.')[1] || '') +'00';
+
+            var dollars = dollars.split('').reverse().join('').replace(/(\d{3}(?!$))/g, '$1,').split('').reverse().join('');
+
+            var cent = cents.slice(0, 2);
+
+            var decimal = ".";
+
+            var cent2 = decimal.concat(cent);
+
+            var dollars = dollars.concat(cent2);
+            
+            return dollars;
+        };
+    });
 
 
 angular.module('dailyFilter', []).filter('todaystransfers', function() {
@@ -723,21 +841,34 @@ return function(input,para,para1,para2) {
 
    var log = [];
 
- 
 
-if(para2 == undefined )
+
+if(typeof para2 === "undefined" )
+
+{
+
+
+if(typeof para != "undefined" && typeof para1 != "undefined")
 
 {
 
 
-if(para != undefined && para1 != undefined)
 
-{
+var fromDate = para.split("-") ;
+var fDate = new Date(fromDate[2],fromDate[1] - 1 ,fromDate[0]);
+
+var toDate =  para1.split("-") ; 
+var tDate = new Date(toDate[2],toDate[1] - 1 ,toDate[0]);
+
 
 
 angular.forEach(input, function(value, key) {
 
-if (value.date >= para && value.date  <= para1)  { 
+
+var valueDate =  value.date.split("-") ; 
+var vDate = new Date(valueDate[2],valueDate[1] - 1 ,valueDate[0]);
+
+if (vDate >= fDate && vDate  <= tDate)  { 
 
 
 this.push(value); 
@@ -763,7 +894,7 @@ else if (para2 == 'paid')
 
 
 
-if(para != undefined && para1 != undefined)
+if(typeof para != "undefined" && typeof para1 != "undefined")
 
 {
 
@@ -771,7 +902,10 @@ if(para != undefined && para1 != undefined)
 
 angular.forEach(input, function(value, key) {
 
-if (value.date >= para && value.date  <= para1 && value.status == 'paid' )  { this.push(value);
+var valueDate =  value.date.split("-") ; 
+var vDate = new Date(valueDate[2],valueDate[1] - 1 ,valueDate[0]);
+
+if (vDate >= fDate && vDate  <= tDate && value.status == 'paid' )  { this.push(value);
 
 
 
@@ -797,7 +931,7 @@ else
 
 
 
-if(para != undefined && para1 != undefined)
+if(typeof para != "undefined" && typeof para1 != "undefined")
 
 {
 
@@ -805,7 +939,10 @@ if(para != undefined && para1 != undefined)
 
 angular.forEach(input, function(value, key) {
 
-if (value.date >= para && value.date  <= para1 && value.status != 'paid' )  { this.push(value); 
+var valueDate =  value.date.split("-") ; 
+var vDate = new Date(valueDate[2],valueDate[1] - 1 ,valueDate[0]);
+
+if (vDate >= fDate && vDate  <= tDate && value.status != 'paid' )  { this.push(value); 
 
 
 }
@@ -843,6 +980,9 @@ return log;
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
 
 <script type="text/javascript">
 

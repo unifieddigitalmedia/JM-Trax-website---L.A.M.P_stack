@@ -19,26 +19,38 @@ use SqlParser\TokensList;
  * @category   Components
  * @package    SqlParser
  * @subpackage Components
- * @author     Dan Ungureanu <udan1107@gmail.com>
- * @license    http://opensource.org/licenses/GPL-2.0 GNU Public License
+ * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class AlterOperation extends Component
 {
 
     /**
-     * All alter operations.
+     * All database options
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $DB_OPTIONS = array(
+        'CHARACTER SET'             => array(1, 'var'),
+        'CHARSET'                   => array(1, 'var'),
+        'DEFAULT CHARACTER SET'     => array(1, 'var'),
+        'DEFAULT CHARSET'           => array(1, 'var'),
+        'UPGRADE'                   => array(1, 'var'),
+        'COLLATE'                   => array(2, 'var'),
+        'DEFAULT COLLATE'           => array(2, 'var'),
+    );
 
-        // table_options
+    /**
+     * All table options
+     *
+     * @var array
+     */
+    public static $TABLE_OPTIONS = array(
         'ENGINE'                        => array(1, 'var='),
         'AUTO_INCREMENT'                => array(1, 'var='),
         'AVG_ROW_LENGTH'                => array(1, 'var'),
         'MAX_ROWS'                      => array(1, 'var'),
         'ROW_FORMAT'                    => array(1, 'var'),
-
+        'COMMENT'                       => array(1, 'var'),
         'ADD'                           => 1,
         'ALTER'                         => 1,
         'ANALYZE'                       => 1,
@@ -60,6 +72,7 @@ class AlterOperation extends Component
         'RENAME'                        => 1,
         'REORGANIZE'                    => 1,
         'REPAIR'                        => 1,
+        'UPGRADE'                       => 1,
 
         'COLUMN'                        => 2,
         'CONSTRAINT'                    => 2,
@@ -75,11 +88,15 @@ class AlterOperation extends Component
         'SPATIAL'                       => 2,
         'TABLESPACE'                    => 2,
         'INDEX'                         => 2,
+    );
 
-        'DEFAULT CHARACTER SET'         => array(3, 'var'),
-        'DEFAULT CHARSET'               => array(3, 'var'),
-
-        'COLLATE'                       => array(4, 'var'),
+    /**
+     * All view options
+     *
+     * @var array
+     */
+    public static $VIEW_OPTIONS = array(
+        'AS'                            => 1,
     );
 
     /**
@@ -165,15 +182,26 @@ class AlterOperation extends Component
             }
 
             if ($state === 0) {
-                $ret->options = OptionsArray::parse($parser, $list, static::$OPTIONS);
+                $ret->options = OptionsArray::parse($parser, $list, $options);
+
+                if ($ret->options->has('AS')) {
+                    for (; $list->idx < $list->count; ++$list->idx) {
+                        if ($list->tokens[$list->idx]->type === Token::TYPE_DELIMITER) {
+                            break;
+                        }
+                        $ret->unknown[] = $list->tokens[$list->idx];
+                    }
+                    break;
+                }
+
                 $state = 1;
             } elseif ($state === 1) {
                 $ret->field = Expression::parse(
                     $parser,
                     $list,
                     array(
-                        'noAlias' => true,
-                        'noBrackets' => true,
+                        'breakOnAlias' => true,
+                        'parseField' => 'column',
                     )
                 );
                 if ($ret->field === null) {
@@ -191,6 +219,17 @@ class AlterOperation extends Component
                     } elseif (($token->value === ',') && ($brackets === 0)) {
                         break;
                     }
+                } elseif (!empty(Parser::$STATEMENT_PARSERS[$token->value])) {
+                    // We have reached the end of ALTER operation and suddenly found
+                    // a start to new statement, but have not find a delimiter between them
+
+                    if (! ($token->value == 'SET' && $list->tokens[$list->idx - 1]->value == 'CHARACTER')) {
+                        $parser->error(
+                            __('A new statement was found, but no delimiter between it and the previous one.'),
+                            $token
+                        );
+                        break;
+                    }
                 }
                 $ret->unknown[] = $token;
             }
@@ -204,6 +243,7 @@ class AlterOperation extends Component
         }
 
         --$list->idx;
+
         return $ret;
     }
 

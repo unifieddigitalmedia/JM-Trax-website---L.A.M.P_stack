@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -15,7 +15,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -29,7 +29,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -39,15 +39,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -60,19 +60,19 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -84,7 +84,7 @@
 </li>  
 
 <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">  /a>
 </li>
 
 </ul> </header>
@@ -107,49 +107,49 @@
     </thead>
     <tbody>
       <tr>
-        <td>STAFF REFERENCE</td>
+        <td><b>STAFF REFERENCE</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='staffref' name="orderreference"></td>
-        <td>DATE</td>
+        <td><b>DATE</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='date' name="orderdate"></td>
       </tr>
   
 <tr>
-        <td>TRANSACTION NUMBER</td>
+        <td><b>TRANSACTION NUMBER</b></td>
         <td><input type="text" class="form-control input-sm"  ng-model='transctionnumber' disabled name="ordernumber"  ></td>
         <td></td>
         <td></td>
       </tr>
 
 <tr>
-        <td>SENDER FIRST NAME </td>
+        <td><b>SENDER FIRST NAME </b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='senderfirstname' name="orderfirstname"></td>
-        <td>SENDER LAST NAME</td>
+        <td><b>SENDER LAST NAME</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='senderlastname' name="orderlastname"></td>
       </tr>
 
 <tr>
-        <td>AMOUNT </td>
+        <td><b>AMOUNT</b> </td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='amount' name="orderamount"></td>
-        <td>FEES</td>
+        <td><b>FEES</td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='fees' name="orderfees"></td>
       </tr>
 
 <tr>
-        <td>GBP TOTAL</td>
+        <td><b>GBP TOTAL</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='gbptotal' name="ordergbptotal"></td>
-        <td>NGN TOTAL</td>
+        <td><b>NGN TOTAL</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='ngntotal' name="orderngntotal"></td>
       </tr>
 
 <tr>
-        <td>PAYMENT DATE</td>
+        <td><b>PAYMENT DATE</b></td>
         <td><input type="text" class="form-control input-sm" id="datepicker" ng-model='paymentdate' name="orderpaymentdate"></td>
-        <td>STATUS</td>
+      <td><b>STATUS</b></td>
         <td><input type="text" class="form-control input-sm" id="usr" ng-model='status' name="orderstatus"></td>
       </tr>
 
 <tr>
-        <td>SENDING BANK</td>
+        <td><b>SENDING BANK</b></td>
         <td><input type="text" name="recbank" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank'/> </td>
         <td>     
 
@@ -162,7 +162,7 @@
       </tr>
 
 <tr>
-        <td>PAYMENT METHOD</td>
+        <td><b>PAYMENT METHOD</b></td>
         <td>  <input type="text" id='paymenttextfeild'  class="form-control input-sm"  name="payment"  value="{{recpaymentref}}" id='paymentref' ng-model='recpaymentref'/> </td>
         <td>   
 
@@ -187,7 +187,7 @@
 
 
 <tr>
-        <td>COMPLIANCE FORM</td>
+        <td><b>COMPLIANCE FORM</b></td>
         <td></td>
         <td colspan="2"> <span class="redtext"> {{editordererror}} </span></td>
       </tr>
@@ -196,7 +196,7 @@
 <tr>
         <td></td>
         <td><button type="button" class="btn btn-primary btn-block" ng-click='payorder()' ng-disable="status === 'paid' ">PAY</button></td>
-        <td><button type="button" class="btn btn-primary btn-block" ng-click='deleteorder()' >DELETE</button> </form></td>
+        <td><button type="button" class="btn btn-primary btn-block" id="reportrights" ng-click='deleteorder()' ng-hide="reportrights" >DELETE</button> </form></td>
         <td>
 
           <button type="button" class="btn btn-primary btn-block" ng-click="printorder()">
@@ -246,7 +246,7 @@
 
   <div class="col-sm-6" id="footer_column_2">  
 
-  <img src='/images/Photo2_small.png' class="footerimage"/>
+  <img src='images/Photo2_small.png' class="footerimage"/>
 
   </div>
 
@@ -320,13 +320,21 @@ function getCookie(cname) {
 
 var init = function () {
    
+   $scope.reportrights = true;
+
+
+
+
+
+
+
 
 if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -338,6 +346,14 @@ if( getCookie('agenttype') == 'user'  )
 { 
 
 $scope.usertype = true;
+
+
+}
+if( getCookie('agenttype') == 'supervisor'  )
+
+{ 
+
+$scope.reportrights = false;
 
 
 }
@@ -362,7 +378,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -382,7 +398,7 @@ init();
 
 app.factory('Editorder_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/editorder',{
+var resource = $resource('api/editorder',{
 
 id:"@id",
 paymentdate : "@paymentdate",
@@ -405,7 +421,7 @@ app.controller('editorder', function($scope,Editorder_Service,$http,$resource) {
 
 var init = function () {
    
-$http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
 $scope.banklist = response.data;
 
@@ -421,7 +437,7 @@ $scope.agenttype = getCookie('agenttype') ;
 
 $scope.creditlimit = getCookie('agentcredit') ;
 
-$http.get("http://192.168.0.90/intranet/api/editorder.php?transaction_number="+ getCookie('transaction_number')).then(function(response) {
+$http.get("api/editorder.php?transaction_number="+ getCookie('transaction_number')).then(function(response) {
 
 $scope.date = response.data[0].date ;
 $scope.transctionnumber = response.data[0].id;
@@ -448,7 +464,6 @@ $scope.recpaymentref = response.data[0].paymentmethod;
 };
 
 init();
-
 $scope.tocurrency = function (para) {
 
 
@@ -474,7 +489,6 @@ return dollars;
 
 
 }
-
 $scope.payorder = function () {
 
 var sendingbank = document.getElementById("recbank").value ;
@@ -516,7 +530,7 @@ paymentmethod : document.getElementById("paymenttextfeild").value ,
 alert(log.ERROR);
 
 
-window.location = "http://192.168.0.90/intranet/daily-transactions-senders.html" ;
+window.location = "daily-transactions-senders.html" ;
 
 
 
@@ -533,8 +547,11 @@ window.location = "http://192.168.0.90/intranet/daily-transactions-senders.html"
 
   $scope.printorder = function () {
 
+document.cookie = "print_location=reports";
 
-window.location = "http://192.168.0.90/intranet/receipt.html" ;
+
+
+window.location = "receipt.html" ;
 
   }
 
@@ -570,11 +587,13 @@ if (r == true) {
 
 
 
-$http.delete("http://81.137.131.58/api/editorder.php?id="+getCookie('transaction_number')+"&agentusername="+getCookie('agentusername') ).then(function(response) {
+
+
+$http.delete("api/editorder.php?id="+getCookie('transaction_number')+"&agentusername="+getCookie('agentusername') ).then(function(response) {
 
 alert(response.data.ERROR);
 
-window.location = "http://192.168.0.90/intranet/daily-transactions-senders.html" ;
+window.location = "daily-transactions-senders.html" ;
 
 
 
@@ -620,6 +639,52 @@ function getCookie(cname) {
 
 
 });
+
+
+
+$(document).ready(function(){
+  
+
+
+
+if(getCookie('agenttype') != 'administrator')
+
+{
+
+
+    $("#reportrights").hide();
+
+}else{
+	
+	   $("#reportrights").show();
+	
+}
+
+
+  
+function getCookie(cname) {
+
+    var name = cname + "=";
+  
+    var ca = document.cookie.split(';');
+  
+    for(var i=0; i<ca.length; i++) {
+  
+        var c = ca[i];
+  
+        while (c.charAt(0)==' ') c = c.substring(1);
+  
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  
+    }
+  
+    return "";
+
+}
+     
+
+});
+
 
 </script>
 

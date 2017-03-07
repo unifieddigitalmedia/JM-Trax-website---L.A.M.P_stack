@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="http://localhost:8888/jmtrax/intranet/images/jmtrax_icon.png">
 
 <title> Just Money Transfers | Senders Transaction Statement </title>
 
@@ -21,6 +21,27 @@
 
 <body ng-cloak ng-app="justmoneytransfers" >
   
+    
+  
+<div >
+
+
+<ul style="list-style-type: none;;" >
+
+<li class="logo_link"> <img src="images/logo.png" class="logo" > </li>
+<li style="padding:10px;">
+Address: 82 High St, London SE25 6EA
+Phone: 020 8771 5353
+
+</li>
+
+
+
+
+</ul></div>
+
+
+
 <div class="container-fluid"  ng-controller='transactions'   >
 
 <div class="table-responsive" >
@@ -111,7 +132,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Transactions_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/transactions',{});
+var resource = $resource('http://localhost:8888/jmtrax/intranet/api/transactions',{});
 
 return resource;
 
@@ -128,7 +149,7 @@ var init = function () {
 $scope.sendersname = getCookie('sender_firstname') + "  " + getCookie('sender_lastname') ;
 
 
-$http.get("http://192.168.0.90/intranet/api/sender_transactions.php?username="+getCookie('sender_username')+"&usertype=customer" ).then(function(response) {
+$http.get("http://localhost:8888/jmtrax/intranet/api/sender_transactions.php?username="+getCookie('sender_username')+"&usertype=customer" ).then(function(response) {
 
 $scope.dailytransactionlist = response.data;
 

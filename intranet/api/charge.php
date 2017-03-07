@@ -10,7 +10,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-if(!$_REQUEST[ngn] && !$_REQUEST[totalngn] && !$_REQUEST[totalgbp] && !$_REQUEST[amount] && !$_REQUEST[remittance])
+$ngn = $_REQUEST[ngn]; 
+$totalngn = $_REQUEST[totalngn]; 
+$totalgbp = $_REQUEST[totalgbp]; 
+$amount = $_REQUEST[amount]; 
+$remittance = $_REQUEST[remittance]; 
+
+
+if(!isset($ngn) && !isset($totalngn) && !isset($totalgbp) && !isset($amount) && !isset($remittance))
 {
 
 $fees = array();
@@ -81,7 +88,7 @@ array_push($rates,$transaction);
      $ngn = $rates[1][rate];
 
 
-if($_REQUEST[ngn])
+if(isset($_REQUEST[ngn]))
 
 {
 
@@ -97,7 +104,18 @@ $ngn = "SELECT * FROM commission WHERE upper >= $amt  && lower <= $amt ";
 
 $resultngn = $conn->query($ngn);
 
+if ($resultngn->num_rows > 0) {
+
 $rowngn = $resultngn->fetch_assoc() ;
+
+
+}else
+{
+	
+$amt = 0 ;
+	
+}
+
 
 if( $amt >= 1000.01){
 	
@@ -134,7 +152,7 @@ echo json_encode(array(
 
 }
 
-else if($_REQUEST[totalngn])
+else if(isset($_REQUEST[totalngn]))
 
 {
 
@@ -148,7 +166,18 @@ $totalngn = "SELECT * FROM commission WHERE upper >= $amt  && lower <= $amt ";
 
 $resulttotalngn = $conn->query($totalngn);
 
+if ($resulttotalngn->num_rows > 0) {
+
 $rowtotalngn = $resulttotalngn->fetch_assoc() ;
+
+
+}else
+{
+	
+$amt = 0 ;
+	
+}
+
 
 if( $amt >= 1000.01){
 	
@@ -184,7 +213,7 @@ echo json_encode(array(
 
 }
 
-else if($_REQUEST[totalgbp])
+else if(isset($_REQUEST[totalgbp]))
 
 {
 
@@ -197,7 +226,17 @@ $totalgbp = "SELECT * FROM commission WHERE upper >= $amt  && lower <= $amt ";
 
 $resulttotalgbp = $conn->query($totalgbp);
 
-$rowtotalgbp = $resulttotalgbp->fetch_assoc();
+if ($resulttotalgbp->num_rows > 0) {
+
+$rowtotalgbp = $resulttotalgbp->fetch_assoc() ;
+
+
+}else
+{
+	
+$newamt = 0 ;
+	
+}
 
 
 		
@@ -280,18 +319,31 @@ $tltngn = $newamt * $gbp;
   
 }
 
-else if($_REQUEST[amount])
+else if(isset($_REQUEST[amount]))
 
 {
-	
+		
 $amt = $_REQUEST[amount];
 
 $amt = str_replace(',','', $amt);
+
+
+
 $amount = "SELECT * FROM commission WHERE upper >= $amt  && lower <= $amt ";
 
 $resultamount = $conn->query($amount);
 
+if ($resultamount->num_rows > 0) {
+
 $rowamount = $resultamount->fetch_assoc() ;
+
+
+}else
+{
+	
+	$amt = 0 ;
+	
+}
 
 if($amt >= 1000.01){
 	
@@ -325,7 +377,7 @@ echo json_encode(array(
 
 }
 
-else if($_REQUEST[remittance])
+else if(isset($_REQUEST[remittance]))
 
 {
 
@@ -337,7 +389,17 @@ $remittance = "SELECT * FROM commission WHERE upper >=$amt && lower <= $amt ";
 
 $resultremittance = $conn->query($remittance);
 
+if ($resultremittance->num_rows > 0) {
+
 $rowremittance = $resultremittance->fetch_assoc() ;
+
+
+}else
+{
+	
+$_REQUEST[remittance] = 0 ;
+	
+}
 
 if( $_REQUEST[remittance] >= 1000.01){
 	

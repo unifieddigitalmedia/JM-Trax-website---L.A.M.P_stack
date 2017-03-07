@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -33,7 +33,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -64,20 +64,20 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
- <a href="daily-transactions-receipients.html"> Daily Transactions Receipients</a>
+   <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
-  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>    
+  <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
 
   <a href="deleted-transactions.html"> Deleted Transactions </a>  
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -530,7 +530,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -594,7 +594,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -630,7 +630,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -651,7 +651,7 @@ init();
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/senders',{
+var resource = $resource('api/senders.php',{
 
 id:"@id",
 firstname:"@firstname",
@@ -704,7 +704,7 @@ var init = function () {
    
  
    
-$http.get("http://192.168.0.90/intranet/api/getoccupations.php").then(function(response) {
+$http.get("api/getoccupations.php").then(function(response) {
 
 
 
@@ -722,7 +722,7 @@ init();
 $scope.getsenderslist = function () {
 
 
-$http.get("http://192.168.0.90/intranet/api/senders.php?").then(function(response) {
+$http.get("api/senders.php?").then(function(response) {
 
 if(response.data.length == 0 )
 {
@@ -792,7 +792,7 @@ $scope.receipentlist = $scope.senderslist[para].senderdetails.receipients;
 
 $scope.printsenderstransaction = function () {
 
-window.location = "http://192.168.0.90/intranet/senderstransactions.php" ;
+window.location = "senderstransactions.php" ;
 
 }
 
@@ -814,7 +814,7 @@ if($scope.sendersid !== undefined || $scope.sendersid  != "" )
 
 
 
-$http.delete("http://192.168.0.90/intranet/api/senders.php?id="+$scope.sendersid).then(function(response) {
+$http.delete("api/senders.php?id="+$scope.sendersid).then(function(response) {
 
 alert(response.data.ERROR);
 

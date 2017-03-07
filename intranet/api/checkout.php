@@ -23,9 +23,6 @@ if ($conn->query($sql) === TRUE) {
      
 
 
-echo json_encode(array(
-    "ERROR" => "Record was updated successfully" ));
-    
 $sql1 = "SELECT * FROM transfers WHERE id = '$_REQUEST[id]' ";
 
 $result = $conn->query($sql1);
@@ -35,31 +32,10 @@ $row = $result->fetch_assoc();
 if ($result->num_rows > 0) {
   
 
-
-
-$phone1 = substr($row[sendermobile],0,1);
-
-if ($phone1 == 0 )
-
-{
-
-$countrycode = 44;
-$phone = substr($row[sendermobile],1);
-$email = "@textmagic.com";
-$recipient = $countrycode."".$phone."".$email;
-$a = $countrycode."".$phone;
-}
-else
-
-{
-
 $countrycode = 44;
 $phone = $row[sendermobile];
 $email = "@textmagic.com";
 $recipient = $countrycode."".$row[sendermobile]."".$email;
-$a = $countrycode."".$row[sendermobile];
-
-}
 
 
 $email = "service@jmtrax.com,justmtransfers@gmail.com" ;
@@ -68,21 +44,30 @@ $message =" Transaction No:$row[id] for $row[senderfirstname] $row[senderlasttna
 mail($email, "Subject: $subject",$message, "From:just-computers@hotmail.com");
 
 
-if(!empty($row[uksms]) || $row[uksms] != 'false' )
+if($row[uksms] == 'true' )
 {
 
 
 
 
-
 $subject = "Welcome to JM Trax" ;
-$message =" Dear $row[senderfirstname] $row[senderlasttname], This confirm your transfer with us and your reference is JM$row[id] . The amount being sent is NGN $TotalDueNGN to $row[recipientfirstname] $row[recipientsurname]" ;
-mail($recipient, "Subject: $subject",
-$message, "From:service@ifixedcomputers.com" );
+$message =" Dear $row[senderfirstname] $row[senderlasttname], This confirm your transfer with us and your reference is JM$row[id] . The amount being sent is NGN  $row[ngn] to $row[recipientfirstname] $row[recipientsurname]" ;
 
 
+
+	if(mail($recipient,"Subject: $subject", $message, "From: justmtrax@gmail.com" )){
+	
+	
+	$errormessage = "Record was updated successfully. Confirmation email was sent to $row[sendermobile]" ;
+	
 }
-
+else {
+	
+	
+	$errormessage = "Record was updated successfully.No confirmation email was sent." ;
+	
+}
+}
 
 
 
@@ -144,6 +129,9 @@ if ($send[0] == "ID") {
 
      
       
+echo json_encode(array(
+    "ERROR" => $errormessage));
+    
      
 
 

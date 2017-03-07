@@ -69,23 +69,39 @@
 
 <tr> <td style='font-size:9px;text-transform:uppercase;' >   {{bankaddress}}  </td> <td style='font-size:9px;text-transform:uppercase;'> {{bankac}}  </td>  <td style='font-size:9px;text-transform:uppercase;'>   {{customerref}}</td> <td colspan='2'><b> {{comment}}   </b></td></tr> </table>
 
-<p style='font-size:8px;color:sienna; width:200px; font-family:Arial, Helvetica, sans-serif;position:relative; top:-5px; width:730px; left:-40px; '>
-PLEASE READ CAREFULLY, BY SIGNING THE PAYMENT ORDER FORM (THE FORM) YOU ARE ENTRERING INTO A LEGAL BINDING AGREEMENT WITH JUST MONEY TRANSFER (JM TRANSFER). BY SIGNING THE FORM YOU GIVE YOUR EXPLICIT CONSENT TO THE EXECUTION OF THE TRANSACTION. THIS CONSENT CANNOT BE WITHDRAWN. You agree that the agreement includes only these terms on the form (the Terms) and the JUST MONEY TRANSFER terms & conditions (the T&C (which are available at www.justcomputersparts.co.uk) and is the entire agreement and understanding between you and JMTransfer and supersedes and terminates all prior agreements between you and JMTransfer. JMTransfer will provide you with the Just money transfer service (a money remittance service) (the Service) through its international network of authorised representatives (the correspondents) to transfer funds (the Transfer to your chosen recipient (the Beneficiary). You may call JUST MONEY TRANSFERs Customer Services on its number (020 8771 5353) during normal business hours 09:00 to 19:00 for the address and hours of operation of the Correspondents’ locations in your or the Beneficiary’s area. You agree to provide JMTransfer with full and accurate information to the best of your knowledge as required for the purposes of the Service, otherwise JUST MONEY TRANSFER may not make the Transfer to the Beneficiary. You are strongly advised against sending money to any person that you do not know. Any defined words or phrases used in the terms that are not defined here are defined in the T&C. You may contact JUST MONEY TRANSFER through its Customer Services by telephone on
-020 8771 5353, by post at 82 High Street, South Norwood, London SE25 6EA or by email: service@jmtransfers.co.uk
+<p style='font-size:8px;color:sienna; width:200px; font-family:Arial, Helvetica, sans-serif;position:relative; top:-5px; width:100%;text-align:center '>
+
+PLEASE READ CAREFULLY, BEFORE SIGNING THIS PAYMENT ORDER FORM. (THE FORM) YOU ARE ENTERING INTO IS A LEGAL BINDING AGREEMENT WITH J.M Transfer 
+
+BY SIGNING THE FORM, YOU GIVE YOUR EXPLICIT CONSENT TO THE EXECUTION OF THE TRANSACTION. THIS CONSENT CANNOT BE WITHDRAWN.
+
+You (Sender) agree to provide J.M Transfer with full and accurate information to the best of your knowledge as required for the purposes of the Service, otherwise J.M Transfer may not make the Transfer to the Beneficiary. You (Sender) are strongly advised against sending money to any person that you do not know.
+J.M Transfer reserves the right at all times to refuse to process any order, at any stage, which is believed, in its sole discretion, is connected in any manner to money laundering activity or any other unlawful purposes. The sender (You) guarantees that the money to be transferred belongs solely to him/her and is not intended for or derived from any illegal activity.
+You (Sender) may contact J.M Transfer through its Customer Services by telephone on 020 8771 5353 during normal business hours 09:00 to 19:00 for the address and hours of operation, by post at 82 High Street, South Norwood, London SE25 6EA or by 
+<a href="mailto:service@jmtransfers.co.uk" style="text-decoration: underline;"> email:service@jmtransfers.co.uk</a></p>
+
+
+<p>I declare that all the information in this order is correct and approved by me</p>
+
+
+
 </p>
 
-<div style='font-size:9px; border-top:#000 solid medium; width:220px; font-family:Arial, Helvetica, sans-serif; font-size:9px; text-align:center; position:relative;  left:10px; top:17px;' >
+
+ 
+<div style='font-size:9px; border-bottom:#000 solid medium; width:220px; font-family:Arial, Helvetica, sans-serif; font-size:9px; text-align:center; position:relative;  left:10px; top:17px;' >
+<p>Sender’s Signature	</p>
 <p>  {{senderfirstname}} {{senderlastname}}  </p>
 
 </div>
 
 
-<div style='font-size:9px;border-top:#000 solid medium;  width:220px; font-family:Arial, Helvetica, sans-serif; font-size:9px; text-align:center; left:350px; position:relative; top:-17px;' >
-
+<div style='font-size:9px;border-bottom:#000 solid medium;  width:220px; font-family:Arial, Helvetica, sans-serif; font-size:9px; text-align:center; left:450px; position:relative; top:-35px;' >
+<p>Sending Agent Representative Signature	</p>
 <p>  {{agency}} </p>
 </div>
 
-
+<!--
 <table border='1' style='font-size:9px;font-family:Arial, Helvetica, sans-serif;  position:relative; top:-10px; width:700px; left:-5px;' ><tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;' > <p> AGENTS'S COPY<br/> Just Money Transfers <br/> 82 High Street, London, SE25 6EA  <br/>Tel:02087715353 Fax:02087717766 Email:service@jmtransfers.co.uk</p> </td> <td colspan='2' style='font-size:9px;font-weight:bold; text-align:center;'> <img src='http://justcomputersparts.co.uk/logocopy.png' width='180px' height='50px'/></td></tr>
 
 <tr> <td colspan='3' style='font-size:9px;font-weight:bold; text-align:center;'>SENDER DETAILS   </td> <th colspan='2' rowspan='2'> Transaction No: {{tnum}}   </th>  </tr>
@@ -149,7 +165,7 @@ PLEASE READ CAREFULLY, BY SIGNING THE PAYMENT ORDER FORM (THE FORM) YOU ARE ENTR
 <div style='font-size:9px;border-top:#000 solid medium;  width:220px; font-family:Arial, Helvetica, sans-serif; font-size:9px; text-align:center; left:350px; position:relative; top:-17px;' >
 
 <p>  {{agency}} </p>
-</div>
+</div>-->
 
 
 
@@ -162,11 +178,13 @@ PLEASE READ CAREFULLY, BY SIGNING THE PAYMENT ORDER FORM (THE FORM) YOU ARE ENTR
 
 
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -183,7 +201,7 @@ app.controller('receipt', function($scope,$http,$resource) {
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -205,7 +223,7 @@ var init = function () {
 
 $scope.agentusername = getCookie('agentusername') ;
 
-$http.get("https://jmtrax.herokuapp.com/api/receipt.php?id="+getCookie('transaction_number')) .then(function(response) {
+$http.get("api/receipt.php?id="+getCookie('transaction_number')) .then(function(response) {
 
 
 $scope.date = response.data[0].tdate;
@@ -311,7 +329,7 @@ function gotohome() {
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/money-transfer-calculator.html" ;
+window.location = "money-transfer-calculator.html" ;
 
 }
 
@@ -319,11 +337,40 @@ else
 {
 
 	
- window.location = "https://jmtrax.herokuapp.com/dashboard.php" ;
+if(getCookie('print_location') === 'reports') {
+	
+	window.location ="transactions.php" ;
+	
+}
+else{
+	window.location = "dashboard.php" ;
+	
+}
+	
  
 
 }
 
+
+}
+
+function getCookie(cname) {
+
+    var name = cname + "=";
+  
+    var ca = document.cookie.split(';');
+  
+    for(var i=0; i<ca.length; i++) {
+  
+        var c = ca[i];
+  
+        while (c.charAt(0)==' ') c = c.substring(1);
+  
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  
+    }
+  
+    return "";
 
 }
 

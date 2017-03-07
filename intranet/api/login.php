@@ -56,22 +56,68 @@ else
 {
 
 
+
+$sqlLoggedinUser = "SELECT * FROM loggedinusers WHERE username = '$_REQUEST[username]' ";
+
+$resultLoggedinUser = $conn->query($sqlLoggedinUser);
+
+$rowLoggedinUser = $resultLoggedinUser->fetch_assoc();
+
+if ($resultLoggedinUser->num_rows > 0) {
+
+echo json_encode(array(
+      "ERROR" => "You are logged in elsewhere. You will need to answer your secret question to log in",
+      "ERRORTYPE"=> "1",
+      "SECRETQUESTION"=> $row[secretquestion],
+      "SECRECTANSWER"=> $row[secretanswer],
+      "USERTYPE"=> $row[usertype]
+      ));
+
+
+}
+else
+{
+
+$sql2 = "INSERT INTO loggedinusers (username) VALUES ('$_REQUEST[username]') ";
+
+
+if ($conn->query($sql2) === TRUE) {
+
 echo json_encode(array(
 
 
       "ERROR" => "",
       "USERTYPE"=> $row[usertype],
+      "SHOP"=> $row[Shop],
       "EMAIL"=> $row[Mobile],
       "AGENTID"=> $row[id],
       "AGENTUSERNAME"=> $row[username],
       "CREDITLIMIT"=> $row[limit],
-    "SENDERFIRSTNAME"=> $row[SendersFirstName],
+      "SENDERFIRSTNAME"=> $row[SendersFirstName],
       "SENDERLASTNAME"=> $row[SendersLastName],
       "sendersID"=> $row[id]
-        
-    
- 
 ));
+
+
+}
+else{
+
+
+echo json_encode(array(
+
+
+      "ERROR" => "There was an error.Please contact web administrator."
+      
+     
+));
+
+
+}
+
+
+
+
+}
 
 
 

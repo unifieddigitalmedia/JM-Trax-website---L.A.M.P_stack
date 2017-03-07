@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -33,7 +33,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -64,7 +64,7 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
@@ -74,11 +74,11 @@
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -90,7 +90,7 @@
 </li>  
 
 <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">  /a>
 </li>
 
 
@@ -138,6 +138,29 @@
 </div>
 
 
+
+  <div class="row">
+
+    <div class="col-sm-6" >
+
+  <div class="form-group">
+  <label for="usr">CREDIT LIMIT:</label>
+  <input type="text" class="form-control" id="creditlimit" class='creditlimit' ng-model="shop_limit">
+  </div>
+
+
+
+ </div>
+
+    <div class="col-sm-6" >  
+
+
+  
+
+   </div>
+
+
+</div>
 
 
  </div>
@@ -240,7 +263,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -257,11 +280,13 @@
 
   </section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -300,7 +325,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -336,7 +361,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -356,10 +381,12 @@ init();
 
 app.factory('Shops_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/shop',{
+var resource = $resource('api/shop.php',{
 
  shop_name:"@shop_name", 
  shop_address:"@shop_address",
+ shop_limit:"@shop_limit"
+
 
 
 });
@@ -383,7 +410,7 @@ document.cookie = "fromdate=" + document.getElementById("datepicker").value;
 
 document.cookie = "todate=" + document.getElementById("datepicker1").value;
 
-window.location = "https://jmtrax.herokuapp.com/shop-activity-report.html" ;
+window.location = "shop-activity-report.html" ;
 
 
 }
@@ -391,11 +418,10 @@ window.location = "https://jmtrax.herokuapp.com/shop-activity-report.html" ;
 $scope.getshops = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/shop").then(function(response) {
+$http.get("api/shop.php").then(function(response) {
 
 
  $scope.shops = response.data;
-
 
 
 
@@ -419,6 +445,8 @@ var log = Shops_Service.save(
 
  shop_address:$scope.shop_address, 
 
+ shop_limit:$scope.shop_limit
+
 }, function() {
 
 alert(log.ERROR);
@@ -426,6 +454,8 @@ alert(log.ERROR);
 $scope.shop_name = ""; 
 
 $scope.shop_address = ""; 
+
+$scope.shop_limit = ""; 
 
 $scope.getshops();
 
@@ -452,7 +482,7 @@ if($scope.shop.id !== undefined || $scope.shop.id !== "")
 
 
 
-$http.delete("https://jmtrax.herokuapp.com/api/shop.php?id="+$scope.shop.id).then(function(response) {
+$http.delete("api/shop.php?id="+$scope.shop.id).then(function(response) {
 
 alert(response.data.ERROR);
 
@@ -496,9 +526,9 @@ alert("You need to select a shop to delete");
 
 $(function() {
 
-    $( "#datepicker" ).datepicker({ dateFormat: "d-m-yy" });
+    $( "#datepicker" ).datepicker({ dateFormat: "dd-m-yy" });
 
-    $( "#datepicker1" ).datepicker({ dateFormat: "d-m-yy" });
+    $( "#datepicker1" ).datepicker({ dateFormat: "dd-m-yy" });
   
   });
 

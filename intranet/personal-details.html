@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -13,7 +13,7 @@
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -31,7 +31,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="money-transfer-calculator.html" class="dropbtn"> Transfer Calculator</a>  
 
@@ -413,7 +413,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -451,7 +451,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('http://192.168.0.90/intranet/api/senders',{
+var resource = $resource('api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -517,7 +517,7 @@ $scope.agenttype = getCookie('agenttype') ;
 $scope.creditlimit = getCookie('agentcredit') ;
 
 
-$http.get("http://192.168.0.90/intranet/api/senders.php?id="+getCookie('agentid')).then(function(response) {
+$http.get("api/senders.php?id="+getCookie('agentid')).then(function(response) {
 
 $scope.senderslist = response.data;
 
@@ -528,7 +528,7 @@ $scope.selectsender(0);
     });
 
 
-$http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
 
 
@@ -539,7 +539,7 @@ $http.get("http://192.168.0.90/intranet/api/banks").then(function(response) {
     });
 
 
-$http.get("http://192.168.0.90/intranet/api/getoccupations").then(function(response) {
+$http.get("api/getoccupations").then(function(response) {
 
 
 
@@ -554,7 +554,7 @@ if(!getCookie('agentusername') )
 {
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -578,7 +578,7 @@ if (counter == '1800')
 
 
 
-window.location = "http://192.168.0.90/intranet/index.html" ;
+window.location = "index.html" ;
 
 
 

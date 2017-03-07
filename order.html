@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -33,7 +33,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -43,15 +43,15 @@
 
 <div class="dropdown-content">
 
-  <a href="banks.html"> Banks </a>  
+  <a href="banks.html" > Banks </a>  
 
-  <a href="commission-fees.php"> Commission Fees</a>  
+  <a href="commission-fees.php" > Commission Fees</a>  
 
-  <a href="customers.html"> Customers </a>
+  <a href="customers.html" > Customers </a>
 
-  <a href="exchange-rates.html"> Exchange Rates</a>  
+  <a href="exchange-rates.html" ng-show="reportrights"> Exchange Rates</a>  
 
-  <a href="shops.html"> Shops </a> 
+  <a href="shops.html" > Shops </a> 
 
   <a href="users.html"> Users </a>   
 
@@ -64,7 +64,7 @@
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
@@ -72,11 +72,11 @@
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -88,7 +88,7 @@
 </li>  
 
 <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">  /a>
 </li>
 
 
@@ -220,7 +220,7 @@ name="senderphone" id='senderphone' ng-model="sendermobile"></td>
 <td> 
 
   <div class="checkbox">
-  <label> <input type="checkbox" class="form-control input-sm" name='uksms' id='uksms' value='on' checked ng-model="uksms" >Yes to receive sms confirmation to your mobile</label>
+  <label> <input type="checkbox"  name='uksms' id='uksms' value='on' checked ng-model="uksms" >Yes to receive sms confirmation to your mobile</label>
 </div>
 
 </td>
@@ -325,7 +325,7 @@ name="recipientphone" id='recipientphone' ng-model="recipientphone">
 <td> 
 
   <div class="checkbox">
-  <label><input type="checkbox" class="form-control input-sm" name='nigeriasms' id='nigeriasms' value='on' ng-model="ngnsms">Yes to send sms confirmation to your recipients mobile</label>
+  <label><input type="checkbox" name='nigeriasms' id='nigeriasms' value='on' ng-model="ngnsms">Yes to send sms confirmation to your recipients mobile</label>
 </div>
 
 </td>
@@ -470,23 +470,28 @@ name="senderpostcode" id='senderpostcode' ng-model="postcode">
 </div></div>
   <div class="col-sm-2"><div class="form-group">
 
-  <label for="usr">REMITTANCE:</label>
-  <input type="text" class="form-control input-sm" name="remittance" id="localamount"  class="remittance"  ng-blur="calREMITTANCE(remittance)" ng-model="remittance" style='background-color:blue;color:white;'>
-
+  
 </div></div>
 
 </div>
 
 <div class="row" class='cellcontainder' style='background-color:grey;color:white;font-weight:bold;padding:20px;'>
 
+<div class="col-sm-2"><div class="form-group">
+
+  <label for="usr">REMITTANCE:</label>
+  <input type="text" class="form-control input-sm REMITTANCE" name="remittance" id="localamount"  class="remittance"  ng-blur="calREMITTANCE(remittance)" ng-model="remittance" style='background-color:blue;color:white;'>
+
+
+</div></div>
 
   <div class="col-sm-2"><div class="form-group">
   <label for="usr">NAIRA AMOUNT:</label>
- <input type="text" class="form-control input-sm" name="paymentlocal" class="NGN" id="NGN" ng-model="NGN" ng-blur="calNGN(NGN)">
+ <input type="text" class="form-control input-sm NGN" name="paymentlocal" class="NGN" id="NGN" ng-model="NGN" ng-blur="calNGN(NGN)">
 </div></div>
   <div class="col-sm-2"><div class="form-group">
   <label for="usr">AMOUNT IN GBP:</label>
-     <input type="text" class="form-control input-sm" value="" name="paymentsterling" class="paymentsterling" id="paymentsterling" ng-model="paymentsterling" ng-blur="calAMOUNT(paymentsterling)">
+     <input type="text" class="form-control input-sm AMOUNT" value="" name="paymentsterling" class="paymentsterling" id="paymentsterling" ng-model="paymentsterling" ng-blur="calAMOUNT(paymentsterling)">
 </div></div>
   <div class="col-sm-2"><div class="form-group">
   <label for="usr">COMISSION:</label>
@@ -494,17 +499,13 @@ name="senderpostcode" id='senderpostcode' ng-model="postcode">
 </div></div>
   <div class="col-sm-2"><div class="form-group">
   <label for="usr">TOTAL NGN:</label>
-  <input type="text" class="form-control input-sm" value="" name="paymenttotalngn" class="paymenttotalngn" id="paymenttotalngn" style='font-weight:bold;color:blue;' ng-model="paymenttotalngn" ng-blur="calTOTALNGN(paymenttotalngn)">
+  <input type="text" class="form-control input-sm TOTALNGN" value="" name="paymenttotalngn" class="paymenttotalngn" id="paymenttotalngn" style='font-weight:bold;color:blue;' ng-model="paymenttotalngn" ng-blur="calTOTALNGN(paymenttotalngn)">
 </div></div>
   <div class="col-sm-2"><div class="form-group">
   <label for="usr">TOTAL GBP DUE:</label>
-  <input type="text" class="form-control input-sm"  value="" name="paymentduegbp" class="total" id="total" style="color:red;font-weight:bold;" ng-model="total" ng-blur="calTOTALGBP(total)">
+  <input style="background-color:#FCC;color:red;font-weight:700;font-size:150%; " type="text" class="form-control input-sm TOTALGBP"  value="" name="paymentduegbp" class="total" id="total" style="color:red;font-weight:bold;" ng-model="total" ng-blur="calTOTALGBP(total)">
 </div></div>
-  <div class="col-sm-2"><div class="form-group">
-
   
-
-</div></div>
 
 </div>
 
@@ -741,7 +742,7 @@ name="senderpostcode" id='senderpostcode' ng-model="postcode">
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -758,11 +759,13 @@ name="senderpostcode" id='senderpostcode' ng-model="postcode">
 
 	</section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -802,7 +805,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -838,7 +841,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -858,7 +861,7 @@ init();
 
 app.factory('Order_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/transactions',{
+var resource = $resource('api/transactions',{
 
 
 username:"@username",
@@ -919,7 +922,7 @@ $scope.sendersdetails = true;
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -937,15 +940,17 @@ $scope.ngn = response.data[1].rate;
 
 var init = function () {
    
+   
    $scope.uksms = true;
+   
  document.getElementById("loader").style.display = "none";
 
 $http.get(
 
 
- // "https://jmtrax.herokuapp.com/api/autofill.php?username="+getCookie('sender_username')+
+ // "api/autofill.php?username="+getCookie('sender_username')+
   
-  "https://jmtrax.herokuapp.com/api/autofill.php?username="+getCookie('sendersid')+
+  "api/autofill.php?username="+getCookie('sendersid')+
   "&receipient_firstname="+getCookie('receipient_firstname')+
   "&receipient_lastname="+getCookie('receipient_lastname')+
   "&receipient_bank="+getCookie('receipient_bank')+
@@ -1121,8 +1126,6 @@ ngnsms:$scope.ngnsms
 
 
 
-
-
 if(log.ERROR === "Transaction has been posted. Proceed to checkout.")
 
 {
@@ -1135,15 +1138,53 @@ document.cookie = "transaction_number=" + log.orderID;
 
 document.cookie = "gbp_total=" + $scope.total;
 
-window.location = "https://jmtrax.herokuapp.com/checkout.html" ;
+window.location = "checkout.html" ;
 
 }
 else
 {
 
 alert(log.ERROR);
+	
+if(log.ERRORTYPE === '1' ){
+
+ var duplicate = confirm("Click cancel if this is a duplicate transaction!");
+    
+    if (duplicate == true) {
+       
+       
+
+document.cookie = "transaction_number=" + log.orderID;
+
+document.cookie = "gbp_total=" + $scope.total;
+
+window.location = "checkout.html" ;
+
+
+    } else {
+      
+      
+      $http.delete("api/editorder.php?id="+log.orderID+"&agentusername="+getCookie('agentusername') ).then(function(response) {
+
+
+
+
+
+});
+      
+      
+      
+    }
+
 
 }
+}
+
+	
+	
+	
+	
+
 
 
 
@@ -1165,28 +1206,15 @@ alert(log.ERROR);
 
 
 
-    $scope.calREMITTANCE = function(para) {
-
-      $http.get("https://jmtrax.herokuapp.com/api/charge.php?remittance="+para).then(function(response) {
-
-$scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
-$scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
-$scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
-$scope.paymentsterling = $scope.tocurrency(Number(response.data.AMOUNT).toFixed(2));
-$scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
-$scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
-$scope.rate = response.data.RATE;
-
-  });
-
-    };
+   
+$(document).ready(function(){
+   
 
 
-$scope.calNGN = function(para) {
+$(".NGN").change(function(){
+   
 
-     
-
-$http.get("https://jmtrax.herokuapp.com/api/charge.php?ngn="+para).then(function(response) {
+   $http.get("api/charge.php?ngn="+$(".NGN").val()).then(function(response) {
 
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -1195,14 +1223,21 @@ $scope.paymentsterling = $scope.tocurrency(Number(response.data.AMOUNT).toFixed(
 $scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
 $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 $scope.rate = response.data.RATE;
+
   });
 
   
-    };
 
-    $scope.calTOTALNGN = function(para) {
 
- $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalngn="+para).then(function(response) {
+});
+
+
+
+$(".TOTALNGN").change(function(){
+
+
+ $http.get("api/charge.php?totalngn="+$(".TOTALNGN").val()).then(function(response) {
+
 
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -1213,12 +1248,18 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 $scope.rate = response.data.RATE;
     });
 
-  
-    };
 
-    $scope.calTOTALGBP = function(para) {
+
+});
+
+
+
+$(".TOTALGBP").change(function(){
   
-     $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalgbp="+para).then(function(response) {
+
+
+    $http.get("api/charge.php?totalgbp="+$(".TOTALGBP").val()).then(function(response) {
+
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -1227,13 +1268,17 @@ $scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2))
 $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 $scope.rate = response.data.RATE;
    });
-    };
 
 
-    $scope.calAMOUNT = function(para) {
+});
 
 
-       $http.get("https://jmtrax.herokuapp.com/api/charge.php?amount="+para).then(function(response) {
+
+$(".AMOUNT").change(function(){
+  
+
+   $http.get("api/charge.php?amount="+$(".AMOUNT").val()).then(function(response) {
+
 $scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -1243,9 +1288,33 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 $scope.rate = response.data.RATE;
 
     });
-       
-    };
 
+
+
+});
+
+$(".REMITTANCE").change(function(){
+  
+
+   $http.get("api/charge.php?remittance="+$(".REMITTANCE").val()).then(function(response) {
+
+$scope.remittance =  $scope.tocurrency(Number(response.data.REMIITANCE).toFixed(2));
+$scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
+$scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
+$scope.paymentsterling = $scope.tocurrency(Number(response.data.AMOUNT).toFixed(2));
+$scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
+$scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
+$scope.rate = response.data.RATE;
+
+
+    });
+
+
+
+});
+
+
+})
 
 $scope.tocurrency = function (para) {
 

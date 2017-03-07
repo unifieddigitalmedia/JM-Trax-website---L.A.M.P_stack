@@ -5,15 +5,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -31,7 +31,7 @@
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="money-transfer-calculator.html" class="dropbtn"> Transfer Calculator</a>  
 
@@ -122,7 +122,7 @@
 
      <div class="form-group">
       <label for="usr"></label>
-     <input type="text" name="recbank" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank' placeholder="*  Bank:" /> 
+     <input type="text" name="recbank"  style="background-color:#FCC;" class="form-control input-sm" style="position:relative; " value="{{recbank}}"  id='recbank' ng-model='recbank' placeholder="" autocomplete="on" /> 
       </div>
 
 
@@ -133,8 +133,13 @@
 
 
  <div class="form-group">
-      <label for="usr"></label>
-    <select class="form-control input-sm"  ng-options="bank as bank.bankname for bank in banklist | filter:bank.type='receipient' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown"style="position:relative; " ></select>
+      <label for="usr">*  Bank:</label>
+
+       <select class="form-control input-sm" style="background-color:#FCC;" ng-options="bank as bank.bankname for bank in banklist | filter:bank.type='receipient' "  ng-change="bankdropdownfunction()" ng-model="bankdropdown"style="position:relative; " ></select>
+
+
+
+    
       </div>
 
 
@@ -148,8 +153,8 @@
 
 
       <div class="form-group">
-      <label for="usr"></label>
-      <input name='recbankaccount' type='text' class="form-control input-sm"  value="{{recaccount}}"  id='recnumber' ng-model='recaccount'  placeholder="* Bank Account:" /> 
+      <label for="usr">* Nigeria Bank Account:</label>
+      <input name='recbankaccount' type='text'  style="background-color:#FCC;" class="form-control input-sm"   value="{{recaccount}}"  id='recnumber' ng-model='recaccount'  autocomplete="on"  placeholder="" /> 
       </div>
 
 
@@ -160,15 +165,14 @@
   </div>
 
 
-
-<div class="row">
+  <div class="row">
 
    <div class="col-sm-4">
 
 
-     <div class="form-group">
+ <div class="form-group">
       <label for="usr"></label>
-     <input type="text" id='paymenttextfeild'  class="form-control input-sm" style="position:relative; " name="payment"  value="{{recpaymentref}}" id='paymentref' ng-model='recpaymentref' placeholder="*Payment Reference :"/> 
+     <input type="text" id='paymenttextfeild'   style="background-color:#FCC;" class="form-control input-sm"  name="payment"  value="{{recpaymentref}}" id='paymentref' autocomplete="on"  ng-model='recpaymentref' placeholder=""/> 
       </div>
 
 
@@ -179,8 +183,8 @@
 
 
 <div class="form-group">
-      <label for="usr"></label>
-   <select  id='paymentdropdown' class="form-control input-sm"  ng-change="paymentdropdownfunction()" ng-model="paymentdropdown">
+      <label for="usr">*PAYMENT TYPE</label>
+    <select  id='paymentdropdown' class="form-control input-sm"  style="background-color:#FCC;" ng-change="paymentdropdownfunction()" ng-model="paymentdropdown">
 
 
 <option value='Cash' >Cash </option>
@@ -208,9 +212,10 @@
 
 </div>
 
+
 <div class="form-group" ng-hide="paypaldiv">
  
-<input type="text" class="form-control input-sm"  name="paypal"  id='paypal' ng-model='paypal' placeholder="*Pay Pal Email :"/> 
+<input type="text" class="form-control input-sm"  name="paypal"  id='paypal' ng-model='paypal' placeholder="*Pay Pal Email :" autocomplete="on" /> 
      
 
 </div>
@@ -220,9 +225,10 @@
       
       <label for="usr"></label>
 
-<select  class="form-control input-sm"  style="background-color:#FCC;" ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative; " ></select>
 
+ <select  style="background-color:#FCC;" class="form-control input-sm"  ng-options="bank as bank.bankholder for bank in banklist | filter:bank.type='payee'"  ng-model='shopacc' style="position:relative;"  ng-change="showAccountDetails($index);"></select>
 
+<div> Account number : {{accountnumber}} Sortcode: {{sortcode}}</div>
 
   </div>
 
@@ -232,24 +238,26 @@
 
   </div>
 
-<div class="row">
 
-   <div class="col-sm-4"> 
+  <div class="row">
 
-   <div class="form-group">
+   <div class="col-sm-4">
 
+<div class="form-group">
       <label for="usr"></label>
-    
-      <input type="text" id='reasonfortransfer'  name="reasonfortransfer"  class="form-control input-sm" value="{{recreasonfortransfer}}"  class='recreason' ng-model='recreasonfortransfer' placeholder="*Reason:"/> 
-    
-      </div> 
+      <input type="text" id='reasonfortransfer'  style="background-color:#FCC;"  name="reasonfortransfer"  class="form-control input-sm" value="{{recreasonfortransfer}}"  class='recreason' ng-model='recreasonfortransfer' placeholder="" autocomplete="on" /> 
+      </div>
 
 
-    </div> 
 
-   <div class="col-sm-4">  <div class="form-group">
-      <label for="usr"></label>
-    <select name='' id='transferreason' class="form-control input-sm"  ng-change="transferreasonfunction()" ng-model="transferreason">
+   </div>
+
+   <div class="col-sm-4">
+
+
+ <div class="form-group">
+      <label for="usr">*Reason For Transfer:</label>
+    <select name=''  id='transferreason' class="form-control input-sm"  style="background-color:#FCC;" ng-change="transferreasonfunction()" ng-model="transferreason">
 
 <option value="Family Assistance">Family Assistance</option>
 <option value="Commercial">Commercial</option>
@@ -264,11 +272,22 @@
 
 </select>
       </div>
- </div> 
 
-   <div class="col-sm-4">  </div> 
 
-</div>
+
+   </div>
+
+
+   <div class="col-sm-4">
+
+
+
+
+   </div>
+
+
+  </div>
+
 
 <div class="row">
 
@@ -319,7 +338,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -341,11 +360,13 @@
 
 
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -358,7 +379,7 @@ var app = angular.module('justmoneytransfers', ['ngResource']);
 
 app.factory('Senders_Service', ['$resource', function($resource) {
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/senders.php',{
+var resource = $resource('api/senders',{
 
 id:"@id",
 firstname:"@firstname",
@@ -408,7 +429,7 @@ $scope.paypaldiv = true;
 $scope.getrates = function () {
 
 
-$http.get("https://jmtrax.herokuapp.com/api/rates.php").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 
  $scope.rateslist = response.data;
@@ -437,7 +458,7 @@ $scope.recipientsID = undefined;
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
+$http.get("api/receipients.php?sendersID="+getCookie('agentid')).then(function(response) {
 
 $scope.receipentlist = response.data;
 
@@ -451,7 +472,7 @@ $scope.sendersid = getCookie('agentid') ;
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/banks.php").then(function(response) {
+$http.get("api/banks").then(function(response) {
 
  $scope.banklist = response.data;
 
@@ -459,12 +480,14 @@ $http.get("https://jmtrax.herokuapp.com/api/banks.php").then(function(response) 
     });
 
 
+
+
 if(!getCookie('agentusername') )
 
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -488,7 +511,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -548,6 +571,15 @@ $scope.recbank = $scope.bankdropdown.bankname ;
   }
 
 
+$scope.showAccountDetails = function (para) {
+
+
+$scope.accountnumber = $scope.banklist[para].accountnumber ;
+$scope.sortcode = $scope.banklist[para].sortcode ;
+
+}
+
+
 
 $scope.selectreceipient = function (para) {
 
@@ -580,7 +612,7 @@ $scope.updatedreceipientaccountnumber = $scope.receipentlist[para].ReceipientAcc
 $scope.deleterec = function () {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
+var resource = $resource('api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -709,7 +741,7 @@ else if(document.getElementById("paymenttextfeild").value == 'Bank' && ($scope.s
 $scope.bankref= false;
 
 
-$scope.recerror = 'Select a bank account from the highlighted list below. This will be used to pay your beneficiary.';
+$scope.recerror = 'Select a bank account from the highlighted field below. This will be used to pay your beneficiary.';
 
 $scope.shopaccdiv = false;
 
@@ -794,7 +826,7 @@ var shopacc = $scope.shopacc.bankholder
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
+var resource = $resource('api/receipients',{
 
 receipientfname : "@receipientfname",
 receipientlname : "@receipientlname",
@@ -874,7 +906,7 @@ else
 {
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/receipients.php',{
+var resource = $resource('api/receipients',{
 
 id:"@id",
 receipientfname : "@receipientfname",
@@ -931,7 +963,7 @@ document.cookie = "receipient_bank=" + document.getElementById("recbank").value 
 document.cookie = "receipient_banknumber=" + document.getElementById("recnumber").value ;
 
 
-window.location = "https://jmtrax.herokuapp.com/confirm-sender.html" ;
+window.location = "confirm-sender.html" ;
 
 
 

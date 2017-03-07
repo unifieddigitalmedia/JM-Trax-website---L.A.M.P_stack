@@ -10,15 +10,14 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$servername = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$dbname = substr($url["path"], 1);
+$servername = "localhost";
+$username = "jmtrax";
+$password = "s0na@bebe123";
+$dbname = "jmtrax";
 
-
-$conn = new mysqli($servername, $username, $password,$dbname);
+//Connecting to your `Database`
+$link =   mysql_connect($servername, $username, $password) ;
 
 
 
@@ -33,20 +32,20 @@ die('Could not connect: ' . mysql_error());
 mysql_select_db("jmtrax",$link);
 
 
-$lower =  $_REQUEST[lower];
+$lowers =  $_REQUEST[lower];
 $upper = $_REQUEST[upper] ;
-$fee = $_REQUEST[fees] ;
+$comission = $_REQUEST[fees] ;
 
 $id = $_REQUEST[id];
 
 
 
-foreach ($lower as $key => $value)
+foreach ($lowers as $key => $value)
 
 {
 
 
-$sql7 = "UPDATE commission SET lower= '$lower[$key]', upper = '$upper[$key]', fee= '$fee[$key]'  WHERE id = '$id[$key]' ";
+$sql7 = "UPDATE commission SET lower= '$lower[$key]', upper = '$upper[$key]', fee= 'fees[$key]'  WHERE Idurl = '$id[$key]' ";
 
 if (!mysql_query($sql7 ,$link))
 {
@@ -80,15 +79,15 @@ die('Error: ' . mysql_error());
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
 
@@ -105,7 +104,7 @@ die('Error: ' . mysql_error());
 
 <ul class="topnav">
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>
 
 <li class="dropdown-link"> <a href="dashboard.php" class="dropbtn"> Dashboard</a>  
 
@@ -136,21 +135,19 @@ die('Error: ' . mysql_error());
 
 <nav class="dropdown-content">
 
-  <a href="banking.html"> Banking</a> 
+  <a href="banking.php"> Banking</a> 
 
    <a href="daily-transactions-receipients.html"> Daily Transactions Receipients </a>
 
   <a href="daily-transactions-senders.html"> Daily Transactions Senders</a>   
-  
-    <a href="deleted-transactions.html"> Deleted Transactions </a>  
 
    <a href="receipients.html"> Recipients </a> 
 
-    <a href="sales-report.html"> Sales Report </a> 
+    <a href="sales-report.html" > Sales Report </a> 
 
   <a href="senders.html"> Senders </a> 
 
-  <a href="transactions.php"> Transactions </a>  
+   <a href="transactions.php"> Transactions </a>   <a href="transferslist.php"  ng-hide="usertype"> Transactions List</a>    
 
 </nav>
 
@@ -203,7 +200,7 @@ die('Error: ' . mysql_error());
  <td> 
 
   <label  > <p ng-show="com.lower > 1000.00 "> % </p></label> 
-  <input type='text' value='{{com.commission}}' class="form-control" name="fees[]"/ > </td>
+  <input type='text' value='{{com.commission}}' class="form-control" name="fee[]"/ > </td>
 
       </tr>
      
@@ -227,7 +224,7 @@ die('Error: ' . mysql_error());
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -246,11 +243,13 @@ die('Error: ' . mysql_error());
   </section>
 
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -291,7 +290,7 @@ if(!getCookie('agentusername') || getCookie('agenttype') == 'customer' )
 {
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 }
@@ -327,7 +326,7 @@ if (counter == '1800')
 
 
 
-window.location = "https://jmtrax.herokuapp.com/index.html" ;
+window.location = "index.html" ;
 
 
 
@@ -349,7 +348,7 @@ app.factory('Money_Transfer_Service', ['$resource', function($resource) {
 
 
 
-var resource = $resource('https://jmtrax.herokuapp.com/api/fees',{
+var resource = $resource('api/fees.php',{
 
 
 },{ 'update': { method:'PUT' } } );
@@ -367,7 +366,7 @@ var init = function () {
 
 
 
-$http.get("https://jmtrax.herokuapp.com/api/charge").then(function(response) {
+$http.get("api/charge.php").then(function(response) {
 
 $scope.fees = response.data;
 

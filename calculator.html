@@ -5,17 +5,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/styles/normal.css">
+<link rel="stylesheet" type="text/css" href="styles/normal.css">
 
-<link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <link rel="icon" 
       type="image/png" 
-      href="/images/jmtrax_icon.png">
+      href="images/jmtrax_icon.png">
 
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+ 
+  
 
 <title> Just Money Transfers |  </title>
 
@@ -36,7 +39,7 @@
 
 
 
-<li class="logo_link"> <a href="index.html"><img src="/images/logo.png" class="logo" ></a> </li>  
+<li class="logo_link"> <a href="index.html"><img src="images/logo.png" class="logo" ></a> </li>  
 
   <li class="dropdown-link"> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; 
 
@@ -69,7 +72,7 @@
 </li>  
 
 <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">â˜°</a>
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="showResponsivemenu()">☰</a>
 </li>
 
 
@@ -92,7 +95,7 @@
   <div class="mySlides slide_fade">
     
 
-    <img src="/images/USA_Street_Chicago.png"  alt="A blurred filter of the main villa drawing attention to the tiles and bricks used to pave the walk way" class="slider_image_1" />
+    <img src="images/USA_Street_Chicago.png"  alt="A blurred filter of the main villa drawing attention to the tiles and bricks used to pave the walk way" class="slider_image_1" />
 
     <div class="slider_text">
     
@@ -134,15 +137,45 @@
 
 <div class="form-group">
 
-  <input type="text" class="form-control callinput innercal" value="" name="paymentsterling" class="paymentsterling" id="paymentsterling" required placeholder="AMOUNT IN GBP:" ng-model="paymentsterling" ng-blur="calAMOUNT(paymentsterling)" >
+<div class="input-group">
+    <span class="input-group-addon">
+        &pound; GBP AMOUNT: &nbsp;&nbsp;
+    </span>
+   <input type="text" class="form-control callinput innercal AMOUNT" value="" name="paymentsterling" class="paymentsterling" id="paymentsterling" required ng-model="paymentsterling" ng-blur="calAMOUNT(paymentsterling)" title="Numbers only 999,999,999,999.99"> 
+</div>
 
+&nbsp;
 
-  <input type="text" class="form-control callinput innercal" name="paymentcommission" class="fee" id="fee" required placeholder="COMMISSION:"  ng-model="fee" >
+<div class="input-group">
+    <span class="input-group-addon">
+       &pound; COMMISSION: &nbsp;&nbsp;
+    </span>
+   <input type="text" class="form-control callinput innercal" name="paymentcommission" class="fee" id="fee" required   ng-model="fee" >
 
+</div>
 
-  <input type="text" class="form-control callinput innercal" value="" name="paymenttotalngn" class="paymenttotalngn" id="paymenttotalngn" required placeholder="TOTAL NGN:" ng-model="NGN" ng-blur="calNGN(NGN)">
+&nbsp;
 
-  <input type="text" class="form-control callinput innercal"  value="" name="paymentduegbp" class="total" id="total" required placeholder="TOTAL GBP DUE:" ng-model="total" ng-blur="calTOTALGBP(total)">
+<div class="input-group">
+    <span class="input-group-addon">
+       &#8358; NGN AMOUNT: &nbsp;
+    </span>
+    <input type="text" class="form-control callinput innercal NGN" value="" name="paymenttotalngn" class="paymenttotalngn" id="paymenttotalngn" required  ng-model="NGN" ng-blur="calNGN(NGN)" title="Numbers only 999,999,999,999.99">
+
+</div>
+
+&nbsp;
+
+<div class="input-group">
+    <span class="input-group-addon">
+       &pound;  TOTAL GBP DUE: 
+    </span>
+   <input type="text" class="form-control callinput innercal TOTALGBP"  value="" name="paymentduegbp" class="total" id="total" required  ng-model="total" ng-blur="calTOTALGBP(total)" title="Numbers only 999,999,999,999.99">
+
+</div>
+
+&nbsp;
+
 </div>
 
 
@@ -193,7 +226,7 @@
 
   <div class="col-sm-6" id="footer_column_2" style="text-align:center;">  
 
-<img src='/images/Photo2_small.png' class="footerimage"/>
+<img src='images/Photo2_small.png' class="footerimage"/>
 
    </div>
 
@@ -210,11 +243,13 @@
 
   </section>
 
-<script src="/scripts/jquery/dist/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" ></script>
 
-<script src="/scripts/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
-<script src="/scripts/angular/angular.min.js" ></script><script src="/scripts/angular-resource/angular-resource.js" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.js" ></script>
 
 <script src="scripts/main.js"> </script>
 
@@ -231,7 +266,7 @@ app.controller('calculator', function($scope,$http,$resource) {
 var init = function () {
    
 
-$http.get("https://jmtrax.herokuapp.com/api/rates").then(function(response) {
+$http.get("api/rates").then(function(response) {
 
 $scope.gbp = response.data[0].rate;
 $scope.ngn = response.data[1].rate;
@@ -259,11 +294,17 @@ document.cookie = "sender_lastname=";
 init();
 
 
-$scope.calNGN = function(para) {
 
-     
 
-$http.get("https://jmtrax.herokuapp.com/api/charge.php?ngn="+para).then(function(response) {
+  
+ $(document).ready(function(){
+
+$(".NGN").change(function(){
+   
+   if($(".NGN").val().match(/^\d+(,\d{3})*(\.\d{2})?$/g)){
+
+
+   $http.get("api/charge.php?ngn="+$(".NGN").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -273,11 +314,19 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
   });
 
   
-    };
+}
 
-    $scope.calTOTALNGN = function(para) {
 
- $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalngn="+para).then(function(response) {
+});
+
+
+
+$(".TOTALNGN").change(function(){
+
+if($(".TOTALNGN").val().match(/^\d+(,\d{3})*(\.\d{2})?$/g)){
+
+
+ $http.get("api/charge.php?totalngn="+$(".TOTALNGN").val()).then(function(response) {
 
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
@@ -288,12 +337,20 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
     });
 
-  
-    };
 
-    $scope.calTOTALGBP = function(para) {
+}
+
+
+});
+
+
+
+$(".TOTALGBP").change(function(){
   
-     $http.get("https://jmtrax.herokuapp.com/api/charge.php?totalgbp="+para).then(function(response) {
+
+if($(".TOTALGBP").val().match(/^\d+(,\d{3})*(\.\d{2})?$/g)){
+
+    $http.get("api/charge.php?totalgbp="+$(".TOTALGBP").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -302,13 +359,23 @@ $scope.paymenttotalngn = $scope.tocurrency(Number(response.data.NGN).toFixed(2))
 $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
    });
-    };
+
+}
 
 
-    $scope.calAMOUNT = function(para) {
+});
 
 
-       $http.get("https://jmtrax.herokuapp.com/api/charge.php?amount="+para).then(function(response) {
+
+$(".AMOUNT").change(function(){
+
+  
+
+  if($(".AMOUNT").val().match(/^\d+(,\d{3})*(\.\d{2})?$/g)){
+
+
+
+$http.get("api/charge.php?amount="+$(".AMOUNT").val()).then(function(response) {
 
 $scope.fee = $scope.tocurrency(Number(response.data.FEES).toFixed(2));
 $scope.NGN = $scope.tocurrency(Number(response.data.NGN).toFixed(2));
@@ -318,8 +385,20 @@ $scope.total = $scope.tocurrency(Number(response.data.TOTALGBP).toFixed(2));
 
 
     });
-       
-    };
+
+
+
+  }
+
+});
+
+
+
+
+
+
+
+});
 
 
 $scope.tocurrency = function (para) {
@@ -358,6 +437,9 @@ return dollars;
 
 </script>
 
+
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
 </body>
 

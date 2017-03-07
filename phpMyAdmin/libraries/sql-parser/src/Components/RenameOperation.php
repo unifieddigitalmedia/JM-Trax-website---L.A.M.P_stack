@@ -19,8 +19,7 @@ use SqlParser\TokensList;
  * @category   Keywords
  * @package    SqlParser
  * @subpackage Components
- * @author     Dan Ungureanu <udan1107@gmail.com>
- * @license    http://opensource.org/licenses/GPL-2.0 GNU Public License
+ * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class RenameOperation extends Component
 {
@@ -93,9 +92,8 @@ class RenameOperation extends Component
                     $parser,
                     $list,
                     array(
-                        'noAlias' => true,
-                        'noBrackets' => true,
-                        'skipColumn' => true,
+                        'breakOnAlias' => true,
+                        'parseField' => 'table',
                     )
                 );
                 if (empty($expr->old)) {
@@ -120,9 +118,8 @@ class RenameOperation extends Component
                     $parser,
                     $list,
                     array(
-                        'noBrackets' => true,
-                        'skipColumn' => true,
-                        'noAlias' => true,
+                        'breakOnAlias' => true,
+                        'parseField' => 'table',
                     )
                 );
                 if (empty($expr->new)) {

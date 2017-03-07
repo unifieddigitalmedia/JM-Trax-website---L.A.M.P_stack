@@ -15,8 +15,7 @@ namespace SqlParser;
  *
  * @category Contexts
  * @package  SqlParser
- * @author   Dan Ungureanu <udan1107@gmail.com>
- * @license  http://opensource.org/licenses/GPL-2.0 GNU Public License
+ * @license  https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 abstract class Context
 {
@@ -29,6 +28,16 @@ abstract class Context
      * @var int
      */
     const KEYWORD_MAX_LENGTH = 30;
+
+    /**
+     * The maximum length of a label.
+     *
+     * @see static::$TOKEN_LABEL
+     * Ref: https://dev.mysql.com/doc/refman/5.7/en/statement-labels.html
+     *
+     * @var int
+     */
+    const LABEL_MAX_LENGTH = 16;
 
     /**
      * The maximum length of an operator.
@@ -107,7 +116,7 @@ abstract class Context
         ':='  =>  8,
 
         // @see Token::FLAG_OPERATOR_SQL
-        '('   => 16, ')'    => 16, '.'   => 16,  ','  => 16,
+        '('   => 16, ')'    => 16, '.'   => 16,  ','  => 16, ';' => 16,
     );
 
     /**
@@ -189,6 +198,13 @@ abstract class Context
 
     // https://dev.mysql.com/doc/refman/5.0/en/sql-mode.html#sqlmode_strict_trans_tables
     const STRICT_TRANS_TABLES           = 1048576;
+
+    // Custom modes.
+
+    // The table and column names and any other field that must be escaped will
+    // not be.
+    // Reserved keywords are being escaped regardless this mode is used or not.
+    const NO_ENCLOSING_QUOTES           = 1073741824;
 
     /*
      * Combination SQL Modes
@@ -397,9 +413,12 @@ abstract class Context
      */
     public static function isSeparator($str)
     {
-        // NOTES:   Only ASCII characters may be separators.
+        // NOTES:   Only non alphanumeric ASCII characters may be separators.
         //          `~` is the last printable ASCII character.
-        return ($str <= '~') && (!ctype_alnum($str)) && ($str !== '_');
+        return ($str <= '~') && ($str !== '_')
+            && (($str < '0') || ($str > '9'))
+            && (($str < 'a') || ($str > 'z'))
+            && (($str < 'A') || ($str > 'Z'));
     }
 
     /**
@@ -517,9 +536,16 @@ abstract class Context
             return $str;
         }
 
+        if ((static::$MODE & Context::NO_ENCLOSING_QUOTES)
+            && (!static::isKeyword($str, true))
+        ) {
+            return $str;
+        }
+
         if (static::$MODE & Context::ANSI_QUOTES) {
             $quote = '"';
         }
+
         return $quote . str_replace($quote, $quote . $quote, $str) . $quote;
     }
 }
